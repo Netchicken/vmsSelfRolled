@@ -1,6 +1,6 @@
 import React from 'react'
 import { useNavigate } from "react-router-dom";
-import '../../styles/Home.css';
+import './';
 import TopBar from '/components/home/TopBar';
 import TopBanner from '/components/home/TopBanner';
 import HowItWorks from '/components/home/HowItWorks';
