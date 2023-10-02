@@ -3,16 +3,16 @@ import '../../../styles/Console.css';
 import GenerateAuthorizationCode from '../authorizationCodePage/GenerateAuthorizationCode';
 import DisplayAuthCodes from '../authorizationCodePage/DisplayAuthCodes';
 import Margin from '../../Margin';
-import NoDataIcon from '@material-ui/icons/AnnouncementTwoTone';
 
-
+import { NoDataIcon, IconButton } from '@mui/icons-material';
+import { IconButton, Close, Tooltip, Button, Chip, Fingerprint, Stepper } from '@mui/material';
 
 
 const AuthorizationCodePage = props => {
-  
-    return (
-      <div>
-      <GenerateAuthorizationCode 
+
+  return (
+    <div>
+      <GenerateAuthorizationCode
         authCode={props.authCode}
         activeStep={props.activeStep}
         stepBack={props.stepBack}
@@ -37,28 +37,28 @@ const AuthorizationCodePage = props => {
 
       <Margin
         height='20px'
-        width='20px'/>
+        width='20px' />
 
-      {props.authCodeArray.length !== 0 ? <DisplayAuthCodes 
+      {props.authCodeArray.length !== 0 ? <DisplayAuthCodes
         authCodeArray={props.authCodeArray}
-        deleteAuthCode={(d)=>props.deleteAuthCode(d)}
+        deleteAuthCode={(d) => props.deleteAuthCode(d)}
         openACDeleteDialog={props.openACDeleteDialog}
-        handleOpenDialog={(d)=>props.handleOpenDialog(d)}
-        handleCloseDialog={(d)=>props.handleCloseDialog(d)}
-        handleACToDelete={(d)=>props.handleACToDelete(d)}
+        handleOpenDialog={(d) => props.handleOpenDialog(d)}
+        handleCloseDialog={(d) => props.handleCloseDialog(d)}
+        handleACToDelete={(d) => props.handleACToDelete(d)}
         acToDelete={props.acToDelete}
-      /> : 
-        <div style={{marginTop: '50px', textAlign: 'center'}}>
-          <NoDataIcon 
-            style={{color: 'E0E5F6', fontSize: '100px'}}
+      /> :
+        <div style={{ marginTop: '50px', textAlign: 'center' }}>
+          <NoDataIcon
+            style={{ color: 'E0E5F6', fontSize: '100px' }}
           />
           <div>
-          No Authorization Codes, click on the "GENERATE" button above to create one.
+            No Authorization Codes, click on the "GENERATE" button above to create one.
           </div>
         </div>
       }
-      </div>
-    )
+    </div>
+  )
 };
 
 export default AuthorizationCodePage;
