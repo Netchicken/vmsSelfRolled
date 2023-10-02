@@ -1,10 +1,12 @@
-import logo from './logo.svg';
+import React, { useEffect, useState } from 'react';
+
 import './App.css';
+// import logo from './logo.svg';
 import { BrowserRouter, Switch, Route, Routes, createBrowserRouter, RouterProvider } from "react-router-dom";
 import Home from './components/Home';
 import Auth from './components/auth/Auth';
 import Console from './components/console/Console';
-import { useEffect } from 'react';
+import InitialSetup from './components/InitialSetup';
 
 import { auth, db } from './components/firebase/Config';
 
@@ -19,9 +21,6 @@ export let DefaultHomeBkgImage = '';
 export let DefaultAdvert = '';
 export let PurposeOfVisitOptions = '';
 export let DefaultSettings = '';
-
-
-
 
 
 function App() {
@@ -143,7 +142,7 @@ function App() {
         {/* <Route path="/pages/login" element={<Login />} /> */}
 
         <Route path="/" element={<Home />} />
-
+        <Route path="setup" element={<InitialSetup />} />
         <Route path="authentication" element={<Auth />} />
 
         <Route path="/console" element={<Console />} />
