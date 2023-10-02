@@ -1,11 +1,12 @@
 //import React from 'react';
 import { createContext } from 'react';
 
-export const authTypeContext = createContext({
+const authTypeContext = createContext({
     authTypeIsLogin: true,
     changeAuthType: () => { }
 });
 
+export default authTypeContext;
 
 // const authTypeContext = React.createContext({
 //     authTypeIsLogin: true,

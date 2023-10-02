@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 // import '../styles/Register.css';
 import '../styles/Common.css';
 
-import { auth, db } from '../firebase/Config';
+import { auth, db } from './firebase/Config';
 import { initializeApp, getApp, getApps } from "firebase/app";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth"; //https://firebase.google.com/docs/auth/web/password-auth#create_a_password-based_account
 import { getFirestore, collection, addDoc } from "firebase/firestore";
@@ -12,21 +12,10 @@ import { format } from 'date-fns';
 
 import NameLogo from '../components/NameLogo';
 
-import TextField from '@material-ui/core/TextField';
-import Visibility from '@material-ui/icons/Visibility';
-import VisibilityOff from '@material-ui/icons/VisibilityOff';
-import Icon from '@material-ui/core/Icon';
-import InputAdornment from '@material-ui/core/InputAdornment';
-import Business from '@material-ui/icons/Business';
-import AlternateEmail from '@material-ui/icons/AlternateEmail';
-import Button from '@material-ui/core/Button';
-import Link from '@material-ui/core/Link';
+import { TextField, Icon, InputAdornment, Typography, Button, Link, Business, AlternateEmail, Checkbox, Divider } from '@mui/material';
 import AuthTypeContext from '../context/authTypeContext';
 import UserDataContext from '../context/userDataContext';
-// import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
-import Divider from '@material-ui/core/Divider';
-import { ValidateEmail, ValidatePassword } from '../functions/Validators';
+import { ValidateEmail, ValidatePassword } from './functions/Validators';
 import { useLocation, useNavigate, useParams, } from "react-router-dom";
 
 export class Register extends Component {

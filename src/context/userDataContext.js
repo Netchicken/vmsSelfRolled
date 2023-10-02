@@ -1,11 +1,12 @@
 import { createContext } from 'react';
 
-export const userDataContext = createContext({
+const userDataContext = createContext({
     authenticated: false,
     appData: '',
     changeAuthenticated: () => { }
 });
 
+export default userDataContext;
 
 // import React from 'react';
 

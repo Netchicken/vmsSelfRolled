@@ -1,7 +1,6 @@
 import React from 'react';
 import vsLogo from '../assets/vsLogo.png';
-
-
+//vms\src\assets
 const NameLogo = (props) => {
 
     const nameLogo = {

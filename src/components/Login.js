@@ -12,14 +12,6 @@ import NameLogo from '../components/NameLogo';
 import { format } from 'date-fns';
 import { TextField, Icon, InputAdornment, Typography, Button, Link, } from '@mui/material';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
-// import Visibility from '@material-ui/icons/Visibility';
-// import VisibilityOff from '@material-ui/icons/VisibilityOff';
-// import Icon from '@mui/material/Icon';
-// import InputAdornment from '@material-ui/core/InputAdornment';
-// import AlternateEmail from '@material-ui/icons/AlternateEmail';
-// import Typography from '@material-ui/core/Typography';
-// import Button from '@material-ui/core/Button';
-// import Link from '@material-ui/core/Link';
 import AuthTypeContext from '../context/authTypeContext';
 import { ValidateEmail, ValidatePassword } from './functions/Validators';
 
