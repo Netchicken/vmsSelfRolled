@@ -1,10 +1,10 @@
 import React from 'react';
 import NameLogo from '../../components/NameLogo';
 import '../../styles/Home.css';
-import Button from '@material-ui/core/Button';
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import PlayStoreLogo from '../../assets/playStoreLogo.png';
-import AppStoreLogo from '../../assets/appStoreLogo.png';
+import Button from '@mui/material/Button';
+// import ChevronRightIcon from '@mui/icons/ChevronRight';
+// import PlayStoreLogo from '../../assets/playStoreLogo.png';
+// import AppStoreLogo from '../../assets/appStoreLogo.png';
 
 
 const TopBar = props => {
@@ -13,31 +13,31 @@ const TopBar = props => {
     window.open('https://play.google.com/store/apps/details?id=com.remphil.visitorregister', '_blank');
   }
 
-  const playStoreImage = {
-    width: '180px',
-    height: '50px',
-    backgroundImage: 'url(' + PlayStoreLogo + ')',
-    backgroundRepeat: 'no-repeat',
-    backgroundSize: 'contain',
-    display: 'inline-block',
-    textAlign: 'center',
-    backgroundPosition: 'center',
-    cursor: 'pointer',
-    // marginLeft: '100px'
-  }
+  // const playStoreImage = {
+  //   width: '180px',
+  //   height: '50px',
+  //   backgroundImage: 'url(' + PlayStoreLogo + ')',
+  //   backgroundRepeat: 'no-repeat',
+  //   backgroundSize: 'contain',
+  //   display: 'inline-block',
+  //   textAlign: 'center',
+  //   backgroundPosition: 'center',
+  //   cursor: 'pointer',
+  //   // marginLeft: '100px'
+  // }
 
-  const appStoreImage = {
-    width: '180px',
-    height: '50px',
-    backgroundImage: 'url(' + AppStoreLogo + ')',
-    backgroundRepeat: 'no-repeat',
-    backgroundSize: 'contain',
-    display: 'inline-block',
-    textAlign: 'center',
-    backgroundPosition: 'center',
-    marginLeft: '10px',
-    cursor: 'pointer',
-  }
+  // const appStoreImage = {
+  //   width: '180px',
+  //   height: '50px',
+  //   backgroundImage: 'url(' + AppStoreLogo + ')',
+  //   backgroundRepeat: 'no-repeat',
+  //   backgroundSize: 'contain',
+  //   display: 'inline-block',
+  //   textAlign: 'center',
+  //   backgroundPosition: 'center',
+  //   marginLeft: '10px',
+  //   cursor: 'pointer',
+  // }
 
   const consoleButton = {
     textTransform: 'none',
@@ -78,74 +78,9 @@ const TopBar = props => {
             />
           </div>
 
-          {/* <Button
-            style={{ textTransform: 'none' }}
-            color='primary'
-            onClick={props.goToConsolePage}
-          >
-            What Is Vistogram?
-          </Button>
 
-          <Button
-            style={{ textTransform: 'none' }}
-            color='primary'
-            onClick={props.goToConsolePage}
-          >
-            How it works
-          </Button>
-
-          <Button
-            style={{ textTransform: 'none' }}
-            color='primary'
-            onClick={props.goToConsolePage}
-          >
-            How It looks
-          </Button>
-
-          <Button
-            style={{ textTransform: 'none' }}
-            color='primary'
-            onClick={props.goToConsolePage}
-          >
-            Pricing
-          </Button>
-
-          <Button
-            style={{ textTransform: 'none' }}
-            color='primary'
-            onClick={props.goToConsolePage}
-          >
-            Our clients
-          </Button>
-
-          <Button
-            style={{ textTransform: 'none' }}
-            color='primary'
-            onClick={props.goToConsolePage}
-          >
-            Contact
-          </Button> */}
-
-          {/* <Button
-            style={{ textTransform: 'none', borderRadius: '50px', marginLeft: '50px' }}
-            variant="contained"
-            color='primary'
-            onClick={props.goToConsolePage}
-          >
-            Download
-          </Button> */}
         </div>
 
-        {/* <div>{props.ppatst}</div>
-
-        {ppats ? <div></div> : <div>
-          <div style={playStoreImage}
-            onClick={redirectToPlayStore}
-          >
-          </div>
-          <div style={appStoreImage}>
-          </div>
-        </div>} */}
 
 
 
@@ -157,7 +92,7 @@ const TopBar = props => {
             onClick={props.goToConsolePage}
           >
             Go To Console
-            <ChevronRightIcon />
+
           </Button>
         </div> :
           <div>

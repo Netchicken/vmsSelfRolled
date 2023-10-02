@@ -1,18 +1,17 @@
 import React from 'react'
 import { useNavigate } from "react-router-dom";
-import './';
-import TopBar from '/components/home/TopBar';
-import TopBanner from '/components/home/TopBanner';
-import HowItWorks from '/components/home/HowItWorks';
-import ContactUs from '/components/home/ContactUs';
+import '../styles/Home.css';
+import TopBar from '../components/home/TopBar';
+// import TopBanner from '../components/home/TopBanner';
+// import HowItWorks from '../components/home/HowItWorks';
+// import ContactUs from '../components/home/ContactUs';
 
 const Home = () => {
     let navigate = useNavigate();
 
 
-
     const goToLoginPage = () => {
-        navigate("/authentication", { state: state });
+        navigate("/authentication");
         console.log("Login", navigate);
     }
     const goToRegisterPage = () => {
@@ -22,17 +21,18 @@ const Home = () => {
     return (
 
         <div className='home-body'>
+            Testing
             <TopBar
-                userData={UserData}
-                goToConsolePage={goToConsolePage}
+
+
                 goToLoginPage={goToLoginPage}
                 goToRegisterPage={goToRegisterPage}
-                goToHomePage={goToHomePage}
+
             />
 
-            <HowItWorks />
+            {/* <HowItWorks /> */}
 
-            <ContactUs />
+            {/* <ContactUs /> */}
 
         </div>
     )
