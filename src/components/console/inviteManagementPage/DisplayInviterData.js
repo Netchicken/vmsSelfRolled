@@ -2,7 +2,7 @@ import React from 'react';
 import VistocodeNameLogo from '../../../assets/vsLogo.png';
 // import {ValidateEmail, ValidatePassword} from '../functions/Validators';
 
-import { TextField, Icon, InputAdornment, Typography, Button, Link, } from '@mui/material';
+import { TextField, InputAdornment, Typography, Button, Link, } from '@mui/material';
 import { DepartmentIcon, FullNameIcon, UserIDIcon, Business, AlternateEmail, Icon, LastNameIcon } from '@mui/icons-material';
 
 
