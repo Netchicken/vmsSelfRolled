@@ -10,7 +10,8 @@ import { useLocation, useNavigate, useParams, } from "react-router-dom";
 
 import NameLogo from '../components/NameLogo';
 import { format } from 'date-fns';
-import { TextField, Visibility, VisibilityOff, Icon, InputAdornment, AlternateEmail, Typography, Button, Link, } from '@mui/material';
+import { TextField, Icon, InputAdornment, Typography, Button, Link, } from '@mui/material';
+import { Visibility, VisibilityOff } from '@mui/icons-material';
 // import Visibility from '@material-ui/icons/Visibility';
 // import VisibilityOff from '@material-ui/icons/VisibilityOff';
 // import Icon from '@mui/material/Icon';
@@ -20,7 +21,7 @@ import { TextField, Visibility, VisibilityOff, Icon, InputAdornment, AlternateEm
 // import Button from '@material-ui/core/Button';
 // import Link from '@material-ui/core/Link';
 import AuthTypeContext from '../context/authTypeContext';
-import { ValidateEmail, ValidatePassword } from '../functions/Validators';
+import { ValidateEmail, ValidatePassword } from './functions/Validators';
 
 //https://firebase.google.com/docs/web/modular-upgrade UPGRADE TO V9 FIREBASE
 
@@ -146,7 +147,7 @@ function Login(props) {
             endAdornment: (
               <InputAdornment position='end'>
                 <Icon className='input-icon'>
-                  <AlternateEmail />
+                  {/* <AlternateEmail /> */}
                 </Icon>
               </InputAdornment>
             ),
