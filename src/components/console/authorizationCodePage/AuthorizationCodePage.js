@@ -4,7 +4,7 @@ import GenerateAuthorizationCode from '../authorizationCodePage/GenerateAuthoriz
 import DisplayAuthCodes from '../authorizationCodePage/DisplayAuthCodes';
 import Margin from '../../Margin';
 
-import { NoDataIcon, IconButton } from '@mui/icons-material';
+import { NoDataIcon } from '@mui/icons-material';
 import { IconButton, Close, Tooltip, Button, Chip, Fingerprint, Stepper } from '@mui/material';
 
 

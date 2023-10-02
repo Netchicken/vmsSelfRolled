@@ -1,7 +1,7 @@
 import React from 'react';
-import Button from '@material-ui/core/Button';
-import LicenceImage from '../../../assets/06.png';
 
+import LicenceImage from '../../../assets/06.png';
+import { TextField, Icon, InputAdornment, Typography, Button, Link, } from '@mui/material';
 const LicenceHome = props => {
 
 
@@ -10,7 +10,7 @@ const LicenceHome = props => {
         borderRadius: '100px',
         fontSize: '16px',
         width: '300px',
-        color:'#253061',
+        color: '#253061',
         // marginBottom: '30px',
     }
 
@@ -45,34 +45,34 @@ const LicenceHome = props => {
     }
 
 
-  return (
-    <div>
-        <div style={purchaseDetailsDiv}>
-        <div style={licenceDisplay}>
-            <div>
-            <p>You have</p>
-            <h1 style={{
-                fontSize: '90px', 
-                color: '#8934FF',
-                margin: '0'
-                }}>{props.userData.licences}</h1>
-            <p>licences</p>
-            </div>
+    return (
+        <div>
+            <div style={purchaseDetailsDiv}>
+                <div style={licenceDisplay}>
+                    <div>
+                        <p>You have</p>
+                        <h1 style={{
+                            fontSize: '90px',
+                            color: '#8934FF',
+                            margin: '0'
+                        }}>{props.userData.licences}</h1>
+                        <p>licences</p>
+                    </div>
 
-            <div style={{textAlign: 'center'}}>
-            <Button
-                style={purchaseButton}
-                variant="contained"
-                color="secondary"
-                onClick={props.purchaseLicence}
-            >
-                Purchase
-            </Button>
+                    <div style={{ textAlign: 'center' }}>
+                        <Button
+                            style={purchaseButton}
+                            variant="contained"
+                            color="secondary"
+                            onClick={props.purchaseLicence}
+                        >
+                            Purchase
+                        </Button>
+                    </div>
+                </div>
             </div>
         </div>
-        </div>
-    </div>
-  )
+    )
 }
 
 export default LicenceHome;

@@ -1,6 +1,6 @@
 import React from 'react';
 import novImage from '../../assets/noVisitor.png';
-import Chip from '@material-ui/core/Chip';
+import { IconButton, Close, Tooltip, Button, Chip, Fingerprint, Stepper } from '@mui/material';
 import '../../styles/Console.css';
 
 const NoData = props => {
@@ -24,29 +24,30 @@ const NoData = props => {
         textAlign: 'center',
     }
 
-  return (
-    <div style={container}> 
-    <div>
-        <div style={text}>{props.remark}</div>
+    return (
+        <div style={container}>
+            <div>
+                <div style={text}>{props.remark}</div>
 
-        <Chip
-        className='console-noDataChip'
-        label={props.message}
-        onClick={props.clickChip ? props.onClickChip : null}
-        />
+                <Chip
+                    className='console-noDataChip'
+                    label={props.message}
+                    onClick={props.clickChip ? props.onClickChip : null}
+                />
 
-        <div style={{
-            display: 'block',
-            margin: '20px auto',
-            height: '300px',
-            width: '300px',
-            backgroundImage: 'url(' + novImage + ')',
-        backgroundRepeat: 'no-repeat',
-        backgroundSize: 'contain',
-        backgroundPosition: 'center',}}></div>
-    </div>
-    </div>
-  )
+                <div style={{
+                    display: 'block',
+                    margin: '20px auto',
+                    height: '300px',
+                    width: '300px',
+                    backgroundImage: 'url(' + novImage + ')',
+                    backgroundRepeat: 'no-repeat',
+                    backgroundSize: 'contain',
+                    backgroundPosition: 'center',
+                }}></div>
+            </div>
+        </div>
+    )
 }
 
 export default NoData;

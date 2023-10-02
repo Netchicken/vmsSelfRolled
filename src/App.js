@@ -6,7 +6,7 @@ import Auth from './components/auth/Auth';
 import Console from './components/console/Console';
 import { useEffect } from 'react';
 
-import { auth, db } from './firebase/Config';
+import { auth, db } from './components/firebase/Config';
 
 
 
@@ -58,18 +58,19 @@ function App() {
         userDataRef.onSnapshot(doc => {
           if (doc.exists) {
             setUserData(doc.data());
+            UserData = doc.data();  //sets the data to be exported
 
             businessCategoryDataRef.get()
               .then((querySnapshot) => {
                 querySnapshot.forEach((doc) => {
-                  BusinessCategories.push(doc.data());
+                  BusinessCategories.push(doc.data()); //sets businessdata to be exported 
                 });
 
                 defaultSettingsRef.get().then((doc) => {
                   if (doc.exists) {
-                    DefaultSettings = doc.data();
+                    DefaultSettings = doc.data(); //sets default settings to be exported
 
-                    AppData = {
+                    AppData = { //sets app data to be exported
                       userData: UserData,
                       businessCategories: BusinessCategories,
                       defaultSettings: DefaultSettings,
