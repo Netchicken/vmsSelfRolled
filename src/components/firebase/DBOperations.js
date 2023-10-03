@@ -4,6 +4,7 @@ import { doc, updateDoc, getDoc, getFirestore, collection, addDoc, query, where,
 import { auth, db } from '../firebase/Config';
 import { format } from 'date-fns';
 import { useState } from "react";
+import { da } from 'date-fns/locale';
 
 //https://firebase.google.com/docs/firestore/manage-data/add-data
 
@@ -60,21 +61,24 @@ export const checkDataExists = (user) => {
     return 1;
     //})
 }
-export const getData = async (user) => {
+export const getUserData = async (user) => {
     //https://firebase.google.com/docs/firestore/query-data/queries?hl=en&authuser=0
     // const q = query(collection(db, "vcUsers"), where("userid", "===", user.id));
+    const data = [];
     const q = query(collection(db, "vcUsers"));
     const querySnapshot = await getDocs(q);
-    if (q) {
+
+    try {
         querySnapshot.forEach((doc) => {
             // doc.data() is never undefined for query doc snapshots
             console.log("DBOperations getData in App  " + doc.id, " => ", doc.data());
+            data.push(doc.data());
         });
-        // return querySnapshot.docs.map(doc => doc.data());
-        return querySnapshot;
+        return Promise.all(data);
+    } catch (e) {
+        console.log('Error getting user: ', e);
     }
-    return "No data";
-    //})
+
 }
 
 

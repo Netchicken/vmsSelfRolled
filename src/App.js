@@ -9,7 +9,7 @@ import Console from './components/console/Console';
 import InitialSetup from './components/InitialSetup';
 import Login from './components/Login';
 import { auth, db } from './components/firebase/Config';
-import { getData, getBusinessData, getPurposeOfVisitOptionsRef, getDefaultSettingsRef } from './components/firebase/DBOperations';
+import { getUserData, getBusinessData, getPurposeOfVisitOptionsRef, getDefaultSettingsRef } from './components/firebase/DBOperations';
 
 
 import { CssBaseline, createTheme, MuiThemeProvider, Typography, Button, Link, } from '@mui/material';
@@ -35,19 +35,18 @@ function App() {
   const [appData, setAppData] = useState(null);
 
   useEffect(() => {
-
     initLoad();
-
-
   }, []);
 
 
-  const initLoad = () => {
-
-    auth.onAuthStateChanged(user => {
+  const initLoad = async () => {
+    auth.onAuthStateChanged(async user => {
       if (user) {
         // const userDataRef = db.collection("vsUsers").doc(user.uid);
-        const userDataRef = getData(user.uid);
+        const userDataRef = await getUserData(user.uid);
+        console.log("userDataRef", userDataRef[0]); //get the only entry in the array
+
+
         // const defaultLogoRef = db.collection("defaultParameters").doc('logoImage');
         // const defaultHomeBkgImageRef = db.collection("defaultParameters").doc('backgroundImage');
         // const defaultAdvertRef = db.collection("defaultParameters").doc('advertImage');
@@ -65,86 +64,84 @@ function App() {
         //       setUserData(doc.data());
         //       UserData = doc.data();  //sets the data to be exported
 
-        // userDataRef.forEach((doc) => {
-        //   // doc.data() is never undefined for query doc snapshots
-        //   console.log("userDataRef   " + doc.id, " => ", doc.data());
-        // });
+        //;
 
-        userDataRef.then(doc => {
+        const doc = userDataRef[0];
 
-          if (doc.exists) {
-            UserData = doc.data();
-            console.log("userDataRef", doc.data());
+        if (doc.exists) {
+          UserData = doc.data();
+          console.log("userDataRef", doc.data());
 
-            businessCategoryDataRef.get()
-              .then((querySnapshot) => {
-                querySnapshot.forEach((doc) => {
-                  BusinessCategories.push(doc.data()); //sets businessdata to be exported 
-                });
-
-                defaultSettingsRef.get().then((doc) => {
-                  if (doc.exists) {
-                    DefaultSettings = doc.data(); //sets default settings to be exported
-
-                    AppData = { //sets app data to be exported
-                      userData: UserData,
-                      businessCategories: BusinessCategories,
-                      defaultSettings: DefaultSettings,
-                    };
-                    setAuthenticated(true);
-                    setCurrentUser(user);
-                    setUserData(doc.data());
-                    setLoading(false);
-                    setAppData(AppData);
-
-                  } else {
-
-                    setAuthenticated(false);
-                    setCurrentUser(null);
-                    setUserData(null);
-                    setLoading(false);
-                    setAppData(null);
-
-                    console.log("No such document!");
-                  }
-                })
-                  .catch((error) => {
-                    setAuthenticated(false);
-                    setCurrentUser(null);
-                    setUserData(null);
-                    setLoading(false);
-                    setAppData(null);
-                    console.log("Error getting document:", error);
-                  });
-              })
-              .catch((error) => {
-                setAuthenticated(false);
-                setCurrentUser(null);
-                setUserData(null);
-                setLoading(false);
-                setAppData(null);
-                console.log("Error getting documents: ", error);
+          businessCategoryDataRef.get()
+            .then((querySnapshot) => {
+              querySnapshot.forEach((doc) => {
+                BusinessCategories.push(doc.data()); //sets businessdata to be exported 
               });
 
-          } else {
-            setAuthenticated(false);
-            setCurrentUser(null);
-            setUserData(null);
-            setLoading(false);
-            setAppData(null);
-            console.log("No such document!");
-          }
+              defaultSettingsRef.get().then((doc) => {
+                if (doc.exists) {
+                  DefaultSettings = doc.data(); //sets default settings to be exported
 
-        });
+                  AppData = { //sets app data to be exported
+                    userData: UserData,
+                    businessCategories: BusinessCategories,
+                    defaultSettings: DefaultSettings,
+                  };
+                  setAuthenticated(true);
+                  setCurrentUser(user);
+                  setUserData(doc.data());
+                  setLoading(false);
+                  setAppData(AppData);
 
-      } else {
-        setAuthenticated(false);
-        setCurrentUser(null);
-        setUserData(null);
-        setLoading(false);
-        setAppData(null);
+                } else {
+
+                  setAuthenticated(false);
+                  setCurrentUser(null);
+                  setUserData(null);
+                  setLoading(false);
+                  setAppData(null);
+
+                  console.log("No such document!");
+                }
+              })
+                .catch((error) => {
+                  setAuthenticated(false);
+                  setCurrentUser(null);
+                  setUserData(null);
+                  setLoading(false);
+                  setAppData(null);
+                  console.log("Error getting document:", error);
+                });
+            })
+            .catch((error) => {
+              setAuthenticated(false);
+              setCurrentUser(null);
+              setUserData(null);
+              setLoading(false);
+              setAppData(null);
+              console.log("Error getting documents: ", error);
+            });
+
+        } else {
+          setAuthenticated(false);
+          setCurrentUser(null);
+          setUserData(null);
+          setLoading(false);
+          setAppData(null);
+          console.log("No such document!");
+        }
       }
     });
+    //       };
+
+    //   } else {
+    //     setAuthenticated(false);
+    //   setCurrentUser(null);
+    //   setUserData(null);
+    //   setLoading(false);
+    //   setAppData(null);
+    // }
+    //     });
 
 
 
