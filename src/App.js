@@ -51,13 +51,14 @@ function App() {
         // const defaultHomeBkgImageRef = db.collection("defaultParameters").doc('backgroundImage');
         // const defaultAdvertRef = db.collection("defaultParameters").doc('advertImage');
         // const businessCategoryDataRef = db.collection("businessCategories");
-        const businessCategoryDataRef = getBusinessData();
+        const businessCategoryDataRef = await getBusinessData();
+        console.log("businessCategoryDataRef", businessCategoryDataRef[0]);
         // const purposeOfVisitOptionsRef = db.collection("defaultParameters").doc("purposeOfVisitOptions");
-        const purposeOfVisitOptionsRef = getPurposeOfVisitOptionsRef();
-
+        const purposeOfVisitOptionsRef = await getPurposeOfVisitOptionsRef();
+        console.log("purposeOfVisitOptionsRef", purposeOfVisitOptionsRef[0]);
         // const defaultSettingsRef = db.collection("settings-default").doc("default");
-        const defaultSettingsRef = getDefaultSettingsRef();
-
+        const defaultSettingsRef = await getDefaultSettingsRef();
+        console.log("defaultSettingsRef", defaultSettingsRef[0]);
         // userDataRef.querySnapshot() //if there is a user logged in then get the rest of the data
         //   .then((doc) => {
         //     if (doc.exists) {
@@ -66,21 +67,23 @@ function App() {
 
         //;
 
-        const doc = userDataRef[0];
+        const userData = userDataRef[0];
 
-        if (doc.exists) {
-          UserData = doc.data();
-          console.log("userDataRef", doc.data());
+        if (userData.exists) {
+          UserData = userData.data();
+          console.log("userDataRef", userData.data());
 
           businessCategoryDataRef.get()
             .then((querySnapshot) => {
               querySnapshot.forEach((doc) => {
                 BusinessCategories.push(doc.data()); //sets businessdata to be exported 
+                console.log("BusinessCategories", doc.data());
               });
 
               defaultSettingsRef.get().then((doc) => {
                 if (doc.exists) {
                   DefaultSettings = doc.data(); //sets default settings to be exported
+                  console.log("defaultSettingsRef", doc.data());
 
                   AppData = { //sets app data to be exported
                     userData: UserData,
@@ -89,7 +92,7 @@ function App() {
                   };
                   setAuthenticated(true);
                   setCurrentUser(user);
-                  setUserData(doc.data());
+                  setUserData(userData.data());
                   setLoading(false);
                   setAppData(AppData);
 
