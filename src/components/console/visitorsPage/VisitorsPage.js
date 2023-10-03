@@ -3,7 +3,7 @@ import React from 'react';
 import NoVisitor from '../NoData';
 
 import { Tooltip, Paper, InputBase, Typography, Button, Link, } from '@mui/material';
-import { IconButton, DeleteIcon, SearchIcon, LicencesIcon, AuthorizationIcon, VillaSharp, DashboardRounded } from '@mui/icons-material';
+import { IconButton, DeleteIcon, SearchIcon, AcUnit, AuthorizationIcon, VillaSharp, DashboardRounded } from '@mui/icons-material';
 
 const VisitorsPage = props => {
 
@@ -60,9 +60,9 @@ const VisitorsPage = props => {
                 <div>
                     <div>
                         <Paper elevation={1}>
-                            <IconButton aria-label="Search">
-                                <SearchIcon />
-                            </IconButton>
+                            <AcUnit aria-label="Search">
+                                {/* <SearchIcon /> */}
+                            </AcUnit>
                             <InputBase placeholder="Search Visitors" />
                         </Paper>
                     </div>
@@ -95,10 +95,10 @@ const VisitorsPage = props => {
                                     <div style={{ color: '#ef0c00' }}>Not Signed Out</div>
                                     : <div>{vs.signedOutDate} {vs.signedOutTime}</div>}
                                 <div style={{ textAlign: 'right' }}>
-                                    <Tooltip title='Delet((e Authorization Code'>
-                                        <IconButton>
-                                            <DeleteIcon fontSize="small" style={{ color: '#ef0c00' }} />
-                                        </IconButton>
+                                    <Tooltip title='Delete Authorization Code'>
+                                        <AcUnit>
+                                            {/* <DeleteIcon fontSize="small" style={{ color: '#ef0c00' }} /> */}
+                                        </AcUnit>
                                     </Tooltip>
                                 </div>
                             </div>

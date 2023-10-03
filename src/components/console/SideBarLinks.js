@@ -2,7 +2,7 @@ import React from 'react';
 import Margin from '../Margin';
 import '../../styles/Console.css';
 import { TextField, Icon, InputAdornment, Typography, Button, Link, } from '@mui/material';
-import { AccountIcon, SetupIcon, InviteIcon, LicencesIcon, AuthorizationIcon, VillaSharp, DashboardRounded } from '@mui/icons-material';
+import { AccountIcon, SetupIcon, InviteIcon, AcUnit, VillaSharp, DashboardRounded } from '@mui/icons-material';
 
 
 const SideBarLinks = (props) => {
@@ -57,7 +57,7 @@ const SideBarLinks = (props) => {
         variant="text"
         onClick={() => props.click('authorizationCode', 'Manage Your Authorization Codes')}
       >
-        <AuthorizationIcon />
+        <AcUnit />
         <Margin
           height='100%'
           width='10px' />
@@ -87,7 +87,7 @@ const SideBarLinks = (props) => {
         variant="text"
         onClick={() => props.click('licences', 'Your Licences')}
       >
-        <LicencesIcon />
+        <AcUnit />
         <Margin
           height='100%'
           width='10px' />
@@ -102,7 +102,7 @@ const SideBarLinks = (props) => {
         variant="text"
         onClick={() => props.click('inviteManagement', 'Manage Invites')}
       >
-        <InviteIcon />
+        <AcUnit />
         <Margin
           height='100%'
           width='10px' />
@@ -117,7 +117,7 @@ const SideBarLinks = (props) => {
         variant="text"
         onClick={props.goToSettingsPage}
       >
-        <SetupIcon />
+        <AcUnit />
         <Margin
           height='100%'
           width='10px' />
@@ -132,7 +132,7 @@ const SideBarLinks = (props) => {
         variant="text"
         onClick={() => props.click('account', 'Your Vistogram Account')}
       >
-        <AccountIcon />
+        <AcUnit />
         <Margin
           height='100%'
           width='10px' />

@@ -7,10 +7,13 @@ import Home from './components/Home';
 import Auth from './components/auth/Auth';
 import Console from './components/console/Console';
 import InitialSetup from './components/InitialSetup';
-
+import Login from './components/Login';
 import { auth, db } from './components/firebase/Config';
+import { getData, getBusinessData, getPurposeOfVisitOptionsRef, getDefaultSettingsRef } from './components/firebase/DBOperations';
 
 
+import { CssBaseline, createTheme, MuiThemeProvider, Typography, Button, Link, } from '@mui/material';
+import { ChevronLeftIcon, StepLabel, Step, Stepper, AuthorizationIcon, VillaSharp, DashboardRounded } from '@mui/icons-material';
 
 export let AppData = null;
 export let UserData = null;
@@ -43,21 +46,35 @@ function App() {
 
     auth.onAuthStateChanged(user => {
       if (user) {
-
-
-        const userDataRef = db.collection("vsUsers").doc(user.uid);
+        // const userDataRef = db.collection("vsUsers").doc(user.uid);
+        const userDataRef = getData(user.uid);
         // const defaultLogoRef = db.collection("defaultParameters").doc('logoImage');
         // const defaultHomeBkgImageRef = db.collection("defaultParameters").doc('backgroundImage');
         // const defaultAdvertRef = db.collection("defaultParameters").doc('advertImage');
-        const businessCategoryDataRef = db.collection("businessCategories");
+        // const businessCategoryDataRef = db.collection("businessCategories");
+        const businessCategoryDataRef = getBusinessData();
         // const purposeOfVisitOptionsRef = db.collection("defaultParameters").doc("purposeOfVisitOptions");
-        const defaultSettingsRef = db.collection("settings-default").doc("default");
+        const purposeOfVisitOptionsRef = getPurposeOfVisitOptionsRef();
 
-        // userDataRef.get().then((doc) => {
-        userDataRef.onSnapshot(doc => {
+        // const defaultSettingsRef = db.collection("settings-default").doc("default");
+        const defaultSettingsRef = getDefaultSettingsRef();
+
+        // userDataRef.querySnapshot() //if there is a user logged in then get the rest of the data
+        //   .then((doc) => {
+        //     if (doc.exists) {
+        //       setUserData(doc.data());
+        //       UserData = doc.data();  //sets the data to be exported
+
+        // userDataRef.forEach((doc) => {
+        //   // doc.data() is never undefined for query doc snapshots
+        //   console.log("userDataRef   " + doc.id, " => ", doc.data());
+        // });
+
+        userDataRef.then(doc => {
+
           if (doc.exists) {
-            setUserData(doc.data());
-            UserData = doc.data();  //sets the data to be exported
+            UserData = doc.data();
+            console.log("userDataRef", doc.data());
 
             businessCategoryDataRef.get()
               .then((querySnapshot) => {
@@ -74,15 +91,11 @@ function App() {
                       businessCategories: BusinessCategories,
                       defaultSettings: DefaultSettings,
                     };
-
-
-
                     setAuthenticated(true);
                     setCurrentUser(user);
                     setUserData(doc.data());
                     setLoading(false);
                     setAppData(AppData);
-
 
                   } else {
 
@@ -132,23 +145,34 @@ function App() {
         setAppData(null);
       }
     });
+
+
+
+
+
   }
 
 
 
   return (
+
+
     <BrowserRouter>
-      <Routes>
-        {/* <Route path="/pages/login" element={<Login />} /> */}
+      <div>
 
-        <Route path="/" element={<Home />} />
-        <Route path="setup" element={<InitialSetup />} />
-        <Route path="authentication" element={<Auth />} />
+        <CssBaseline />
+        <Routes>
+          <Route path="/login" element={<Login />} />
 
-        <Route path="/console" element={<Console />} />
+          <Route path="/" element={<Home />} />
+          <Route path="/setup" element={<InitialSetup />} />
+          <Route path="/authentication" element={<Auth />} />
+
+          <Route path="/console" element={<Console />} />
 
 
-      </Routes>
+        </Routes>
+      </div>
     </BrowserRouter>
   );
 }

@@ -1,5 +1,6 @@
 import React from 'react';
-import Switch from '@material-ui/core/Switch';
+
+import { Switch, Checkbox, DialogActions } from '@mui/material';
 
 export const SecurityData = props => {
 
@@ -22,14 +23,14 @@ export const SecurityData = props => {
     return (
         <div style={container}>
 
-        <div style={formRow}>
-            <h4>{props.fields.inputParams[props.id] ? 'Disable' : 'Enable' }  {props.name}</h4>
-            <Switch
-            checked={props.fields.inputParams[props.id]}
-            onChange={()=>props.formOnChange(props.id)}
-            value={props.id}
-            />
-        </div>
+            <div style={formRow}>
+                <h4>{props.fields.inputParams[props.id] ? 'Disable' : 'Enable'}  {props.name}</h4>
+                <Switch
+                    checked={props.fields.inputParams[props.id]}
+                    onChange={() => props.formOnChange(props.id)}
+                    value={props.id}
+                />
+            </div>
 
         </div>
 

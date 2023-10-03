@@ -6,11 +6,11 @@ import { AuthCode, VistocodeSKU } from '../functions/AuthCodeGenerator';
 import { auth, db } from '../firebase/Config';
 import { UserData } from '../../App';
 import { format, addDays } from 'date-fns';
-import AuthorizationCodePage from '../../components/console/authorizationCodePage/AuthorizationCodePage';
-import DashboardPage from '../../components/console/dashboardPage/DashboardPage';
-import LicencePage from '../../components/console/licencePage/LicencePage';
+// import AuthorizationCodePage from '../../components/console/authorizationCodePage/AuthorizationCodePage';
+// import DashboardPage from '../../components/console/dashboardPage/DashboardPage';
+// import LicencePage from '../../components/console/licencePage/LicencePage';
 import VisitorsPage from '../../components/console/visitorsPage/VisitorsPage';
-import InviteManagementPage from '../../components/console/inviteManagementPage/InviteManagementPage';
+// import InviteManagementPage from '../../components/console/inviteManagementPage/InviteManagementPage';
 import { ValidateEmail } from '../functions/Validators';
 // import axios from 'axios';
 import { useLocation, useNavigate, useParams, } from "react-router-dom";
@@ -342,19 +342,19 @@ function Console(props) {
             } else {
               setCheckingEmail(true);
 
-              axios.get('https://api.emailverifyapi.com/v3/lookups/json?key=6A2A5F1A86DEF543&email=' + email)
-                .then(response => {
-                  if (!response.data.deliverable) {
-                    setEmailError('Email is incorrect');
+              // axios.get('https://api.emailverifyapi.com/v3/lookups/json?key=6A2A5F1A86DEF543&email=' + email)
+              //   .then(response => {
+              //     if (!response.data.deliverable) {
+              //       setEmailError('Email is incorrect');
 
-                    setCheckingEmail(false);
+              //       setCheckingEmail(false);
 
-                  } else {
-                    setCheckingEmail(false);
-                    setCheckingEmail(false);
-                    nextVRegStep();
-                  }
-                })
+              //     } else {
+              //       setCheckingEmail(false);
+              //       setCheckingEmail(false);
+              //       nextVRegStep();
+              //     }
+              //   })
             }
           }
         }
@@ -461,81 +461,20 @@ function Console(props) {
             {header}
           </div>
           <div className='console-content-children'>
-            {
-              activeLink === 'dashboard' ?
-                <DashboardPage
-                  currentVisitors={currentVisitors}
-                  todayVisitors={todayVisitors}
-                  activeDevices={activeDevices}
-                  userData={UserData}
-                /> :
 
-                activeLink === 'visitors' ?
-                  <VisitorsPage
-                    visitorsData={visitorsData}
-                    userData={UserData}
-                  /> :
-                  activeLink === 'authorizationCode' ?
-                    <AuthorizationCodePage
-                      authCode={authCode}
-                      genAuthCode={generateAuthCode}
-                      subAuthCodeButtonDisabled={authCodeButtonDisabled}
-                      submitAuthCode={submitAuthCode}
-                      subAuthCodeButtonLabel={authCodeButtonLabel}
-                      stepNext={authCodeActiveStepNext}
-                      stepBack={authCodeActiveStepBack}
-                      activeStep={authCodeActiveStep}
-                      selectedSetting={selectedSetting}
-                      selectSettings={handleSelectSettings}
-                      settingsArray={settingsArray}
-                      authCodeArray={authCodeArray}
-                      // deleteAuthCode={(d) => deleteAuthCode(d)}
-                      openSettingsDialog={openSettingsDialog}
-                      openACDeleteDialog={openACDeleteDialog}
-                      handleOpenDialog={(d) => handleOpenDialog(d)}
-                      handleCloseDialog={(d) => handleCloseDialog(d)}
-                      handleACToDelete={(d) => handleACToDelete(d)}
-                      acToDelete={acToDelete}
-                      goToSettingsPage={goToSettingsPage}
-                      userData={UserData}
-                      goToLicencePage={goToLicencePage}
-                      enableGAC={enableGAC}
-                      handleEnableGAC={handleEnableGAC}
-                    />
-                    :
-                    activeLink === 'licences' ?
-                      <LicencePage
-                        pricingTable={pricingTable}
-                        purchaseLicence={purchaseLicence}
-                        userData={UserData}
-                      /> :
-                      activeLink === 'inviteManagement' ?
-                        <InviteManagementPage
-                          invitersData={invitersData}
-                          userData={UserData}
-                          registerInvertersForm={registerInvertersForm}
-                          enableRegisterInvitersForm={enableRegisterInvitersForm}
-                          vRegStep={vRegStep}
-                          previousVRegStep={previousVRegStep}
-                          nextVRegStep={nextVRegStep}
-                          vRegistering={vRegistering}
-                          vRegister={vRegister}
+            activeLink === 'dashboard' ?
+            {/* <DashboardPage
+              currentVisitors={currentVisitors}
+              todayVisitors={todayVisitors}
+              activeDevices={activeDevices}
+              userData={UserData}
+            /> : */}
 
-                          userID={userID}
-                          fullName={fullName}
-                          department={department}
-                          email={email}
-
-                          handleChange={(c) => handleChange(c)}
-                          checkRegisterInputs={checkRegisterInputs}
-
-                          userIDError={userIDError}
-                          fullNameError={fullNameError}
-                          departmentError={departmentError}
-                          emailError={emailError}
-                          checkingEmail={checkingEmail}
-                        /> :
-                        null}
+            activeLink === 'visitors' ?
+            <VisitorsPage
+              visitorsData={visitorsData}
+              userData={UserData}
+            />
           </div>
         </div>
       </div>
@@ -551,3 +490,65 @@ export default Console;
 //=====END HOOKS=====
 
 
+// :
+// activeLink === 'authorizationCode' ?
+// <AuthorizationCodePage
+//   authCode={authCode}
+//   genAuthCode={generateAuthCode}
+//   subAuthCodeButtonDisabled={authCodeButtonDisabled}
+//   submitAuthCode={submitAuthCode}
+//   subAuthCodeButtonLabel={authCodeButtonLabel}
+//   stepNext={authCodeActiveStepNext}
+//   stepBack={authCodeActiveStepBack}
+//   activeStep={authCodeActiveStep}
+//   selectedSetting={selectedSetting}
+//   selectSettings={handleSelectSettings}
+//   settingsArray={settingsArray}
+//   authCodeArray={authCodeArray}
+//   // deleteAuthCode={(d) => deleteAuthCode(d)}
+//   openSettingsDialog={openSettingsDialog}
+//   openACDeleteDialog={openACDeleteDialog}
+//   handleOpenDialog={(d) => handleOpenDialog(d)}
+//   handleCloseDialog={(d) => handleCloseDialog(d)}
+//   handleACToDelete={(d) => handleACToDelete(d)}
+//   acToDelete={acToDelete}
+//   goToSettingsPage={goToSettingsPage}
+//   userData={UserData}
+//   goToLicencePage={goToLicencePage}
+//   enableGAC={enableGAC}
+//   handleEnableGAC={handleEnableGAC}
+// />
+// :
+// activeLink === 'licences' ?
+//   <LicencePage
+//     pricingTable={pricingTable}
+//     purchaseLicence={purchaseLicence}
+//     userData={UserData}
+//   /> :
+//   activeLink === 'inviteManagement' ?
+//     <InviteManagementPage
+//       invitersData={invitersData}
+//       userData={UserData}
+//       registerInvertersForm={registerInvertersForm}
+//       enableRegisterInvitersForm={enableRegisterInvitersForm}
+//       vRegStep={vRegStep}
+//       previousVRegStep={previousVRegStep}
+//       nextVRegStep={nextVRegStep}
+//       vRegistering={vRegistering}
+//       vRegister={vRegister}
+
+//       userID={userID}
+//       fullName={fullName}
+//       department={department}
+//       email={email}
+
+//       handleChange={(c) => handleChange(c)}
+//       checkRegisterInputs={checkRegisterInputs}
+
+//       userIDError={userIDError}
+//       fullNameError={fullNameError}
+//       departmentError={departmentError}
+//       emailError={emailError}
+//       checkingEmail={checkingEmail}
+//     /> :
+//  null

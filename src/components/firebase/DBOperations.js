@@ -66,19 +66,78 @@ export const getData = async (user) => {
     const q = query(collection(db, "vcUsers"));
     const querySnapshot = await getDocs(q);
     if (q) {
-
-
         querySnapshot.forEach((doc) => {
             // doc.data() is never undefined for query doc snapshots
-            console.log("DBOperations in App  " + doc.id, " => ", doc.data());
+            console.log("DBOperations getData in App  " + doc.id, " => ", doc.data());
         });
-
-
-        return querySnapshot.docs.map(doc => doc.data());
+        // return querySnapshot.docs.map(doc => doc.data());
+        return querySnapshot;
     }
     return "No data";
     //})
 }
+
+
+export const getBusinessData = async () => {
+    const q = query(collection(db, "businessCategories"));
+    const querySnapshot = await getDocs(q);
+    if (q) {
+        querySnapshot.forEach((doc) => {
+
+            console.log("getBusinessData in App  ");
+        });
+        return querySnapshot.docs.map(doc => doc.data());
+    }
+    return "No data";
+
+}
+export const getPurposeOfVisitOptionsRef = async () => {
+    const q = query(collection(db, "defaultParameters"));
+    const querySnapshot = await getDocs(q);
+    if (q) {
+        querySnapshot.forEach((doc) => {
+            console.log("purposeOfVisitOptionsRef in App  ");
+        });
+        return querySnapshot.docs.map(doc => doc.purposeOfVisitOptions);
+    }
+    return "No data";
+
+}
+export const getDefaultSettingsRef = async () => {
+    const q = query(collection(db, "settings-default"));
+    const querySnapshot = await getDocs(q);
+    if (q) {
+        querySnapshot.forEach((doc) => {
+            console.log("defaultSettingsRef in App  ");
+        });
+        return querySnapshot; //.docs.map(doc => doc.default);
+    }
+    return "No data";
+
+}
+
+
+
+
+
+
+
+
+// I understand that you want to add a new document to a collection with a document ID that you specify.You should you use the setDoc() method as follows:
+
+// import { doc, setDoc } from "firebase/firestore";
+
+// await setDoc(doc(db, "cities", "new-city-id"), data);
+
+
+
+
+
+
+
+
+
+
 
 // export const userChanged = (user) => {
 

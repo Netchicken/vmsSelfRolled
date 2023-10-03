@@ -3,32 +3,33 @@ import LandingScreenPreview from '../components/setup-preview/LandingScreen';
 import WelcomeScreenPreview from '../components/setup-preview/WelcomeScreen';
 import MainScreenPreview from '../components/setup-preview/MainScreen';
 import Logo from '../components/Logo';
-import '../../styles/InitialSetup.css';
+import '../styles/InitialSetup.css';
+import '../styles/Home.css';
 
-import { UserData, BusinessCategories, DefaultSettings } from '../../root/App';
+import { UserData, BusinessCategories, DefaultSettings } from '../App';
 import CompanyInfo from '../components/initial-setup/CompanyInfo';
 import CompanyColors from '../components/initial-setup/CompanyColors';
 import CompanyAssets from '../components/initial-setup/CompanyAssets';
 import WelcomeInfo from '../components/initial-setup/WelcomeInfo';
 import CompanyAdverts from '../components/initial-setup/CompanyAdverts';
-import Form from '../../components/initial-setup/Form';
+import Form from '../components/initial-setup/Form';
 import SecurityData from '../components/initial-setup/SecurityData';
 
 import Margin from '../components/Margin';
-import Firebase from '../../firebase/Config';
+import { storage, db } from '../components/firebase/Config';
 
 import { format } from 'date-fns';
 
 
 import { TextField, Icon, InputAdornment, Typography, Button, Link, } from '@mui/material';
-import { ChevronLeftIcon, StepLabel, Step, Stepper, AuthorizationIcon, VillaSharp, DashboardRounded } from '@mui/icons-material';
+import { ChevronLeft, StepLabel, Step, Stepper, AuthorizationIcon, VillaSharp, DashboardRounded } from '@mui/icons-material';
 
 
 
 let advertNum = 0;
 
-const db = Firebase.firestore();
-const storage = Firebase.storage();
+// const db = Firebase.firestore();
+// const storage = Firebase.storage();
 
 let imagesRef = '';
 let logoImageDUrl = '';
@@ -557,7 +558,7 @@ export class Setup extends Component {
                     variant="outlined"
                     onClick={this.goToConsolePage}
                   >
-                    <ChevronLeftIcon />
+
                     Back To Console
                   </Button> : null}
                 </div>
@@ -581,7 +582,7 @@ export class Setup extends Component {
             <div className='setup-content-header'>
               <div>Configure a setting for your VISTOGRAM</div>
             </div>
-            <div className='setup-stepper'>
+            {/* <div className='setup-stepper'>
               <Stepper
                 activeStep={activeStep < 8 ? activeStep : 8}
                 alternativeLabel
@@ -592,7 +593,7 @@ export class Setup extends Component {
                   </Step>
                 ))}
               </Stepper>
-            </div>
+            </div> */}
 
             <div className='setup-content-children'>
 

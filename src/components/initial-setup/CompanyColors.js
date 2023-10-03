@@ -1,11 +1,10 @@
 import React from 'react';
 import { SketchPicker } from 'react-color';
-import TextField from '@material-ui/core/TextField';
-import InputAdornment from '@material-ui/core/InputAdornment';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import Button from '@material-ui/core/Button';
+
+
+
+import { TextField, Icon, InputAdornment, Typography, Button, Link, } from '@mui/material';
+import { Dialog, DialogContent, DialogActions } from '@mui/material';
 
 
 export const CompanyColors = props => {
@@ -33,7 +32,7 @@ export const CompanyColors = props => {
 
     return (
         <div>
-        {/* <div style={colorDiv}> */}
+            {/* <div style={colorDiv}> */}
             <TextField
                 id={props.name}
                 label={props.label}
@@ -45,58 +44,58 @@ export const CompanyColors = props => {
                 InputProps={{
                     readOnly: true,
                     endAdornment: (
-                      <InputAdornment position="end">
-                        <div style={divider}></div>
-                        <Button
-                            size='small'
-                            disableFocusRipple
-                            disableRipple
-                            onClick={props.click}
+                        <InputAdornment position="end">
+                            <div style={divider}></div>
+                            <Button
+                                size='small'
+                                disableFocusRipple
+                                disableRipple
+                                onClick={props.click}
                             >
-                        <div style={color}></div>
-                        </Button>
-                      </InputAdornment>
+                                <div style={color}></div>
+                            </Button>
+                        </InputAdornment>
                     ),
-                  }}
+                }}
 
-                  InputLabelProps={{
+                InputLabelProps={{
                     focused: props.focus
-                  }}
+                }}
             />
-            
+
 
             <div>
                 <Dialog
-                disableBackdropClick
-                disableEscapeKeyDown
-                open={props.dialogIsOpen}
-                onClose={props.closeColorDialog}
-                aria-labelledby="responsive-dialog-title"
+                    disableBackdropClick
+                    disableEscapeKeyDown
+                    open={props.dialogIsOpen}
+                    onClose={props.closeColorDialog}
+                    aria-labelledby="responsive-dialog-title"
                 >
-                <h4
-                style={dialogTitle}
-                >{'Select '+props.activeColorSelect}</h4>
-                <DialogContent>
-                <SketchPicker
-                        color={props.activeColorSelect === 'Primary Color' ? 
-                        props.pcpBkgColor : props.scpBkgColor}
-                        disableAlpha
-                        presetColors={props.presetColors}
-                        onChangeComplete={props.handleSelectColor}
-                    /> 
+                    <h4
+                        style={dialogTitle}
+                    >{'Select ' + props.activeColorSelect}</h4>
+                    <DialogContent>
+                        <SketchPicker
+                            color={props.activeColorSelect === 'Primary Color' ?
+                                props.pcpBkgColor : props.scpBkgColor}
+                            disableAlpha
+                            presetColors={props.presetColors}
+                            onChangeComplete={props.handleSelectColor}
+                        />
 
-                </DialogContent>
-                <DialogActions>
-                    {/* <Button onClick={props.closeColorDialog} color="primary">
+                    </DialogContent>
+                    <DialogActions>
+                        {/* <Button onClick={props.closeColorDialog} color="primary">
                     Disagree
                     </Button> */}
-                    <Button onClick={props.closeColorDialog} color="primary" autoFocus>
-                    Okay
-                    </Button>
-                </DialogActions>
+                        <Button onClick={props.closeColorDialog} color="primary" autoFocus>
+                            Okay
+                        </Button>
+                    </DialogActions>
                 </Dialog>
             </div>
-        {/* </div> */}
+            {/* </div> */}
         </div>
     )
 }

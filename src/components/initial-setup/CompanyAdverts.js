@@ -1,6 +1,8 @@
 import React from 'react';
-import IconButton from '@material-ui/core/IconButton';
-import CloseOutlinedIcon from '@material-ui/icons/CloseOutlined';
+
+
+import { TextField, Icon, InputAdornment, Typography, Button, Link, } from '@mui/material';
+import { IconButton, CloseOutlinedIcon } from '@mui/icons-material';
 
 
 export const CompanyAdverts = props => {
@@ -18,8 +20,8 @@ export const CompanyAdverts = props => {
             description = props.advertImagesUrl.length + ' Advert';
         }
     }
-    
-    const fieldset = { 
+
+    const fieldset = {
         display: 'block',
         marginLeft: '2px',
         marginRight: '0',
@@ -34,8 +36,8 @@ export const CompanyAdverts = props => {
         fontSize: '11px',
         padding: '10px',
         marginBottom: '5px'
-      }
-    
+    }
+
     const uploadButtonRow = {
         width: '100%',
         display: 'flex',
@@ -91,50 +93,50 @@ export const CompanyAdverts = props => {
         <fieldset style={fieldset}>
             <legend>Advert(s)</legend>
             <div style={uploadButtonRow}>
-            <div>
-            <label 
-                style={uploadButton}
-                htmlFor="files"
-                >
-                    {label}
-            </label>
-            <input 
-                style={fileInput}
-                accept="image/*"
-                id="files"
-                type="file" 
-                name="advert" 
-                multiple 
-                onChange={props.onChange}
-                />
-            </div>
-            <div style={descDiv}>
-                {description}
-            </div>
-            
+                <div>
+                    <label
+                        style={uploadButton}
+                        htmlFor="files"
+                    >
+                        {label}
+                    </label>
+                    <input
+                        style={fileInput}
+                        accept="image/*"
+                        id="files"
+                        type="file"
+                        name="advert"
+                        multiple
+                        onChange={props.onChange}
+                    />
+                </div>
+                <div style={descDiv}>
+                    {description}
+                </div>
+
             </div>
 
             <div style={advertsContainer}>
-            {props.advertImagesUrl.map((advert, index) => (
-                <div 
-                    key={index}
-                    style={advertPreviewRow}
-                >
-                <img
-                    style={advertPreview} 
-                    src={advert}
-                    alt={props.advertImageNames[index]}
-                />
-
-                <IconButton 
-                    style={deleteButton}
-                    aria-label="Delete"
-                    onClick={()=>props.onDelete(index, advert, props.advertImageNames[index])}
+                {props.advertImagesUrl.map((advert, index) => (
+                    <div
+                        key={index}
+                        style={advertPreviewRow}
                     >
-                    <CloseOutlinedIcon />
-                </IconButton>
-                </div>
-            ))}
+                        <img
+                            style={advertPreview}
+                            src={advert}
+                            alt={props.advertImageNames[index]}
+                        />
+
+                        {/* <IconButton
+                            style={deleteButton}
+                            aria-label="Delete"
+                            onClick={() => props.onDelete(index, advert, props.advertImageNames[index])}
+                        >
+                            <CloseOutlinedIcon />
+                        </IconButton> */}
+                    </div>
+                ))}
             </div>
         </fieldset>
 

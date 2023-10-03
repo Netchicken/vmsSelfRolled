@@ -1,6 +1,8 @@
 import React from 'react';
-import Switch from '@material-ui/core/Switch';
-import Checkbox from '@material-ui/core/Checkbox';
+
+
+import { Switch, Checkbox, DialogActions } from '@mui/material';
+
 
 export const Form = props => {
 
@@ -45,33 +47,33 @@ export const Form = props => {
     return (
         <div style={container}>
 
-        <div style={formRow}>
-            <h4>{props.fields.inputParams[props.id] ? 'Disable' : 'Enable'} {props.name}</h4> 
-            <Switch
-            disabled={props.id === '6tagForm'}
-            checked={props.fields.inputParams[props.id]}
-            onChange={()=>props.formOnChange(props.id, props.idf)}
-            value={props.id}
-            />
-        </div>
-
-
-        <p style={ffLabel}>{props.name} Fields</p>
-        <div style={fieldContainer}>
-        {props.fields[props.idf].map((field, index) => (
-        <div 
-            key={index}
-            style={formFieldsRow}>
-                <Checkbox
-                disabled={!props.fields.inputParams[props.id] || props.id === '6tagForm' || field.field === 'Company'}
-                checked={field.active}
-                onChange={()=>props.fieldOnChange(props.id, props.idf, index)}
-                value={field.field}
+            <div style={formRow}>
+                <h4>{props.fields.inputParams[props.id] ? 'Disable' : 'Enable'} {props.name}</h4>
+                <Switch
+                    disabled={props.id === '6tagForm'}
+                    checked={props.fields.inputParams[props.id]}
+                    onChange={() => props.formOnChange(props.id, props.idf)}
+                    value={props.id}
                 />
-                <p>{field.field}</p>
-        </div>
-        ))}
-        </div>
+            </div>
+
+
+            <p style={ffLabel}>{props.name} Fields</p>
+            <div style={fieldContainer}>
+                {props.fields[props.idf].map((field, index) => (
+                    <div
+                        key={index}
+                        style={formFieldsRow}>
+                        <Checkbox
+                            disabled={!props.fields.inputParams[props.id] || props.id === '6tagForm' || field.field === 'Company'}
+                            checked={field.active}
+                            onChange={() => props.fieldOnChange(props.id, props.idf, index)}
+                            value={field.field}
+                        />
+                        <p>{field.field}</p>
+                    </div>
+                ))}
+            </div>
 
         </div>
 

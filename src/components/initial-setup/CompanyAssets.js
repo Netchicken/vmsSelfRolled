@@ -1,11 +1,12 @@
 import React from 'react';
-import TextField from '@material-ui/core/TextField';
-import InputAdornment from '@material-ui/core/InputAdornment';
-import CloseOutlinedIcon from '@material-ui/icons/CloseOutlined';
-import IconButton from '@material-ui/core/IconButton';
+
+
+
+import { TextField, Icon, InputAdornment, Typography, Button, Link, } from '@mui/material';
+import { IconButton, CloseOutlinedIcon } from '@mui/icons-material';
 
 export const CompanyAssets = props => {
-    
+
     let bd = 'none';
 
     if (props.type === 'file') {
@@ -20,7 +21,7 @@ export const CompanyAssets = props => {
         borderRadius: '10px',
     }
 
-    const noImagePreview ={
+    const noImagePreview = {
         width: '40px',
         height: '40px',
         borderRadius: '10px',
@@ -51,53 +52,53 @@ export const CompanyAssets = props => {
 
     return (
         <div style={container}>
-        <div style={inputContainer}>
-        <TextField
-                id={props.name}
-                label={props.label}
-                type={props.name}
-                name={props.name}
-                margin="normal"
-                variant="outlined"
-                fullWidth
-                title="&nbsp;"
-                error={props.error}
-                helperText={props.helperText}
-                onChange={props.onChange}
-                InputProps={{
-                    style: input,
-                    accept: props.type === 'file' ? "image/*" : "",
-                    readOnly: true,
-                    type: props.type,
-                    value: props.value,
-                    endAdornment: (
-                        
-                        <InputAdornment position="end">
-                        {props.type !== 'file' ? 
-                        <img
-                        style={imagePreview} 
-                        src={props.src}
-                       alt={props.value}
-                        /> : <div style={noImagePreview}></div> }
-                      </InputAdornment> 
-                    ),
-                  }}
+            <div style={inputContainer}>
+                <TextField
+                    id={props.name}
+                    label={props.label}
+                    type={props.name}
+                    name={props.name}
+                    margin="normal"
+                    variant="outlined"
+                    fullWidth
+                    title="&nbsp;"
+                    error={props.error}
+                    helperText={props.helperText}
+                    onChange={props.onChange}
+                    InputProps={{
+                        style: input,
+                        accept: props.type === 'file' ? "image/*" : "",
+                        readOnly: true,
+                        type: props.type,
+                        value: props.value,
+                        endAdornment: (
 
-                  InputLabelProps={{
-                    shrink: true,
-                    focused: props.focus
-                  }}
+                            <InputAdornment position="end">
+                                {props.type !== 'file' ?
+                                    <img
+                                        style={imagePreview}
+                                        src={props.src}
+                                        alt={props.value}
+                                    /> : <div style={noImagePreview}></div>}
+                            </InputAdornment>
+                        ),
+                    }}
 
-            />
+                    InputLabelProps={{
+                        shrink: true,
+                        focused: props.focus
+                    }}
+
+                />
             </div>
 
-            <IconButton 
+            {/* <IconButton
                 style={deleteButton}
                 aria-label="Delete"
                 onClick={props.onDelete}
-                >
+            >
                 <CloseOutlinedIcon />
-            </IconButton>
+            </IconButton> */}
 
         </div>
 
