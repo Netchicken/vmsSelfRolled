@@ -73,11 +73,13 @@ function App() {
         // const defaultHomeBkgImageRef = db.collection("defaultParameters").doc('backgroundImage');
         // const defaultAdvertRef = db.collection("defaultParameters").doc('advertImage');
         // const businessCategoryDataRef = db.collection("businessCategories");
-        const businessCategoryDataRef = getBusinessData();
+        const businessCategoryDataRef = await getBusinessData();
+        console.log("businessCategoryDataRef", businessCategoryDataRef[0]);
         // const purposeOfVisitOptionsRef = db.collection("defaultParameters").doc("purposeOfVisitOptions");
-        const purposeOfVisitOptionsRef = getPurposeOfVisitOptionsRef();
-
+        const purposeOfVisitOptionsRef = await getPurposeOfVisitOptionsRef();
+        console.log("purposeOfVisitOptionsRef", purposeOfVisitOptionsRef[0]);
         // const defaultSettingsRef = db.collection("settings-default").doc("default");
+<<<<<<< HEAD
         const defaultSettingsRef = getDefaultSettingsRef();
 
         userDataRef //if there is a user logged in then get the rest of the data
@@ -130,6 +132,58 @@ function App() {
                       console.log("Error getting document:", error);
                     });
                 })
+=======
+        const defaultSettingsRef = await getDefaultSettingsRef();
+        console.log("defaultSettingsRef", defaultSettingsRef[0]);
+        // userDataRef.querySnapshot() //if there is a user logged in then get the rest of the data
+        //   .then((doc) => {
+        //     if (doc.exists) {
+        //       setUserData(doc.data());
+        //       UserData = doc.data();  //sets the data to be exported
+
+        //;
+
+        const userData = userDataRef[0];
+
+        if (userData.exists) {
+          UserData = userData.data();
+          console.log("userDataRef", userData.data());
+
+          businessCategoryDataRef.get()
+            .then((querySnapshot) => {
+              querySnapshot.forEach((doc) => {
+                BusinessCategories.push(doc.data()); //sets businessdata to be exported 
+                console.log("BusinessCategories", doc.data());
+              });
+
+              defaultSettingsRef.get().then((doc) => {
+                if (doc.exists) {
+                  DefaultSettings = doc.data(); //sets default settings to be exported
+                  console.log("defaultSettingsRef", doc.data());
+
+                  AppData = { //sets app data to be exported
+                    userData: UserData,
+                    businessCategories: BusinessCategories,
+                    defaultSettings: DefaultSettings,
+                  };
+                  setAuthenticated(true);
+                  setCurrentUser(user);
+                  setUserData(userData.data());
+                  setLoading(false);
+                  setAppData(AppData);
+
+                } else {
+
+                  setAuthenticated(false);
+                  setCurrentUser(null);
+                  setUserData(null);
+                  setLoading(false);
+                  setAppData(null);
+
+                  console.log("No such document!");
+                }
+              })
+>>>>>>> 49cf40ddbbad3a46ebef6e156ff93803a42e2ef7
                 .catch((error) => {
                   setAuthenticated(false);
                   setCurrentUser(null);

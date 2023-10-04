@@ -78,38 +78,47 @@ export const getData = async (user) => {
 
 
 export const getBusinessData = async () => {
+    const data = [];
     const q = query(collection(db, "businessCategories"));
     const querySnapshot = await getDocs(q);
     if (q) {
         querySnapshot.forEach((doc) => {
 
             console.log("getBusinessData in App  ");
+            data.push(doc.data());
         });
-        return querySnapshot.docs.map(doc => doc.data());
+        return Promise.all(data);
     }
     return "No data";
-
 }
 export const getPurposeOfVisitOptionsRef = async () => {
+    const data = [];
     const q = query(collection(db, "defaultParameters"));
     const querySnapshot = await getDocs(q);
     if (q) {
         querySnapshot.forEach((doc) => {
             console.log("purposeOfVisitOptionsRef in App  ");
+            data.push(doc.data());
         });
-        return querySnapshot.docs.map(doc => doc.purposeOfVisitOptions);
+        return Promise.all(data);
     }
     return "No data";
 
 }
 export const getDefaultSettingsRef = async () => {
+    const data = [];
     const q = query(collection(db, "settings-default"));
     const querySnapshot = await getDocs(q);
     if (q) {
         querySnapshot.forEach((doc) => {
             console.log("defaultSettingsRef in App  ");
+            data.push(doc.data());
         });
+<<<<<<< HEAD
         return querySnapshot.docs.map(doc => doc.default);
+=======
+        return Promise.all(data);
+>>>>>>> 49cf40ddbbad3a46ebef6e156ff93803a42e2ef7
     }
     return "No data";
 
