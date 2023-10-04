@@ -4,7 +4,6 @@ import { doc, updateDoc, getDoc, getFirestore, collection, addDoc, query, where,
 import { auth, db } from '../firebase/Config';
 import { format } from 'date-fns';
 import { useState } from "react";
-import { da } from 'date-fns/locale';
 
 //https://firebase.google.com/docs/firestore/manage-data/add-data
 
@@ -61,24 +60,20 @@ export const checkDataExists = (user) => {
     return 1;
     //})
 }
-export const getUserData = async (user) => {
+export const getData = async (user) => {
     //https://firebase.google.com/docs/firestore/query-data/queries?hl=en&authuser=0
     // const q = query(collection(db, "vcUsers"), where("userid", "===", user.id));
-    const data = [];
     const q = query(collection(db, "vcUsers"));
     const querySnapshot = await getDocs(q);
-
-    try {
+    if (q) {
         querySnapshot.forEach((doc) => {
             // doc.data() is never undefined for query doc snapshots
             console.log("DBOperations getData in App  " + doc.id, " => ", doc.data());
-            data.push(doc.data());
         });
-        return Promise.all(data);
-    } catch (e) {
-        console.log('Error getting user: ', e);
+        return querySnapshot.docs.map(doc => doc.data());
     }
-
+    return "No data";
+    //})
 }
 
 
@@ -114,34 +109,11 @@ export const getDefaultSettingsRef = async () => {
         querySnapshot.forEach((doc) => {
             console.log("defaultSettingsRef in App  ");
         });
-        return querySnapshot; //.docs.map(doc => doc.default);
+        return querySnapshot.docs.map(doc => doc.default);
     }
     return "No data";
 
 }
-
-
-
-
-
-
-
-
-// I understand that you want to add a new document to a collection with a document ID that you specify.You should you use the setDoc() method as follows:
-
-// import { doc, setDoc } from "firebase/firestore";
-
-// await setDoc(doc(db, "cities", "new-city-id"), data);
-
-
-
-
-
-
-
-
-
-
 
 // export const userChanged = (user) => {
 

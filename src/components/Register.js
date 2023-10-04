@@ -1,223 +1,188 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 // import '../styles/Register.css';
-import '../styles/Common.css';
+import "../styles/Common.css";
 
-import { auth, db } from './firebase/Config';
+import { auth, db } from "./firebase/Config";
 import { initializeApp, getApp, getApps } from "firebase/app";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth"; //https://firebase.google.com/docs/auth/web/password-auth#create_a_password-based_account
 import { getFirestore, collection, addDoc } from "firebase/firestore";
 
+import { format } from "date-fns";
 
-import { format } from 'date-fns';
+import NameLogo from "../components/NameLogo";
 
-import NameLogo from '../components/NameLogo';
-
-import { TextField, Icon, InputAdornment, Typography, Button, Link, Business, AlternateEmail, Checkbox, Divider } from '@mui/material';
-import AuthTypeContext from '../context/authTypeContext';
-import UserDataContext from '../context/userDataContext';
-import { ValidateEmail, ValidatePassword } from './functions/Validators';
-import { useLocation, useNavigate, useParams, } from "react-router-dom";
+import {
+  TextField,
+  Icon,
+  InputAdornment,
+  Typography,
+  Button,
+  Link,
+  Business,
+  AlternateEmail,
+  Checkbox,
+  Divider,
+} from "@mui/material";
+import AuthTypeContext from "../context/authTypeContext";
+import UserDataContext from "../context/userDataContext";
+import { ValidateEmail, ValidatePassword } from "./functions/Validators";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 
 export class Register extends Component {
+  constructor(props) {
+    super(props);
 
-    constructor(props) {
-        super(props);
+    this.state = {
+      businessName: "",
+      businessNameError: "",
+      email: "",
+      emailError: "",
+      password: "",
+      passwordError: "",
+      showPassword: false,
+      checkedBoxTP: false,
+      checkedBoxTPError: false,
+      registering: false,
+      authenticated: false,
+    };
+  }
 
-        this.state = {
-            businessName: '',
-            businessNameError: '',
-            email: '',
-            emailError: '',
-            password: '',
-            passwordError: '',
-            showPassword: false,
-            checkedBoxTP: false,
-            checkedBoxTPError: false,
-            registering: false,
-            authenticated: false,
-        };
+  handleChange = (prop) => (event) => {
+    this.setState({
+      [prop]: event.target.value,
+      [prop + "Error"]: "",
+    });
+  };
 
-    }
+  handleClickShowPassword = () => {
+    this.setState((state) => ({ showPassword: !state.showPassword }));
+  };
 
+  handleClickedCheckedBoxTP = (name) => (event) => {
+    this.setState({
+      [name]: event.target.checked,
+      [name + "Error"]: false,
+    });
+  };
 
+  checkRegisterInputs = () => {
+    this.register();
+    // if (this.state.businessName === '') {
+    //     this.setState(state => ({ businessNameError: 'Your Business Name is required' }));
+    // } else {
+    //     if (this.state.email === '') {
+    //         this.setState(state => ({ emailError: 'Your email is required' }));
+    //     } else {
+    //         if (!ValidateEmail(this.state.email)) {
+    //             this.setState(state => ({ emailError: 'Email is invalid' }));
+    //         } else {
+    //             if (this.state.password === '') {
+    //                 this.setState(state => ({ passwordError: 'Enter a password' }));
+    //             } else {
+    //                 if (!ValidatePassword(this.state.password)) {
+    //                     this.setState(state => ({ passwordError: 'Your password must be at least 6 characters' }));
+    //                 } else {
+    //                     if (this.state.checkedBoxTP === false) {
+    //                         this.setState(state => ({ checkedBoxTPError: true }));
+    //                     } else {
+    //                         this.register();
+    //                     }
+    //                 }
+    //             }
+    //         }
+    //     }
 
-    handleChange = prop => event => {
-        this.setState({
-            [prop]: event.target.value,
-            [prop + 'Error']: ''
+    // }
+  };
+
+  register = async () => {
+    console.log("register running");
+    // const registerEmail = this.state.email;
+    // const registerPassword = this.state.password;
+    // const registerBusinessName = this.state.businessName;
+    const registerEmail = "aaa@aaa1.com";
+    const registerPassword = "123qwe";
+    const registerBusinessName = "Vision College Test2";
+    // const db = Firebase.firestore();
+
+    // Initialize Firebase
+    // const app = initializeApp(Firebase);
+
+    //  const app = !getApps().length ? initializeApp(Firebase) : getApp(); //Just be sure to import getApps () and getApp().
+
+    // Initialize Cloud Firestore and get a reference to the service
+    //  const db = getFirestore(app);
+
+    this.setState({
+      registering: true,
+    });
+
+    try {
+      //Cloud Firestore creates collections and documents implicitly the first time you add data to the document.
+      //You do not need to explicitly create collections or documents. https://firebase.google.com/docs/firestore/query-data/get-data
+      console.log("registering"); // .auth() db.collection('vistogramUsers').doc(data.user.uid).set({
+
+      //  const auth = getAuth();
+      //Create the User
+      await createUserWithEmailAndPassword(
+        auth,
+        registerEmail,
+        registerPassword
+      ).then((data) => {
+        addDoc(collection(db, "vcUsers"), {
+          businessName: registerBusinessName,
+          email: registerEmail,
+          ID: data.user.uid,
+          initialSetup: false,
+          licences: 1,
+          activeLicences: 1,
+          generateTrialLicence: true,
+          trialLicence: true,
+          trialLicenceStartDate: "",
+          trialLicenceEndDate: "",
+          user: "Super Admin",
+          createdDate: format(Date.now(), "yyyy-MM-DD HH:MM:SS"),
+          lastLoginDate: format(Date.now(), "yyyy-MM-DD HH:MM:SS"),
+        }).then(() => {
+          this.setState({
+            authenticated: true,
+          });
+          this.props.history.push("/settings");
         });
-    };
-
-    handleClickShowPassword = () => {
-        this.setState(state => ({ showPassword: !state.showPassword }));
-    };
-
-    handleClickedCheckedBoxTP = name => event => {
-        this.setState({
-            [name]: event.target.checked,
-            [name + 'Error']: false,
-        });
-    };
-
-    checkRegisterInputs = () => {
-        this.register();
-        // if (this.state.businessName === '') {
-        //     this.setState(state => ({ businessNameError: 'Your Business Name is required' }));
-        // } else {
-        //     if (this.state.email === '') {
-        //         this.setState(state => ({ emailError: 'Your email is required' }));
-        //     } else {
-        //         if (!ValidateEmail(this.state.email)) {
-        //             this.setState(state => ({ emailError: 'Email is invalid' }));
-        //         } else {
-        //             if (this.state.password === '') {
-        //                 this.setState(state => ({ passwordError: 'Enter a password' }));
-        //             } else {
-        //                 if (!ValidatePassword(this.state.password)) {
-        //                     this.setState(state => ({ passwordError: 'Your password must be at least 6 characters' }));
-        //                 } else {
-        //                     if (this.state.checkedBoxTP === false) {
-        //                         this.setState(state => ({ checkedBoxTPError: true }));
-        //                     } else {
-        //                         this.register();
-        //                     }
-        //                 }
-        //             }
-        //         }
-        //     }
-
-        // }
+      });
+    } catch (error) {
+      alert(error);
+      console.log("registering catch error = ", error);
+      this.setState({
+        businessName: "",
+        businessNameError: "",
+        email: "",
+        emailError: "",
+        password: "",
+        passwordError: "",
+        showPassword: false,
+        checkedBoxTP: false,
+        checkedBoxTPError: false,
+        registering: false,
+      });
     }
+  };
 
-    register = async () => {
+  goToHomePage = () => {
+    this.props.history.push("/");
+  };
 
-        console.log('register running');
-        // const registerEmail = this.state.email;
-        // const registerPassword = this.state.password;
-        // const registerBusinessName = this.state.businessName;
-        const registerEmail = "aaa@aaa.com";
-        const registerPassword = "123qwe";
-        const registerBusinessName = "Vision College";
-        // const db = Firebase.firestore();
+  render() {
+    return (
+      <div className='register-container'>
+        <div className='register-name-logo' onClick={this.goToHomePage}>
+          <NameLogo height='50px' />
+        </div>
 
-        // Initialize Firebase
-        // const app = initializeApp(Firebase);
-
-        //  const app = !getApps().length ? initializeApp(Firebase) : getApp(); //Just be sure to import getApps () and getApp().
-
-        // Initialize Cloud Firestore and get a reference to the service
-        //  const db = getFirestore(app);
-
-        this.setState({
-            registering: true,
-        });
-
-        try {
-            //Cloud Firestore creates collections and documents implicitly the first time you add data to the document. 
-            //You do not need to explicitly create collections or documents. https://firebase.google.com/docs/firestore/query-data/get-data
-            console.log('registering');  // .auth() db.collection('vistogramUsers').doc(data.user.uid).set({
-
-            //  const auth = getAuth();
-            //Create the User 
-            await createUserWithEmailAndPassword(auth, registerEmail, registerPassword).then(data => {
-                addDoc(collection(db, "vcUsers"), {
-                    businessName: registerBusinessName,
-                    email: registerEmail,
-                    ID: data.user.uid,
-                    initialSetup: false,
-                    licences: 1,
-                    activeLicences: 1,
-                    generateTrialLicence: true,
-                    trialLicence: true,
-                    trialLicenceStartDate: '',
-                    trialLicenceEndDate: '',
-                    user: 'Super Admin',
-                    createdDate: format(
-                        Date.now(),
-                        'yyyy-MM-DD HH:MM:SS'
-                    ),
-                    lastLoginDate: format(
-                        Date.now(),
-                        'yyyy-MM-DD HH:MM:SS'
-                    )
-                }).then(() => {
-                    this.setState({
-                        authenticated: true,
-                    });
-                    this.props.history.push("/settings");
-                });
-            });
-
-
-        } catch (error) {
-            alert(error);
-            console.log('registering catch error = ', error);
-            this.setState({
-                businessName: '',
-                businessNameError: '',
-                email: '',
-                emailError: '',
-                password: '',
-                passwordError: '',
-                showPassword: false,
-                checkedBoxTP: false,
-                checkedBoxTPError: false,
-                registering: false,
-            });
-        }
-    };
-
-    goToHomePage = () => {
-        this.props.history.push("/");
-    }
-
-    render() {
-        return (
-            <div className='register-container'>
-                <div className='register-name-logo' onClick={this.goToHomePage}>
-                    <NameLogo
-                        height='50px'
-                    />
-                </div>
-
-                <div className='register-message-form'>
-                    {/* <div className='register-message'>
-                        <div>
-                            <div
-                                className='register-message-content'>
-                                <p>Do away with cumbersome and
-                                    unreliable paper visitor register.
-                                    With Vistogram you can digitize your
-                                    visitor registration process.</p>
-
-                                <p>Digitally Capture your visitors Bio,
-                                    Address, signature, picture, information
-                                    of the host, etc and store centrally
-                                    in the cloud.</p>
-
-                                <p>Personalize your Vistogram and access
-                                    your visitor information centrally
-                                    from the dashboard.</p>
-
-                                <p>Get added security by knowing who is
-                                    in your premises in real-time.</p>
-
-                                <p>Display your brand and advertisements,
-                                    and leave your visitors in awe of your
-                                    professionalism.</p>
-
-                                <p>Mordernise your front desk
-                                    with Vistogram.</p>
-
-                            </div>
-                        </div>
-
-
-                    </div> */}
-                    <div className='register-form'>
-
-                        <div className='register-form-c'>
-                            {/* <TextField
+        <div className='register-message-form'>
+          <div className='register-form'>
+            <div className='register-form-c'>
+              {/* <TextField
                                 className='input'
                                 id='rBusiness'
                                 variant='outlined'
@@ -239,7 +204,7 @@ export class Register extends Component {
                                 }}
                             /> */}
 
-                            {/* <TextField
+              {/* <TextField
                                 className='input'
                                 id='rEmail'
                                 variant='outlined'
@@ -261,7 +226,7 @@ export class Register extends Component {
                                 }}
                             /> */}
 
-                            {/* <TextField
+              {/* <TextField
                                 className='input'
                                 id='lPassword'
                                 variant='outlined'
@@ -286,8 +251,8 @@ export class Register extends Component {
                                 }}
                             /> */}
 
-                            <div className='register-tnc'>
-                                {/* <FormControlLabel
+              <div className='register-tnc'>
+                {/* <FormControlLabel
                                     className='register-tnc-checkbox'
                                     color='primary'
                                     control={
@@ -298,23 +263,16 @@ export class Register extends Component {
                                         />
                                     }
                                 /> */}
+              </div>
 
-
-                            </div>
-
-                            {/* {this.state.checkedBoxTPError ?
+              {/* {this.state.checkedBoxTPError ?
                                 <p className='register-tnc-error'>^^^**You have not agreed to our
                                     Terms of Service and Privacy Policy**</p> : <p></p>} */}
 
-                            <Divider
-                                variant="middle"
-                                className='register-form-divider'
-                            />
+              <Divider variant='middle' className='register-form-divider' />
 
-
-                            <div className='auth-button-row'>
-
-                                {/* <AuthTypeContext.Consumer>
+              <div className='auth-button-row'>
+                {/* <AuthTypeContext.Consumer>
                                     {context => <Link
                                         className='auth-forgot'
                                         component="button"
@@ -327,51 +285,41 @@ export class Register extends Component {
 
                                 </AuthTypeContext.Consumer> */}
 
-                                < Button
-                                    className='auth-button'
-                                    variant='contained'
-                                    color='primary'
-                                    size='large'
-                                    disabled={this.state.registering}
-                                    onClick={this.checkRegisterInputs}
-                                >
-                                    {this.state.registering ?
-                                        'Registering.....' :
-                                        'Get Started'}
-                                </Button>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-                </div>
-
-                <UserDataContext.Provider value={{
-                    authenticated: this.state.authenticated,
-                }} />
+                <Button
+                  className='auth-button'
+                  variant='contained'
+                  color='primary'
+                  size='large'
+                  disabled={this.state.registering}
+                  onClick={this.checkRegisterInputs}
+                >
+                  {this.state.registering ? "Registering....." : "Get Started"}
+                </Button>
+              </div>
             </div>
-        )
-    }
-}
+          </div>
+        </div>
 
+        <UserDataContext.Provider
+          value={{
+            authenticated: this.state.authenticated,
+          }}
+        />
+      </div>
+    );
+  }
+}
 
 //https://reactrouter.com/en/6.4.0/start/faq#what-happened-to-withrouter-i-need-it
 function withRouter(Component) {
-    function ComponentWithRouterProp(props) {
-        let location = useLocation();
-        let navigate = useNavigate();
-        let params = useParams();
-        return (
-            <Component
-                {...props}
-                router={{ location, navigate, params }}
-            />
-        );
-    }
+  function ComponentWithRouterProp(props) {
+    let location = useLocation();
+    let navigate = useNavigate();
+    let params = useParams();
+    return <Component {...props} router={{ location, navigate, params }} />;
+  }
 
-    return ComponentWithRouterProp;
+  return ComponentWithRouterProp;
 }
-
 
 export default withRouter(Register);

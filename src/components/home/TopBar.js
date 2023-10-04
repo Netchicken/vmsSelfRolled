@@ -9,36 +9,7 @@ import Button from '@mui/material/Button';
 
 const TopBar = props => {
 
-  const redirectToPlayStore = () => {
-    window.open('https://play.google.com/store/apps/details?id=com.remphil.visitorregister', '_blank');
-  }
-
-  // const playStoreImage = {
-  //   width: '180px',
-  //   height: '50px',
-  //   backgroundImage: 'url(' + PlayStoreLogo + ')',
-  //   backgroundRepeat: 'no-repeat',
-  //   backgroundSize: 'contain',
-  //   display: 'inline-block',
-  //   textAlign: 'center',
-  //   backgroundPosition: 'center',
-  //   cursor: 'pointer',
-  //   // marginLeft: '100px'
-  // }
-
-  // const appStoreImage = {
-  //   width: '180px',
-  //   height: '50px',
-  //   backgroundImage: 'url(' + AppStoreLogo + ')',
-  //   backgroundRepeat: 'no-repeat',
-  //   backgroundSize: 'contain',
-  //   display: 'inline-block',
-  //   textAlign: 'center',
-  //   backgroundPosition: 'center',
-  //   marginLeft: '10px',
-  //   cursor: 'pointer',
-  // }
-
+ 
   const consoleButton = {
     textTransform: 'none',
     marginRight: '30px',
