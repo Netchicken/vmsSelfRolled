@@ -116,19 +116,18 @@ export const getPurposeOfVisitOptionsRef = async () => {
 };
 export const getDefaultSettingsRef = async () => {
   const data = [];
-  const q = query(collection(db, "settings-default"));
+  const q = query(collection(db, "settings-zKrDsscyDXN7lQbdujUjjcj3N5K2"));
   const querySnapshot = await getDocs(q);
   if (q) {
     querySnapshot.forEach((doc) => {
-      console.log("defaultSettingsRef in App  ");
+      console.log("settings-zKrDsscyDXN7lQbdujUjjcj3N5K2 in App  ");
       data.push(doc.data());
     });
-    return querySnapshot.docs.map((doc) => doc.default);
+    return Promise.all(data);
   }
   return "No data";
 };
 
-// db.collection("settings-zKrDsscyDXN7lQbdujUjjcj3N5K2")
 export const updateSettings = async () => {
   await setDoc(doc(db, "settings-zKrDsscyDXN7lQbdujUjjcj3N5K2", "init"), {
     fields: false,
