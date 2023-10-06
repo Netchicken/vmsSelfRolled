@@ -90,7 +90,7 @@ export const getData = async (user) => {
 
 export const getBusinessData = async (user) => {
   const data = [];
-  const q = query(collection(db, "settings-" +user.uid));
+  const q = query(collection(db, "settings-" + user.uid));
   const querySnapshot = await getDocs(q);
   if (q) {
     querySnapshot.forEach((doc) => {
@@ -127,6 +127,41 @@ export const getDefaultSettingsRef = async () => {
   }
   return "No data";
 };
+
+export const getTodayUsersVisitorsData = async (user) => {
+  const data = [];
+  const q = query(collection(db, "visitors-" + user.uid)).where(
+    "signedInDate",
+    "==",
+    this.state.dateToday
+  );
+  const querySnapshot = await getDocs(q);
+  if (q) {
+    querySnapshot.forEach((doc) => {
+      console.log("getTodayUserVisitorsData in App  ");
+      data.push(doc.data());
+    });
+    return Promise.all(data);
+  }
+  return "No data";
+};
+
+export const getAllVisitorsData = async (user) => {
+  const data = [];
+  const q = query(collection(db, "visitors-" + user.uid));
+  const querySnapshot = await getDocs(q);
+  if (q) {
+    querySnapshot.forEach((doc) => {
+      console.log("getAllVisitorsData in App  ");
+      data.push(doc.data());
+    });
+    return Promise.all(data);
+  }
+  return "No data";
+};
+
+
+
 //https://firebase.google.com/docs/firestore/manage-data/add-data?hl=en&authuser=0
 export const updateSettings = async () => {
   console.log("updateSettings in App  ");
@@ -151,97 +186,3 @@ export const updateSettings = async () => {
     });
   });
 };
-// export const userChanged = (user) => {
-
-//     const [authenticated, setAuthenticated] = useState(false);
-//     const [currentUser, setCurrentUser] = useState(null);
-//     const [userData, setUserData] = useState(null);
-//     const [appData, setAppData] = useState(null);
-
-//     onAuthStateChanged(auth, user => {
-//         if (user) {
-
-//             //https://firebase.google.com/docs/firestore/quickstart#web-modular-api_1
-
-//             const userDataRef = getData(user);
-//             console.log("userDataRef:", userDataRef);
-
-//             const businessCategoryDataRef = db.collection("businessCategories");
-//             const purposeOfVisitOptionsRef = db.collection("defaultParameters").doc("purposeOfVisitOptions");
-//             const defaultSettingsRef = db.collection("settings-default").doc("default");
-//             // const defaultLogoRef = db.collection("defaultParameters").doc('logoImage');
-//             // const defaultHomeBkgImageRef = db.collection("defaultParameters").doc('backgroundImage');
-//             // const defaultAdvertRef = db.collection("defaultParameters").doc('advertImage');
-//             // const businessCategoryDataRef = collection(db, "businessCategories");
-//             // const purposeOfVisitOptionsRef = db.collection("defaultParameters").doc("purposeOfVisitOptions");
-//             // const defaultSettingsRef = collection(db, "settings-default"); //.doc("default");
-
-//             userDataRef.onSnapshot(doc => {
-//                 if (doc.exists) {
-//                     setUserData(doc.data());
-//                     console.log("userData:", doc.data());
-
-//                     businessCategoryDataRef.get()
-//                         .then((querySnapshot) => {
-//                             querySnapshot.forEach((doc) => {
-//                                 BusinessCategories.push(doc.data());
-//                             });
-
-//                             defaultSettingsRef.get().then((doc) => {
-//                                 if (doc.exists) {
-//                                     DefaultSettings = doc.data();
-
-//                                     setAppData({
-//                                         userData: doc.data(),
-//                                         businessCategories: categories,
-//                                         defaultSettings: DefaultSettings
-//                                     });
-
-//                                     setAauthenticated(true);
-//                                     setCurrentUser(user);
-//                                     setUserData(doc.data());
-//                                     setAppData(AppData);
-
-//                                 } else {
-//                                     setAauthenticated(false);
-//                                     setCurrentUser(null);
-//                                     setUserData(null);
-//                                     setAppData(null);
-
-//                                     console.log("No such document!");
-//                                 }
-//                             })
-//                                 .catch((error) => {
-//                                     setAauthenticated(false);
-//                                     setCurrentUser(null);
-//                                     setUserData(null);
-//                                     setAppData(null);
-//                                     console.log("Error getting document:", error);
-//                                 });
-//                         })
-//                         .catch((error) => {
-//                             setAauthenticated(false);
-//                             setCurrentUser(null);
-//                             setUserData(null);
-//                             setAppData(null);
-//                             console.log("Error getting documents: ", error);
-//                         });
-
-//                 } else {
-//                     setAauthenticated(false);
-//                     setCurrentUser(null);
-//                     setUserData(null);
-//                     setAppData(null);
-//                     console.log("No such document!");
-//                 }
-
-//             });
-
-//         } else {
-//             setAauthenticated(false);
-//             setCurrentUser(null);
-//             setUserData(null);
-//             setAppData(null);
-//         }
-//     });
-// };

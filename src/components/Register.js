@@ -4,7 +4,7 @@ import "../styles/Common.css";
 
 import { auth, db } from "./firebase/Config";
 //import { initializeApp, getApp, getApps } from "firebase/app";
-import {  createUserWithEmailAndPassword } from "firebase/auth"; //https://firebase.google.com/docs/auth/web/password-auth#create_a_password-based_account
+import { createUserWithEmailAndPassword } from "firebase/auth"; //https://firebase.google.com/docs/auth/web/password-auth#create_a_password-based_account
 import { collection, addDoc } from "firebase/firestore";
 
 import { format } from "date-fns";
@@ -38,11 +38,24 @@ const Register = () => {
   const [registering, setRegistering] = useState(false);
   const [authenticated, setAuthenticated] = useState(false);
 
-  const handleChange = (prop) => (event) => {
-    this.setState({
-      [prop]: event.target.value,
-      [prop + "Error"]: "",
-    });
+  // const handleChange = (prop) => (event) => {
+  //   this.setState({
+  //     [prop]: event.target.value,
+  //     [prop + "Error"]: "",
+  //   });
+  // };
+
+  const handleBusinessName = (props) => {
+    businessName = props;
+    console.log("businessName = ", businessName);
+  };
+  const handleEmail = (props) => {
+    email = props;
+    console.log("email = ", email);
+  };
+  const handlePassword = (props) => {
+    password = props;
+    console.log("password = ", password);
   };
 
   const handleClickShowPassword = () => {
@@ -99,21 +112,22 @@ const Register = () => {
       try {
         console.log("registering");
 
-        await createUserWithEmailAndPassword(auth,email,password)
-          .then((data) => {
-          addDoc(collection(db, "vcUsers"), {
-            businessName: businessName,
-            email: email,
-            ID: data.user.uid,
-            initialSetup: false,
-            user: "Super Admin",
-            createdDate: format(Date.now(), "yyyy-MM-dd HH:MM:SS"),
-            lastLoginDate: format(Date.now(), "yyyy-MM-dd HH:MM:SS"),
-          }).then(() => {
-            setAuthenticated(true);
-            navigate("/settings");
-          });
-        });
+        await createUserWithEmailAndPassword(auth, email, password).then(
+          (data) => {
+            addDoc(collection(db, "vcUsers"), {
+              businessName: businessName,
+              email: email,
+              ID: data.user.uid,
+              initialSetup: false,
+              user: "Super Admin",
+              createdDate: format(Date.now(), "yyyy-MM-dd HH:MM:SS"),
+              lastLoginDate: format(Date.now(), "yyyy-MM-dd HH:MM:SS"),
+            }).then(() => {
+              setAuthenticated(true);
+              //navigate("/settings");
+            });
+          }
+        );
       } catch (error) {
         alert(error);
         console.log("registering catch error = ", error);
@@ -144,7 +158,7 @@ const Register = () => {
               type='businessName'
               label='Business Name'
               value={businessName}
-              onChange={handleChange(businessName)}
+              onChange={handleBusinessName(businessName)}
               fullWidth={true}
               InputProps={{
                 endAdornment: (
@@ -164,7 +178,7 @@ const Register = () => {
               type='email'
               label='Email'
               value={email}
-              onChange={handleChange(email)}
+              onChange={handleEmail(email)}
               fullWidth={true}
               InputProps={{
                 endAdornment: (
@@ -184,7 +198,7 @@ const Register = () => {
               type={showPassword ? "text" : "password"}
               label='Password'
               value={password}
-              onChange={handleChange(password)}
+              onChange={handlePassword(password)}
               fullWidth={true}
               InputProps={{
                 endAdornment: (

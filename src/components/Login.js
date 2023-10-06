@@ -89,16 +89,16 @@ function Login(props) {
 
         if (dataexists > 0) {
           UpdateToDb(user); //just update the user
-          console.log("user exists");
+          console.log("user exists", user);
 
           navigate("/console");
 
           //  props.history.push('/console');
         } else {
           SaveToDb(user); //generate a new entry
-          console.log("user created");
+          console.log("user created", user);
 
-          navigate("/settings");
+          // navigate("/settings");
 
           // props.history.push('/settings');
         }
@@ -211,18 +211,18 @@ function Login(props) {
 }
 
 //https://reactrouter.com/en/6.4.0/start/faq#what-happened-to-withrouter-i-need-it
-function withRouter(Component) {
-  function ComponentWithRouterProp(props) {
-    let location = useLocation();
-    let navigate = useNavigate();
-    let params = useParams();
-    return <Component {...props} router={{ location, navigate, params }} />;
-  }
+// function withRouter(Component) {
+//   function ComponentWithRouterProp(props) {
+//     let location = useLocation();
+//     let navigate = useNavigate();
+//     let params = useParams();
+//     return <Component {...props} router={{ location, navigate, params }} />;
+//   }
 
-  return ComponentWithRouterProp;
-}
+//   return ComponentWithRouterProp;
+// }
 
-export default withRouter(Login);
+export default Login;
 
 // export class Login extends Component {
 
