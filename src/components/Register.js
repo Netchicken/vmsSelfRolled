@@ -4,8 +4,8 @@ import "../styles/Common.css";
 
 import { auth, db } from "./firebase/Config";
 //import { initializeApp, getApp, getApps } from "firebase/app";
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth"; //https://firebase.google.com/docs/auth/web/password-auth#create_a_password-based_account
-import { getFirestore, collection, addDoc } from "firebase/firestore";
+import {  createUserWithEmailAndPassword } from "firebase/auth"; //https://firebase.google.com/docs/auth/web/password-auth#create_a_password-based_account
+import { collection, addDoc } from "firebase/firestore";
 
 import { format } from "date-fns";
 import NameLogo from "../components/NameLogo";
@@ -28,7 +28,7 @@ import {
 //import { ValidateEmail, ValidatePassword } from "./functions/Validators";
 import { useNavigate } from "react-router-dom";
 
-const Register = (props) => {
+const Register = () => {
   let navigate = useNavigate();
   let businessName = "";
   let email = "";
@@ -130,7 +130,7 @@ const Register = (props) => {
 
   return (
     <div className='register-container'>
-      <div className='register-name-logo' onClick={this.goToHomePage}>
+      <div className='register-name-logo' onClick={goToHomePage}>
         <NameLogo height='50px' />
       </div>
 
