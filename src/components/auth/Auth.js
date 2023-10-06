@@ -13,7 +13,7 @@ import { useLocation, useNavigate, useParams, } from "react-router-dom";
 
 function Auth(props) {
   const [authTypeIsLogin, setAuthTypeIsLogin] = useState(true);
-
+  let navigate = useNavigate(); 
   // React.useEffect(() => {
   //   setAuthTypeIsLogin(props.location.state ? props.location.state.authTypeIsLogin : false);
   // }, []);
@@ -23,15 +23,15 @@ function Auth(props) {
   }
 
   const goToHomePage = () => {
-    props.history.push("/");
+    navigate("/");
   }
 
   const goToPrivacyPolicyPage = () => {
-    props.history.push("/privacy-policy");
+    navigate("/privacy-policy");
   }
 
   const goToTermsAndConditionsPage = () => {
-    props.history.push("/terms-and-conditions");
+    navigate("/terms-and-conditions");
   }
 
   return (

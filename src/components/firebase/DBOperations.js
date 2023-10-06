@@ -88,9 +88,9 @@ export const getData = async (user) => {
   //})
 };
 
-export const getBusinessData = async () => {
+export const getBusinessData = async (user) => {
   const data = [];
-  const q = query(collection(db, "businessCategories"));
+  const q = query(collection(db, "settings-" +user.uid));
   const querySnapshot = await getDocs(q);
   if (q) {
     querySnapshot.forEach((doc) => {
@@ -127,8 +127,9 @@ export const getDefaultSettingsRef = async () => {
   }
   return "No data";
 };
-
+//https://firebase.google.com/docs/firestore/manage-data/add-data?hl=en&authuser=0
 export const updateSettings = async () => {
+  console.log("updateSettings in App  ");
   await setDoc(doc(db, "settings-zKrDsscyDXN7lQbdujUjjcj3N5K2", "init"), {
     fields: false,
     primaryColor: "#4A90E2",
@@ -137,16 +138,19 @@ export const updateSettings = async () => {
     businessName: "Vision College",
     businessSlogan: "Changing Lives for Learning",
     businessBranch: "Christchurch",
-    welcomeMessage: "Welcome message in DB",
+    welcomeMessage: "Welcome message to the VMS",
     logoImageDownloadUrl: "",
     backgroundImageDownloadUrl: "",
     advertsDownloadUrl: "",
     businessMultiOffices: "",
     purposeOfVisitOptions: "",
-    createdDate: format(Date.now(), " yyyy-MM-DD HH:MM:SS"),
+    createdDate: format(Date.now(), " yyyy-MM-dd HH:MM:SS"),
+  }).then(() => {
+    setDoc(doc(db, "vcUsers", "zKrDsscyDXN7lQbdujUjjcj3N5K2"), {
+      initialSetup: true,
+    });
   });
 };
-
 // export const userChanged = (user) => {
 
 //     const [authenticated, setAuthenticated] = useState(false);

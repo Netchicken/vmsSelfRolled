@@ -4,7 +4,6 @@ import "../styles/InitialSetup.css";
 import "../styles/Home.css";
 import { useNavigate } from "react-router-dom";
 import { UserData, BusinessCategories, DefaultSettings } from "../App"; //imports data from app
-import SecurityData from "../components/initial-setup/SecurityData";
 
 import Margin from "../components/Margin";
 import { storage, db } from "../components/firebase/Config";
@@ -108,7 +107,7 @@ export const InitialSetup = () => {
         advertsDownloadUrl: advertsDUrl,
         businessMultiOffices: this.state.businessMultiOfficesArray,
         purposeOfVisitOptions: this.state.purposeOfVisitOptions,
-        createdDate: format(Date.now(), " YYYY-MM-DD HH:MM:SS"),
+        createdDate: format(Date.now(), " yyyy-MM-dd HH:MM:SS"),
       })
       .then(() => {
         db.collection("vsUsers")

@@ -1,19 +1,26 @@
 //import React, { Component } from 'react';
-import React, { useState } from 'react';
+import React, { useState } from "react";
 // import '../styles/Login.css';
-import '../styles/Common.css';
-import { auth, db } from './firebase/Config';
+import "../styles/Common.css";
+import { auth, db } from "./firebase/Config";
 import { signInWithEmailAndPassword } from "firebase/auth";
 //import { doc, updateDoc, getDoc, getFirestore, collection, addDoc, query, where, getDocs, setDoc, documentId } from "firebase/firestore";
-import { SaveToDb, UpdateToDb, checkDataExists } from './firebase/DBOperations';
-import { useLocation, useNavigate, useParams, } from "react-router-dom";
+import { SaveToDb, UpdateToDb, checkDataExists } from "./firebase/DBOperations";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 
-import NameLogo from '../components/NameLogo';
-import { format } from 'date-fns';
-import { TextField, Icon, InputAdornment, Typography, Button, Link, } from '@mui/material';
-import { Visibility, VisibilityOff } from '@mui/icons-material';
-import AuthTypeContext from '../context/authTypeContext';
-import { ValidateEmail, ValidatePassword } from './functions/Validators';
+import NameLogo from "../components/NameLogo";
+import { format } from "date-fns";
+import {
+  TextField,
+  Icon,
+  InputAdornment,
+  Typography,
+  Button,
+  Link,
+} from "@mui/material";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
+import AuthTypeContext from "../context/authTypeContext";
+import { ValidateEmail, ValidatePassword } from "./functions/Validators";
 
 //https://firebase.google.com/docs/web/modular-upgrade UPGRADE TO V9 FIREBASE
 
@@ -22,23 +29,22 @@ import { ValidateEmail, ValidatePassword } from './functions/Validators';
 //https://github.com/kekency/vistogram/blob/main/src/components/Login.js
 
 function Login(props) {
-
-  const [email, setEmail] = useState('');
-  const [emailError, setEmailError] = useState('');
-  const [password, setPassword] = useState('');
-  const [passwordError, setPasswordError] = useState('');
+  const [email, setEmail] = useState("");
+  const [emailError, setEmailError] = useState("");
+  const [password, setPassword] = useState("");
+  const [passwordError, setPasswordError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [loggingIn, setLoggingIn] = useState(false);
-  let navigate = useNavigate();      //https://stackoverflow.com/questions/71173957/how-to-use-history-push-in-react-router-dom-version-6-0-0
+  let navigate = useNavigate(); //https://stackoverflow.com/questions/71173957/how-to-use-history-push-in-react-router-dom-version-6-0-0
 
   const handleChange = (prop) => (event) => {
-    if (prop === 'email') {
+    if (prop === "email") {
       setEmail(event.target.value);
-      setEmailError('');
+      setEmailError("");
     }
-    if (prop === 'password') {
+    if (prop === "password") {
       setPassword(event.target.value);
-      setPasswordError('');
+      setPasswordError("");
     }
   };
 
@@ -47,17 +53,17 @@ function Login(props) {
   };
 
   const checkLoginInputs = () => {
-    if (email === '') {
-      setEmailError('Please enter your email');
+    if (email === "") {
+      setEmailError("Please enter your email");
     } else {
       if (!ValidateEmail(email)) {
-        setEmailError('Your email is invalid');
+        setEmailError("Your email is invalid");
       } else {
-        if (password === '') {
-          setPasswordError('Enter a password');
+        if (password === "") {
+          setPasswordError("Enter a password");
         } else {
           if (!ValidatePassword(password)) {
-            setPasswordError('Your password must be at least 6 characters');
+            setPasswordError("Your password must be at least 6 characters");
           } else {
             login();
           }
@@ -69,60 +75,54 @@ function Login(props) {
   const login = async () => {
     const loginEmail = email;
     const loginPassword = password;
-    let user = '';
+    let user = "";
 
-    setLoggingIn('true');
+    setLoggingIn("true");
 
-    console.log('NAME AND pw ', loginEmail + ' ' + loginPassword);
+    console.log("NAME AND pw ", loginEmail + " " + loginPassword);
 
-    await signInWithEmailAndPassword(auth, loginEmail, loginPassword).then((data) => {
-      user = data.user;
-      const dataexists = checkDataExists(user);
-      console.log('checkDataExists(user)', dataexists);
+    await signInWithEmailAndPassword(auth, loginEmail, loginPassword).then(
+      (data) => {
+        user = data.user;
+        const dataexists = checkDataExists(user);
+        console.log("checkDataExists(user)", dataexists);
 
-      if (dataexists > 0) {
-        UpdateToDb(user); //just update the user
-        console.log('user exists');
+        if (dataexists > 0) {
+          UpdateToDb(user); //just update the user
+          console.log("user exists");
 
+          navigate("/console");
 
+          //  props.history.push('/console');
+        } else {
+          SaveToDb(user); //generate a new entry
+          console.log("user created");
 
-        navigate("/console");
+          navigate("/settings");
 
-        //  props.history.push('/console');
-      } else {
-        SaveToDb(user); //generate a new entry
-        console.log('user created');
-
-        navigate("/settings");
-
-        // props.history.push('/settings');
+          // props.history.push('/settings');
+        }
+        console.log("userId", user.uid); // uid: 'zKrDsscyDXN7lQbdujUjjcj3N5K2'
+        console.log("user", user.email); //user aaa@aaa.com
       }
-      console.log("userId", user.uid);// uid: 'zKrDsscyDXN7lQbdujUjjcj3N5K2'
-      console.log("user", user.email); //user aaa@aaa.com
-
-    });
-
+    );
   };
 
-
   const goToHomePage = () => {
-    props.history.push("/");
-  }
+    navigate("/");
+  };
 
   return (
     <div className='login-container'>
       <div className='login-form-area'>
         <div className='login-name-logo' onClick={goToHomePage}>
-          <NameLogo
-            height='100px'
-          />
+          <NameLogo height='100px' />
           {/* <p
                 className='login-typography-secondary'
               >
                 admin
               </p> */}
         </div>
-
 
         <TextField
           className='input'
@@ -131,16 +131,14 @@ function Login(props) {
           type='email'
           label='Email'
           value={email}
-          onChange={handleChange('email')}
+          onChange={handleChange("email")}
           fullWidth={true}
           // helperText={setEmailError}
-          error={setEmailError !== ''}
+          error={setEmailError !== ""}
           InputProps={{
             endAdornment: (
               <InputAdornment position='end'>
-                <Icon className='input-icon'>
-                  {/* <AlternateEmail /> */}
-                </Icon>
+                <Icon className='input-icon'>{/* <AlternateEmail /> */}</Icon>
               </InputAdornment>
             ),
           }}
@@ -150,20 +148,17 @@ function Login(props) {
           className='input'
           id='lPassword'
           variant='outlined'
-          type={setShowPassword ? 'text' : 'password'}
+          type={setShowPassword ? "text" : "password"}
           label='Password'
           value={password}
-          onChange={handleChange('password')}
+          onChange={handleChange("password")}
           fullWidth={true}
           // helperText={setPasswordError}
-          error={setPasswordError !== ''}
+          error={setPasswordError !== ""}
           InputProps={{
             endAdornment: (
               <InputAdornment position='end'>
-                <Icon
-                  className='input-icon'
-                  onClick={handleClickShowPassword}
-                >
+                <Icon className='input-icon' onClick={handleClickShowPassword}>
                   {setShowPassword ? <Visibility /> : <VisibilityOff />}
                 </Icon>
               </InputAdornment>
@@ -172,11 +167,10 @@ function Login(props) {
         />
 
         <div className='auth-button-row'>
-
           <Link
             className='auth-forgot'
-            component="button"
-            variant="body2"
+            component='button'
+            variant='body2'
             onClick={() => {
               alert("I'm a button.");
             }}
@@ -184,7 +178,7 @@ function Login(props) {
             Forgot Password?
           </Link>
 
-          < Button
+          <Button
             className='auth-button'
             variant='contained'
             color='primary'
@@ -192,33 +186,28 @@ function Login(props) {
             // disabled={setLoggingIn}
             onClick={checkLoginInputs}
           >
-            {loggingIn ? 'Logging In...' : 'Login'}
+            {loggingIn ? "Logging In..." : "Login"}
           </Button>
         </div>
-
       </div>
 
-
-      <div
-        className='login-notregistered-row'
-      >
-
+      <div className='login-notregistered-row'>
         <AuthTypeContext.Consumer>
-          {context => < Button
-            className='login-notregistered-button'
-            variant='outlined'
-            color='primary'
-            size='large'
-            onClick={context.changeAuthType}
-          >
-            Register
-          </Button>
-          }
+          {(context) => (
+            <Button
+              className='login-notregistered-button'
+              variant='outlined'
+              color='primary'
+              size='large'
+              onClick={context.changeAuthType}
+            >
+              Register
+            </Button>
+          )}
         </AuthTypeContext.Consumer>
-
       </div>
     </div>
-  )
+  );
 }
 
 //https://reactrouter.com/en/6.4.0/start/faq#what-happened-to-withrouter-i-need-it
@@ -227,19 +216,13 @@ function withRouter(Component) {
     let location = useLocation();
     let navigate = useNavigate();
     let params = useParams();
-    return (
-      <Component
-        {...props}
-        router={{ location, navigate, params }}
-      />
-    );
+    return <Component {...props} router={{ location, navigate, params }} />;
   }
 
   return ComponentWithRouterProp;
 }
 
 export default withRouter(Login);
-
 
 // export class Login extends Component {
 
@@ -255,8 +238,6 @@ export default withRouter(Login);
 //       loggingIn: false,
 //     };
 //   }
-
-
 
 //   handleChange = prop => event => {
 //     this.setState({
@@ -289,7 +270,6 @@ export default withRouter(Login);
 //     }
 //   }
 
-
 //   login = async () => {
 //     const loginEmail = this.state.email;
 //     const loginPassword = this.state.password;
@@ -300,7 +280,6 @@ export default withRouter(Login);
 //     });
 
 //     console.log("NAME AND pw ", loginEmail + " " + loginPassword);
-
 
 //     await signInWithEmailAndPassword(auth, loginEmail, loginPassword)
 //       .then((data) => {
@@ -319,11 +298,8 @@ export default withRouter(Login);
 //           this.props.history.push("/settings");
 //         }
 
-
 //         console.log("userId", user.uid);// uid: 'zKrDsscyDXN7lQbdujUjjcj3N5K2'
 //         console.log("user", user.email); //user aaa@aaa.com
-
-
 
 //         // if (doc.data().initialSetup) {
 //         //  this.props.history.push("/console");
@@ -333,8 +309,6 @@ export default withRouter(Login);
 
 //       });
 //   };
-
-
 
 //   goToHomePage = () => {
 //     props.history.push("/");
@@ -355,7 +329,6 @@ export default withRouter(Login);
 //               admin
 //             </p> */}
 //           </div>
-
 
 //           <TextField
 //             className='input'
@@ -431,7 +404,6 @@ export default withRouter(Login);
 
 //         </div>
 
-
 //         <div
 //           className='login-notregistered-row'
 //         >
@@ -463,9 +435,6 @@ export default withRouter(Login);
 //   }
 // }
 
-
-
-
 // }
 // catch(error) {
 //   console.log("docRef Document borked", error);
@@ -482,9 +451,6 @@ export default withRouter(Login);
 //To refer to the location in your code, you can create a reference to it.
 // const docRef = doc(db, "vcUsers", where(documentId == user.uid), "lastLoginDate");
 
-
-
-
 // const docSnap = getDoc(docRef);
 // if (docSnap) {
 //   console.log("docSnap Document data:", docSnap.data());
@@ -492,8 +458,6 @@ export default withRouter(Login);
 //   // docSnap.data() will be undefined in this case
 //   console.log("docSnap No such document!");
 // }
-
-
 
 // const querySnapshot = getDocs(q);
 

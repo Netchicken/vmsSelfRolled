@@ -4,8 +4,15 @@ import '../../styles/Console.css';
 import SideBarLinks from '../../components/console/SideBarLinks';
 import { AuthCode, VistocodeSKU } from '../functions/AuthCodeGenerator';
 import { auth, db } from '../firebase/Config';
-import { UserData } from '../../App';
+import { UserData } from '../../App'; //bring in the USerdata from APP.js
 import { format, addDays } from 'date-fns';
+import {
+  getData,
+  getBusinessData,
+  getPurposeOfVisitOptionsRef,
+  getDefaultSettingsRef,
+  updateSettings,
+} from "../firebase/DBOperations";
 // import AuthorizationCodePage from '../../components/console/authorizationCodePage/AuthorizationCodePage';
 // import DashboardPage from '../../components/console/dashboardPage/DashboardPage';
 // import LicencePage from '../../components/console/licencePage/LicencePage';
@@ -64,99 +71,95 @@ function Console(props) {
   let navigate = useNavigate();
   useEffect(() => {
     console.log('console', UserData);
-
-    if (UserData) {
-      if (UserData.initialSetup) {
-        let newSettingsArray = [];
-        db.collection("settings-" + UserData.ID)
-          .get()
-          .then(querySnapshot => {
-            querySnapshot.forEach(doc => {
-              newSettingsArray.push(doc.id);
-            });
-
-            setSettingsArray(newSettingsArray)
-
-          })
-          .catch(error => {
-            console.log("Error getting documents: ", error);
-          });
-
-
-        db.collection('licenceCodes').where('ID', '==', UserData.ID)
-          .onSnapshot(querySnapshot => {
-            let newAuthCodeArray = [];
-            let myActiveDevices = 0;
-            querySnapshot.forEach(doc => {
-              newAuthCodeArray.push(doc.data());
-              if (doc.data().status === 'Active') {
-                myActiveDevices = myActiveDevices + 1;
-              }
-            });
-
-
-            setAuthCodeArray(newAuthCodeArray)
-
-          })
-
-        db.collection('signedInTags-' + UserData.ID)
-          .onSnapshot(querySnapshot => {
-            let myCurrentVisitors = 0;
-            querySnapshot.forEach(doc => {
-              myCurrentVisitors = myCurrentVisitors + 1;
-            });
-
-            setCurrentVisitors(myCurrentVisitors)
-
-          })
-
-        db.collection('visitors-' + UserData.ID).where('signedInDate', '==', this.state.dateToday)
-          .onSnapshot(querySnapshot => {
-            let myTodayVisitors = 0;
-            querySnapshot.forEach(doc => {
-              myTodayVisitors = myTodayVisitors + 1;
-            });
-
-            setTodayVisitors(myTodayVisitors)
-
-          })
-
-
-        db.collection('visitors-' + UserData.ID)
-          .onSnapshot(querySnapshot => {
-            let myVisitors = [];
-            querySnapshot.forEach(doc => {
-              myVisitors.push(doc.data());
-            });
-
-            setVisitorsData(myVisitors)
-
-          })
-
-        db.collection('inviters-' + UserData.ID)
-          .onSnapshot(querySnapshot => {
-            let myinviters = [];
-            querySnapshot.forEach(doc => {
-              myinviters.push(doc.data());
-            });
-
-            setInvitersData(myinviters)
-
-          })
-
-      } else {
-        console.log('initialSetup', UserData)
-        navigate("/settings");
-
-      }
-    } else {
-      console.log('initialSetup true', UserData)
-      navigate("/settings", true);
-    }
+    init();
+   
 
   }, []);
 
+  const init = () =>{
+   if (UserData) {
+     if (UserData.initialSetup) {
+       let newSettingsArray = [];
 
+        const defaultSettingsRef = getDefaultSettingsRef();
+
+       defaultSettingsRef
+         .get()
+         .then((querySnapshot) => {
+           querySnapshot.forEach((doc) => {
+             newSettingsArray.push(doc.id);
+           });
+
+           setSettingsArray(newSettingsArray);
+         })
+         .catch((error) => {
+           console.log("Error getting documents: ", error);
+         });
+
+      //  db.collection("licenceCodes")
+      //    .where("ID", "==", UserData.ID)
+      //    .onSnapshot((querySnapshot) => {
+      //      let newAuthCodeArray = [];
+      //      let myActiveDevices = 0;
+      //      querySnapshot.forEach((doc) => {
+      //        newAuthCodeArray.push(doc.data());
+      //        if (doc.data().status === "Active") {
+      //          myActiveDevices = myActiveDevices + 1;
+      //        }
+      //      });
+
+      //      setAuthCodeArray(newAuthCodeArray);
+      //    });
+
+      //  db.collection("signedInTags-" + UserData.ID).onSnapshot(
+      //    (querySnapshot) => {
+      //      let myCurrentVisitors = 0;
+      //      querySnapshot.forEach((doc) => {
+      //        myCurrentVisitors = myCurrentVisitors + 1;
+      //      });
+
+      //      setCurrentVisitors(myCurrentVisitors);
+      //    }
+      //  );
+
+       db.collection("visitors-" + UserData.ID)
+         .where("signedInDate", "==", this.state.dateToday)
+         .onSnapshot((querySnapshot) => {
+           let myTodayVisitors = 0;
+           querySnapshot.forEach((doc) => {
+             myTodayVisitors = myTodayVisitors + 1;
+           });
+
+           setTodayVisitors(myTodayVisitors);
+         });
+
+       db.collection("visitors-" + UserData.ID).onSnapshot((querySnapshot) => {
+         let myVisitors = [];
+         querySnapshot.forEach((doc) => {
+           myVisitors.push(doc.data());
+         });
+
+         setVisitorsData(myVisitors);
+       });
+
+       db.collection("inviters-" + UserData.ID).onSnapshot((querySnapshot) => {
+         let myinviters = [];
+         querySnapshot.forEach((doc) => {
+           myinviters.push(doc.data());
+         });
+
+         setInvitersData(myinviters);
+       });
+     } else {
+       console.log("initialSetup", UserData);
+       navigate("/settings");
+     }
+   } else {
+     console.log("initialSetup true", UserData);
+     navigate("/settings", true);
+   }
+
+}
 
   // if (props.location.state) {
   //   //TODO: FIX THIS  

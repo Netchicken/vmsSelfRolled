@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 // import '../styles/Register.css';
 import "../styles/Common.css";
 
@@ -23,50 +23,41 @@ import {
   Checkbox,
   Divider,
 } from "@mui/material";
-import AuthTypeContext from "../context/authTypeContext";
+
 import UserDataContext from "../context/userDataContext";
 import { ValidateEmail, ValidatePassword } from "./functions/Validators";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-export class Register extends Component {
-  constructor(props) {
-    super(props);
+export const Register = (props) => {
+  let navigate = useNavigate();
+  const [businessName, setBusinessName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [checkedBoxTP, setCheckedBoxTP] = useState(false);
+  const [registering, setRegistering] = useState(false);
+  const [authenticated, setAuthenticated] = useState(false);
 
-    this.state = {
-      businessName: "",
-      businessNameError: "",
-      email: "",
-      emailError: "",
-      password: "",
-      passwordError: "",
-      showPassword: false,
-      checkedBoxTP: false,
-      checkedBoxTPError: false,
-      registering: false,
-      authenticated: false,
-    };
-  }
-
-  handleChange = (prop) => (event) => {
+  const handleChange = (prop) => (event) => {
     this.setState({
       [prop]: event.target.value,
       [prop + "Error"]: "",
     });
   };
 
-  handleClickShowPassword = () => {
-    this.setState((state) => ({ showPassword: !state.showPassword }));
+  const handleClickShowPassword = () => {
+    setShowPassword({ showPassword: !showPassword });
   };
 
-  handleClickedCheckedBoxTP = (name) => (event) => {
+  const handleClickedCheckedBoxTP = (name) => (event) => {
     this.setState({
       [name]: event.target.checked,
       [name + "Error"]: false,
     });
   };
 
-  checkRegisterInputs = () => {
-    this.register();
+  const checkRegisterInputs = () => {
+    // this.register();
     // if (this.state.businessName === '') {
     //     this.setState(state => ({ businessNameError: 'Your Business Name is required' }));
     // } else {
@@ -91,39 +82,25 @@ export class Register extends Component {
     //             }
     //         }
     //     }
-
     // }
   };
 
-  register = async () => {
+  const register = async () => {
     console.log("register running");
-    // const registerEmail = this.state.email;
-    // const registerPassword = this.state.password;
-    // const registerBusinessName = this.state.businessName;
-    const registerEmail = "aaa@aaa1.com";
-    const registerPassword = "123qwe";
-    const registerBusinessName = "Vision College Test2";
-    // const db = Firebase.firestore();
+    const registerEmail = email;
+    const registerPassword = password;
+    const registerBusinessName = businessName;
+    // const registerEmail = "aaa@aaa1.com";
+    // const registerPassword = "123qwe";
+    // const registerBusinessName = "Vision College Test2";
 
-    // Initialize Firebase
-    // const app = initializeApp(Firebase);
-
-    //  const app = !getApps().length ? initializeApp(Firebase) : getApp(); //Just be sure to import getApps () and getApp().
-
-    // Initialize Cloud Firestore and get a reference to the service
-    //  const db = getFirestore(app);
-
-    this.setState({
-      registering: true,
-    });
+    setRegistering(true);
 
     try {
       //Cloud Firestore creates collections and documents implicitly the first time you add data to the document.
       //You do not need to explicitly create collections or documents. https://firebase.google.com/docs/firestore/query-data/get-data
-      console.log("registering"); // .auth() db.collection('vistogramUsers').doc(data.user.uid).set({
+      console.log("registering");
 
-      //  const auth = getAuth();
-      //Create the User
       await createUserWithEmailAndPassword(
         auth,
         registerEmail,
@@ -134,55 +111,40 @@ export class Register extends Component {
           email: registerEmail,
           ID: data.user.uid,
           initialSetup: false,
-          licences: 1,
-          activeLicences: 1,
-          generateTrialLicence: true,
-          trialLicence: true,
-          trialLicenceStartDate: "",
-          trialLicenceEndDate: "",
           user: "Super Admin",
-          createdDate: format(Date.now(), "yyyy-MM-DD HH:MM:SS"),
-          lastLoginDate: format(Date.now(), "yyyy-MM-DD HH:MM:SS"),
+          createdDate: format(Date.now(), "yyyy-MM-dd HH:MM:SS"),
+          lastLoginDate: format(Date.now(), "yyyy-MM-dd HH:MM:SS"),
         }).then(() => {
-          this.setState({
-            authenticated: true,
-          });
-          this.props.history.push("/settings");
+          setAuthenticated(true);
+          Navigate("/settings");
         });
       });
     } catch (error) {
       alert(error);
       console.log("registering catch error = ", error);
-      this.setState({
-        businessName: "",
-        businessNameError: "",
-        email: "",
-        emailError: "",
-        password: "",
-        passwordError: "",
-        showPassword: false,
-        checkedBoxTP: false,
-        checkedBoxTPError: false,
-        registering: false,
-      });
+      setBusinessName("");
+      setEmail("");
+      setPassword("");
+      setRegistering(false);
+      setShowPassword(false);
+      setCheckedBoxTP(false);
     }
   };
 
-  goToHomePage = () => {
-    this.props.history.push("/");
+  const goToHomePage = () => {
+    navigate("/");
   };
 
-  render() {
-    return (
-      <div className='register-container'>
-        <div className='register-name-logo' onClick={this.goToHomePage}>
-          <NameLogo height='50px' />
-        </div>
+  return (
+    <div className='register-container'>
+      <div className='register-name-logo' onClick={this.goToHomePage}>
+        <NameLogo height='50px' />
+      </div>
 
-        <div className='register-message-form'>
-          <div className='register-form'>
-            <div className='register-form-c'>
-              {/* <TextField
+      <div className='register-message-form'>
+        <div className='register-form'>
+          <div className='register-form-c'>
+            {/* <TextField
                                 className='input'
                                 id='rBusiness'
                                 variant='outlined'
@@ -204,7 +166,7 @@ export class Register extends Component {
                                 }}
                             /> */}
 
-              {/* <TextField
+            {/* <TextField
                                 className='input'
                                 id='rEmail'
                                 variant='outlined'
@@ -226,7 +188,7 @@ export class Register extends Component {
                                 }}
                             /> */}
 
-              {/* <TextField
+            {/* <TextField
                                 className='input'
                                 id='lPassword'
                                 variant='outlined'
@@ -251,8 +213,8 @@ export class Register extends Component {
                                 }}
                             /> */}
 
-              <div className='register-tnc'>
-                {/* <FormControlLabel
+            <div className='register-tnc'>
+              {/* <FormControlLabel
                                     className='register-tnc-checkbox'
                                     color='primary'
                                     control={
@@ -263,16 +225,16 @@ export class Register extends Component {
                                         />
                                     }
                                 /> */}
-              </div>
+            </div>
 
-              {/* {this.state.checkedBoxTPError ?
+            {/* {this.state.checkedBoxTPError ?
                                 <p className='register-tnc-error'>^^^**You have not agreed to our
                                     Terms of Service and Privacy Policy**</p> : <p></p>} */}
 
-              <Divider variant='middle' className='register-form-divider' />
+            <Divider variant='middle' className='register-form-divider' />
 
-              <div className='auth-button-row'>
-                {/* <AuthTypeContext.Consumer>
+            <div className='auth-button-row'>
+              {/* <AuthTypeContext.Consumer>
                                     {context => <Link
                                         className='auth-forgot'
                                         component="button"
@@ -285,41 +247,40 @@ export class Register extends Component {
 
                                 </AuthTypeContext.Consumer> */}
 
-                <Button
-                  className='auth-button'
-                  variant='contained'
-                  color='primary'
-                  size='large'
-                  disabled={this.state.registering}
-                  onClick={this.checkRegisterInputs}
-                >
-                  {this.state.registering ? "Registering....." : "Get Started"}
-                </Button>
-              </div>
+              <Button
+                className='auth-button'
+                variant='contained'
+                color='primary'
+                size='large'
+                disabled={this.state.registering}
+                onClick={this.checkRegisterInputs}
+              >
+                {this.state.registering ? "Registering....." : "Get Started"}
+              </Button>
             </div>
           </div>
         </div>
-
-        <UserDataContext.Provider
-          value={{
-            authenticated: this.state.authenticated,
-          }}
-        />
       </div>
-    );
-  }
-}
+
+      <UserDataContext.Provider
+        value={{
+          authenticated: this.state.authenticated,
+        }}
+      />
+    </div>
+  );
+};
 
 //https://reactrouter.com/en/6.4.0/start/faq#what-happened-to-withrouter-i-need-it
-function withRouter(Component) {
-  function ComponentWithRouterProp(props) {
-    let location = useLocation();
-    let navigate = useNavigate();
-    let params = useParams();
-    return <Component {...props} router={{ location, navigate, params }} />;
-  }
+// function withRouter(Component) {
+//   function ComponentWithRouterProp(props) {
+//     let location = useLocation();
+//     let navigate = useNavigate();
+//     let params = useParams();
+//     return <Component {...props} router={{ location, navigate, params }} />;
+//   }
 
-  return ComponentWithRouterProp;
-}
+//   return ComponentWithRouterProp;
+// }
 
-export default withRouter(Register);
+// export default withRouter(Register);
