@@ -29,6 +29,7 @@ import {
 import { useNavigate } from "react-router-dom";
 
 const Register = () => {
+  console.log("Register running");
   let navigate = useNavigate();
   let businessName = "";
   let email = "";

@@ -12,11 +12,11 @@ const Home = () => {
   let navigate = useNavigate();
 
   const goToLoginPage = () => {
-    navigate("/authentication");
+    navigate("/authentication", { authTypeIsLogin: true });
     console.log("Login", navigate);
   };
   const goToRegisterPage = () => {
-    navigate("/authentication");
+    navigate("/authentication", { authTypeIsLogin: false });
   };
   const goToConsolePage = () => {
     navigate("/console");
@@ -36,8 +36,8 @@ const Home = () => {
       {/* <TopBanner goToRegisterPage={this.goToRegisterPage} /> */}
 
       <BottomBar
-        // goToPrivacyPolicyPage={this.goToPrivacyPolicyPage}
-        // goToTermsAndConditionsPage={this.goToTermsAndConditionsPage}
+      // goToPrivacyPolicyPage={this.goToPrivacyPolicyPage}
+      // goToTermsAndConditionsPage={this.goToTermsAndConditionsPage}
       />
     </div>
   );
