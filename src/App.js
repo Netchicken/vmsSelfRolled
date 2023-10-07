@@ -66,6 +66,7 @@ function App() {
         // const defaultHomeBkgImageRef = db.collection("defaultParameters").doc('backgroundImage');
         // const defaultAdvertRef = db.collection("defaultParameters").doc('advertImage');
         // const businessCategoryDataRef = db.collection("businessCategories");
+        
         const businessCategoryDataRef = await getBusinessData(user);
         console.log("businessCategoryDataRef", businessCategoryDataRef[0]);
         businessCategoryDataRef.forEach((doc) => {

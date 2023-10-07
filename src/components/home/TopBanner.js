@@ -1,7 +1,7 @@
 import React from 'react';
 import '../../styles/Home.css';
 import tbImage from '../../assets/01.png';
-import Button from '@material-ui/core/Button';
+import { Button } from "@mui/material";
 
 const TopBanner = props => {
 

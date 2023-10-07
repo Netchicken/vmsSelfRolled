@@ -1,5 +1,4 @@
 import React from "react";
-import Link from '@mui/material';
 import '../styles/BottomBar.css'
 
 const BottomBar = props => {

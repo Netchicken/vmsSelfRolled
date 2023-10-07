@@ -1,33 +1,29 @@
-import React from 'react';
-import NameLogo from '../../components/NameLogo';
-import '../../styles/Home.css';
-import Button from '@mui/material/Button';
+import React from "react";
+import NameLogo from "../../components/NameLogo";
+import "../../styles/Home.css";
+import { Button } from "@mui/material";
 // import ChevronRightIcon from '@mui/icons/ChevronRight';
 // import PlayStoreLogo from '../../assets/playStoreLogo.png';
 // import AppStoreLogo from '../../assets/appStoreLogo.png';
 
-
-const TopBar = props => {
-
- 
+const TopBar = (props) => {
   const consoleButton = {
-    textTransform: 'none',
-    marginRight: '30px',
-    padding: '10px',
-
-  }
+    textTransform: "none",
+    marginRight: "30px",
+    padding: "10px",
+  };
 
   const authButtons = {
-    textTransform: 'none',
-    marginRight: '30px',
-    width: '150px',
-    padding: '10px',
-  }
+    textTransform: "none",
+    marginRight: "30px",
+    width: "150px",
+    padding: "10px",
+  };
 
   const orButton = {
-    textTransform: 'none',
-    margin: '0 0 0 -30px',
-  }
+    textTransform: "none",
+    margin: "0 0 0 -30px",
+  };
 
   const ppats = props.ppats ? true : false;
 
@@ -36,36 +32,53 @@ const TopBar = props => {
       <div className='home-topBar'>
         <div
           style={{
-            display: 'flex',
-            flexDirection: 'row',
-            alignItems: 'center',
-          }}>
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "center",
+          }}
+        >
           <div
-            style={{ width: '200px', marginLeft: '30px', cursor: 'pointer' }}
+            style={{ width: "200px", marginLeft: "30px", cursor: "pointer" }}
             onClick={props.goToHomePage}
           >
-            <NameLogo
-              height='60px'
-            />
+            <NameLogo height='60px' />
           </div>
-
-
-        </div>
-
-
-
-
-        {ppats ? <div></div> : props.userData ? <div>
           <Button
-            style={consoleButton}
+            style={{ textTransform: "none" }}
             color='primary'
-            variant='outlined'
             onClick={props.goToConsolePage}
           >
-            Go To Console
-
+            What Is This mess?
           </Button>
-        </div> :
+
+          <Button
+            style={{
+              textTransform: "none",
+              borderRadius: "50px",
+              marginLeft: "50px",
+            }}
+            variant='contained'
+            color='primary'
+            onClick={props.goToConsolePage}
+          >
+            Download
+          </Button>
+        </div>
+
+        {ppats ? (
+          <div></div>
+        ) : props.userData ? (
+          <div>
+            <Button
+              style={consoleButton}
+              color='primary'
+              variant='outlined'
+              onClick={props.goToConsolePage}
+            >
+              Go To Console
+            </Button>
+          </div>
+        ) : (
           <div>
             <Button
               style={authButtons}
@@ -76,11 +89,7 @@ const TopBar = props => {
               Login
             </Button>
 
-            <Button
-              style={orButton}
-              color='primary'
-              disabled
-            >
+            <Button style={orButton} color='primary' disabled>
               Or
             </Button>
 
@@ -92,11 +101,11 @@ const TopBar = props => {
             >
               Register
             </Button>
-          </div>}
-
+          </div>
+        )}
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default TopBar;
