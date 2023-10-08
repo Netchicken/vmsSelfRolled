@@ -29,35 +29,49 @@ import {
 import { useNavigate } from "react-router-dom";
 
 const Register = () => {
-  console.log("Register running");
+  console.log("Register running in Register.js Line 32");
   let navigate = useNavigate();
   let businessName = "";
-  let email = "";
-  let password = "";
+  //let email = "";
+  // let password = "";
   const [showPassword, setShowPassword] = useState(false);
   const [checkedBoxTP, setCheckedBoxTP] = useState(false);
   const [registering, setRegistering] = useState(false);
   const [authenticated, setAuthenticated] = useState(false);
+  const [business, setBusiness] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-  // const handleChange = (prop) => (event) => {
-  //   this.setState({
-  //     [prop]: event.target.value,
-  //     [prop + "Error"]: "",
-  //   });
+
+  const handleChange = (prop) => (event) => {
+    if (prop === "email") {
+      setEmail(event.target.value);
+      console.log("register email = ", event.target.value);
+    }
+    if (prop === "password") {
+      setPassword(event.target.value);
+      console.log("register password = ", event.target.value);
+    }
+    if (prop === "business") {
+      setBusiness(event.target.value);
+      console.log("register businessName = ", event.target.value);
+    }
+
+  };
+
+
+  // const handleBusinessName = (props) => {
+  //   businessName = props;
+
   // };
-
-  const handleBusinessName = (props) => {
-    businessName = props;
-    console.log("businessName = ", businessName);
-  };
-  const handleEmail = (props) => {
-    email = props;
-    console.log("email = ", email);
-  };
-  const handlePassword = (props) => {
-    password = props;
-    console.log("password = ", password);
-  };
+  // const handleEmail = (props) => {
+  //   email = props;
+  //   console.log("register email = ", props + " " + email);
+  // };
+  // const handlePassword = (props) => {
+  //   password = props;
+  //   console.log("register password = ", props + " " + password);
+  // };
 
   const handleClickShowPassword = () => {
     setShowPassword({ showPassword: !showPassword });
@@ -98,9 +112,10 @@ const Register = () => {
     // }
   };
 
+  //run on button click
   const register = async () => {
-    if (email !== "" && password !== "" && businessName !== "") {
-      console.log("register running");
+    if (email !== "" && password !== "" && business !== "") {
+      console.log("register running in register.js line 103");
       // const registerEmail = email;
       // const registerPassword = password;
       // const registerBusinessName = businessName;
@@ -136,6 +151,8 @@ const Register = () => {
         setShowPassword(false);
         setCheckedBoxTP(false);
       }
+    } else {
+      console.log("registering  error = ");
     }
   };
 
@@ -158,8 +175,8 @@ const Register = () => {
               variant='outlined'
               type='businessName'
               label='Business Name'
-              value={businessName}
-              onChange={handleBusinessName(businessName)}
+              value={business}
+              onChange={handleChange("business")}
               fullWidth={true}
               InputProps={{
                 endAdornment: (
@@ -179,7 +196,7 @@ const Register = () => {
               type='email'
               label='Email'
               value={email}
-              onChange={handleEmail(email)}
+              onChange={handleChange("email")}
               fullWidth={true}
               InputProps={{
                 endAdornment: (
@@ -199,7 +216,7 @@ const Register = () => {
               type={showPassword ? "text" : "password"}
               label='Password'
               value={password}
-              onChange={handlePassword(password)}
+              onChange={handleChange("password")}
               fullWidth={true}
               InputProps={{
                 endAdornment: (

@@ -13,12 +13,16 @@ function Auth(props) {
   const [authTypeIsLogin, setAuthTypeIsLogin] = useState(true);
 
   let navigate = useNavigate();
-
+  let authlogin = useLocation(); //https://stackoverflow.com/questions/71380596/pass-data-to-a-component-with-usenavigate-from-react-router-dom
   //sets true or false for login or register
   useEffect(() => {
-    setAuthTypeIsLogin(props.authTypeIsLogin);
-    console.log("authTypeIsLogin at startup = " + props.authTypeIsLogin);
+    loadAuthType();
   }, []);
+
+  const loadAuthType = () => {
+    setAuthTypeIsLogin(authlogin); //https://stackoverflow.com/questions/71380596/pass-data-to-a-component-with-usenavigate-from-react-router-dom
+    console.log("authTypeIsLogin at startup = " + authlogin);
+  };
 
   const changeAuthType = () => {
     setAuthTypeIsLogin(!authTypeIsLogin);
@@ -44,8 +48,8 @@ function Auth(props) {
       </authTypeContext.Provider>
       <BottomBar
         rlAbs={true}
-        // goToPrivacyPolicyPage={goToPrivacyPolicyPage}
-        // goToTermsAndConditionsPage={goToTermsAndConditionsPage}
+      // goToPrivacyPolicyPage={goToPrivacyPolicyPage}
+      // goToTermsAndConditionsPage={goToTermsAndConditionsPage}
       />
     </div>
   );

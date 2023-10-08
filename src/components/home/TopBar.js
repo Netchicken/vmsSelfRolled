@@ -86,7 +86,7 @@ const TopBar = (props) => {
               variant='outlined'
               onClick={props.goToLoginPage}
             >
-              Login
+              Admin Login
             </Button>
 
             <Button style={orButton} color='primary' disabled>
@@ -99,7 +99,7 @@ const TopBar = (props) => {
               variant='contained'
               onClick={props.goToRegisterPage}
             >
-              Register
+              Register for Admin
             </Button>
           </div>
         )}

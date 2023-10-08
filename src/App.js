@@ -169,7 +169,7 @@ function App() {
 
           <Route path='/' element={<Home />} />
           <Route path='/setup' element={<InitialSetup />} />
-          <Route path='/authentication' element={<Auth />} />
+          <Route path='/authentication' element={<Auth  />} />
 
           <Route path='/console' element={<Console />} />
         </Routes>
