@@ -17,11 +17,13 @@ const Home = () => {
   let navigate = useNavigate();
 
   const goToLoginPage = () => {
-    navigate("/authentication", { state: true });
+    const authType = true;
+    navigate("/authentication", { state: authType });
     console.log("Login", navigate);
   };
   const goToRegisterPage = () => {
-    navigate("/authentication", { state: false });
+    const authType = false;
+    navigate("/authentication", { state: authType });
     console.log("Register", navigate);
   };
   const goToConsolePage = () => {
