@@ -2,9 +2,6 @@ import React from "react";
 import NameLogo from "../../components/NameLogo";
 import "../../styles/Home.css";
 import { Button } from "@mui/material";
-// import ChevronRightIcon from '@mui/icons/ChevronRight';
-// import PlayStoreLogo from '../../assets/playStoreLogo.png';
-// import AppStoreLogo from '../../assets/appStoreLogo.png';
 
 const TopBar = (props) => {
   const consoleButton = {
@@ -64,45 +61,45 @@ const TopBar = (props) => {
             Download
           </Button>
         </div>
-
-        {ppats ? (
-          <div></div>
-        ) : props.userData ? (
-          <div>
-            <Button
-              style={consoleButton}
-              color='primary'
-              variant='outlined'
-              onClick={props.goToConsolePage}
-            >
-              Go To Console
-            </Button>
-          </div>
+        <div></div>
+        {/* {ppats ? ( 
+         
+        ) : props.userData ? (*/}
+        <div>
+          <Button
+            style={consoleButton}
+            color='primary'
+            variant='outlined'
+            onClick={props.goToConsolePage}
+          >
+            Go To Console
+          </Button>
+          {/* </div>
         ) : (
-          <div>
-            <Button
-              style={authButtons}
-              color='primary'
-              variant='outlined'
-              onClick={props.goToLoginPage}
-            >
-              Admin Login
-            </Button>
+          <div> */}
+          <Button
+            style={authButtons}
+            color='primary'
+            variant='outlined'
+            onClick={props.goToLoginPage}
+          >
+            Admin Login
+          </Button>
 
-            <Button style={orButton} color='primary' disabled>
-              Or
-            </Button>
+          <Button style={orButton} color='primary' disabled>
+            Or
+          </Button>
 
-            <Button
-              style={authButtons}
-              color='primary'
-              variant='contained'
-              onClick={props.goToRegisterPage}
-            >
-              Register for Admin
-            </Button>
-          </div>
-        )}
+          <Button
+            style={authButtons}
+            color='primary'
+            variant='contained'
+            onClick={props.goToRegisterPage}
+          >
+            Register for Admin
+          </Button>
+        </div>
+        {/* )} */}
       </div>
     </div>
   );

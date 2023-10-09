@@ -165,7 +165,7 @@ const Register = () => {
       <div className='register-name-logo' onClick={goToHomePage}>
         <NameLogo height='50px' />
       </div>
-
+      Register for App
       <div className='register-message-form'>
         <div className='register-form'>
           <div className='register-form-c'>

@@ -72,7 +72,7 @@ export const checkDataExists = (user) => {
   return 1;
   //})
 };
-export const getData = async (user) => {
+export const getDataUsers = async () => {
   //https://firebase.google.com/docs/firestore/query-data/queries?hl=en&authuser=0
   // const q = query(collection(db, "vcUsers"), where("userid", "===", user.id));
   const q = query(collection(db, "vcUsers"));
@@ -83,6 +83,27 @@ export const getData = async (user) => {
       console.log("DBOperations getData in App  " + doc.id, " => ", doc.data());
     });
     return querySnapshot.docs.map((doc) => doc.data());
+  }
+  return "No data";
+  //})
+};
+export const getDataSingleUser = async (user) => {
+  //https://firebase.google.com/docs/firestore/query-data/queries?hl=en&authuser=0
+  // const q = query(collection(db, "vcUsers"), where("userid", "===", user.id));
+  if (user) {
+    console.log("getDataSingleUser in App  " + user);
+    const allUsers = collection(db, "vcUsers");
+    const q = query(allUsers, where("ID", "==", user));
+
+    const querySnapshot = await getDocs(q);
+    if (q) {
+      // return querySnapshot.docs.map((doc) => doc.data());
+
+      querySnapshot.forEach((doc) => {
+        return (doc.id, ' => ', doc.data());
+      });
+
+    }
   }
   return "No data";
   //})

@@ -123,7 +123,7 @@ function Login(props) {
                 admin
               </p> */}
         </div>
-
+        login to app
         <TextField
           className='input'
           id='lEmail'
@@ -191,21 +191,21 @@ function Login(props) {
         </div>
       </div>
 
-      <div className='login-notregistered-row'>
+      {/* <div className='login-notregistered-row'>
         <AuthTypeContext.Consumer>
-          {(context) => (
-            <Button
-              className='login-notregistered-button'
-              variant='outlined'
-              color='primary'
-              size='large'
-              onClick={context.changeAuthType}
-            >
-              Register
-            </Button>
+         // {(context) => (
+            // <Button
+            //   className='login-notregistered-button'
+            //   variant='outlined'
+            //   color='primary'
+            //   size='large'
+            //   onClick={context.changeAuthType}
+            // >
+            //   Register
+            // </Button>
           )}
         </AuthTypeContext.Consumer>
-      </div>
+      </div> */}
     </div>
   );
 }

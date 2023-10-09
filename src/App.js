@@ -18,6 +18,7 @@ import Login from "./components/Login";
 import { auth, db } from "./components/firebase/Config";
 import {
   getData,
+  getDataSingleUser,
   getBusinessData,
   getPurposeOfVisitOptionsRef,
   getDefaultSettingsRef,
@@ -46,14 +47,14 @@ export let PurposeOfVisitOptions = "";
 export let DefaultSettings = "";
 
 function App() {
-  const [loading, setLoading] = useState(true);
-  const [authenticated, setAuthenticated] = useState(false);
-  const [currentUser, setCurrentUser] = useState(null);
-  const [userData, setUserData] = useState(null);
-  const [appData, setAppData] = useState(null);
+  // const [loading, setLoading] = useState(true);
+  // const [authenticated, setAuthenticated] = useState(false);
+  // const [currentUser, setCurrentUser] = useState(null);
+  // const [userData, setUserData] = useState(null);
+  // const [appData, setAppData] = useState(null);
 
   useEffect(() => {
-    initLoad();
+    // initLoad();
     //updateSettings();
   }, []);
 
@@ -61,12 +62,13 @@ function App() {
     auth.onAuthStateChanged(async (user) => {
       if (user) {
         // const userDataRef = db.collection("vsUsers").doc(user.uid);
-        const userDataRef = getData(user.uid);
+        const userDataRef = getDataSingleUser(user.uid);
+        console.log("userDataRef", userDataRef);
         // const defaultLogoRef = db.collection("defaultParameters").doc('logoImage');
         // const defaultHomeBkgImageRef = db.collection("defaultParameters").doc('backgroundImage');
         // const defaultAdvertRef = db.collection("defaultParameters").doc('advertImage');
         // const businessCategoryDataRef = db.collection("businessCategories");
-        
+
         const businessCategoryDataRef = await getBusinessData(user);
         console.log("businessCategoryDataRef", businessCategoryDataRef[0]);
         businessCategoryDataRef.forEach((doc) => {
@@ -84,7 +86,7 @@ function App() {
         userDataRef //if there is a user logged in then get the rest of the data
           .then((doc) => {
             if (doc.exists) {
-              setUserData(doc.data());
+              // setUserData(doc.data());
               UserData = doc.data(); //sets the data to be exported
 
               businessCategoryDataRef
@@ -109,53 +111,54 @@ function App() {
                           defaultSettings: DefaultSettings,
                         };
 
-                        setAuthenticated(true);
-                        setCurrentUser(user);
-                        setUserData(doc.data());
-                        setLoading(false);
-                        setAppData(AppData);
-                      } else {
-                        setAuthenticated(false);
-                        setCurrentUser(null);
-                        setUserData(null);
-                        setLoading(false);
-                        setAppData(null);
+                        //   setAuthenticated(true);
+                        //   setCurrentUser(user);
+                        //   setUserData(doc.data());
+                        //   setLoading(false);
+                        //   setAppData(AppData);
+                        // } else {
+                        //   setAuthenticated(false);
+                        //   setCurrentUser(null);
+                        //   setUserData(null);
+                        //   setLoading(false);
+                        //   setAppData(null);
 
-                        console.log("No such document!");
+                        //   console.log("No such document!");
                       }
                     })
-                    .catch((error) => {
-                      setAuthenticated(false);
-                      setCurrentUser(null);
-                      setUserData(null);
-                      setLoading(false);
-                      setAppData(null);
-                      console.log("Error getting document:", error);
-                    });
+                  // .catch((error) => {
+                  //   // setAuthenticated(false);
+                  //   // setCurrentUser(null);
+                  //   // setUserData(null);
+                  //   // setLoading(false);
+                  //   // setAppData(null);
+                  //   console.log("Error getting document:", error);
+                  // });
                 })
                 .catch((error) => {
-                  setAuthenticated(false);
-                  setCurrentUser(null);
-                  setUserData(null);
-                  setLoading(false);
-                  setAppData(null);
+                  // setAuthenticated(false);
+                  // setCurrentUser(null);
+                  // setUserData(null);
+                  // setLoading(false);
+                  // setAppData(null);
                   console.log("Error getting documents: ", error);
                 });
             } else {
-              setAuthenticated(false);
-              setCurrentUser(null);
-              setUserData(null);
-              setLoading(false);
-              setAppData(null);
+              // setAuthenticated(false);
+              // setCurrentUser(null);
+              // setUserData(null);
+              // setLoading(false);
+              // setAppData(null);
               console.log("No such document!");
             }
           });
       } else {
-        setAuthenticated(false);
-        setCurrentUser(null);
-        setUserData(null);
-        setLoading(false);
-        setAppData(null);
+        // setAuthenticated(false);
+        // setCurrentUser(null);
+        // setUserData(null);
+        // setLoading(false);
+        // setAppData(null);
+        console.log("No user login");
       }
     });
   };
@@ -169,7 +172,7 @@ function App() {
 
           <Route path='/' element={<Home />} />
           <Route path='/setup' element={<InitialSetup />} />
-          <Route path='/authentication' element={<Auth  />} />
+          <Route path='/authentication' element={<Auth />} />
 
           <Route path='/console' element={<Console />} />
         </Routes>

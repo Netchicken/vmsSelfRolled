@@ -1,5 +1,5 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import "../styles/Home.css";
 import TopBar from "../components/home/TopBar";
 //import TopBanner from "../components/home/TopBanner";
@@ -8,15 +8,21 @@ import { UserData } from "../App";
 // import HowItWorks from '../components/home/HowItWorks';
 // import ContactUs from '../components/home/ContactUs';
 //import { Button } from "@mui/material";
+
+
+//HOME IS THE EMPTY HOMEPAGE WITH THE TOPBAR
+
 const Home = () => {
+  console.log("Home Loading");
   let navigate = useNavigate();
 
   const goToLoginPage = () => {
-    navigate("/authentication", { authTypeIsLogin: true });
+    navigate("/authentication", { state: true });
     console.log("Login", navigate);
   };
   const goToRegisterPage = () => {
-    navigate("/authentication", { authTypeIsLogin: false });
+    navigate("/authentication", { state: false });
+    console.log("Register", navigate);
   };
   const goToConsolePage = () => {
     navigate("/console");
