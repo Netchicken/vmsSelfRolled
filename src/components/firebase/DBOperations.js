@@ -184,24 +184,19 @@ export const getAllVisitorsData = async (user) => {
 
 
 //https://firebase.google.com/docs/firestore/manage-data/add-data?hl=en&authuser=0
-export const updateSettings = async () => {
+//setDoc overwrites the document If the document does not exist, it will be created. If the document does exist, its contents will be overwritten with the newly provided data
+//unless you specify that the data should be merged into the existing document, as follows: setDoc(cityRef, { capital: true }, { merge: true });
+export const updateSettings = async (user) => {
   console.log("updateSettings in App  ");
-  await setDoc(doc(db, "settings-zKrDsscyDXN7lQbdujUjjcj3N5K2", "init"), {
-    fields: false,
-    primaryColor: "#4A90E2",
-    secondaryColor: "#B8E986",
+  await setDoc(doc(db, "settings-" + user.uid), "init"), {
     businessCategory: "College",
     businessName: "Vision College",
     businessSlogan: "Changing Lives for Learning",
     businessBranch: "Christchurch",
     welcomeMessage: "Welcome message to the VMS",
-    logoImageDownloadUrl: "",
-    backgroundImageDownloadUrl: "",
-    advertsDownloadUrl: "",
-    businessMultiOffices: "",
     purposeOfVisitOptions: "",
     createdDate: format(Date.now(), " yyyy-MM-dd HH:MM:SS"),
-  }).then(() => {
+  }.then(() => {
     setDoc(doc(db, "vcUsers", "zKrDsscyDXN7lQbdujUjjcj3N5K2"), {
       initialSetup: true,
     });

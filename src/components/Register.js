@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 //import '../styles/Register.css';
 import "../styles/Common.css";
+import "../styles/InitialSetup.css";
 
 import { auth, db } from "./firebase/Config";
 //import { initializeApp, getApp, getApps } from "firebase/app";
@@ -9,7 +10,25 @@ import { collection, addDoc } from "firebase/firestore";
 
 import { format } from "date-fns";
 import NameLogo from "../components/NameLogo";
-
+import {
+  signInWithEmailAndPassword,
+  getAuth,
+  onAuthStateChanged,
+} from "firebase/auth";
+import {
+  doc,
+  updateDoc,
+  getDoc,
+  getFirestore,
+  collection,
+  addDoc,
+  query,
+  where,
+  getDocs,
+  setDoc,
+  documentId,
+} from "firebase/firestore";
+import { auth, db } from "../firebase/Config";
 import {
   TextField,
   Icon,
@@ -22,7 +41,7 @@ import {
   VisibilityOff,
   Business,
   AlternateEmail,
-} from "@mui/icons-material";
+} from "@mui/icons-material/createSvgIcon";
 
 //import UserDataContext from "../context/userDataContext";
 //import { ValidateEmail, ValidatePassword } from "./functions/Validators";
@@ -43,6 +62,13 @@ const Register = () => {
   const [password, setPassword] = useState("");
 
 
+  const [businessSlogan, setBusinessSlogan] = useState("Changing Lives for Learning");
+  const [businessCategory, setBusinessCategory] = useState("Education");
+  const [businessBranch, setBusinessBranch] = useState("Christchurch");
+  const [welcomeMessage, setWelcomeMessage] = useState("Welcome to the Visitor Management System");
+
+
+
   const handleChange = (prop) => (event) => {
     if (prop === "email") {
       setEmail(event.target.value);
@@ -56,22 +82,26 @@ const Register = () => {
       setBusiness(event.target.value);
       console.log("register businessName = ", event.target.value);
     }
+    if (prop === "busnessSlogan") {
+      setBusinessSlogan(event.target.value);
+      console.log("register busnessSlogan = ", event.target.value);
+    }
+    if (prop === "businessCategory") {
+      setBusinessCategory(event.target.value);
+      console.log("register businessCategory = ", event.target.value);
+    }
+    if (prop === "businessBranch") {
+      setBusinessBranch(event.target.value);
+      console.log("register businessBranch = ", event.target.value);
+    }
+
+    if (prop === "welcomeMessage") {
+      setWelcomeMessage(event.target.value);
+      console.log("register welcomeMessage = ", event.target.value);
+    }
 
   };
 
-
-  // const handleBusinessName = (props) => {
-  //   businessName = props;
-
-  // };
-  // const handleEmail = (props) => {
-  //   email = props;
-  //   console.log("register email = ", props + " " + email);
-  // };
-  // const handlePassword = (props) => {
-  //   password = props;
-  //   console.log("register password = ", props + " " + password);
-  // };
 
   const handleClickShowPassword = () => {
     setShowPassword({ showPassword: !showPassword });
@@ -116,13 +146,6 @@ const Register = () => {
   const register = async () => {
     if (email !== "" && password !== "" && business !== "") {
       console.log("register running in register.js line 103");
-      // const registerEmail = email;
-      // const registerPassword = password;
-      // const registerBusinessName = businessName;
-      // const registerEmail = "aaa@aaa1.com";
-      // const registerPassword = "123qwe";
-      // const registerBusinessName = "Vision College Test2";
-
       setRegistering(true);
 
       try {
@@ -130,21 +153,32 @@ const Register = () => {
 
         await createUserWithEmailAndPassword(auth, email, password).then(
           (data) => {
-            addDoc(collection(db, "vcUsers"), {
-              businessName: businessName,
+
+            setDoc(doc(db, "vcUsers"), data.user.uid), {
+              businessName: business,
               email: email,
-              ID: data.user.uid,
-              initialSetup: false,
-              user: "Super Admin",
+              ID: dataId,
+              initialSetup: true,
+              user: "Admin",
               createdDate: format(Date.now(), "yyyy-MM-dd HH:MM:SS"),
               lastLoginDate: format(Date.now(), "yyyy-MM-dd HH:MM:SS"),
-            }).then(() => {
-              setAuthenticated(true);
-              //navigate("/settings");
+            }
+          }).then((data) => {
+
+            setDoc(doc(db, "settings-" + data.user.uid), "init"), {
+              businessCategory: businessCategory,
+              businessName: business,
+              businessSlogan: businessSlogan,
+              businessBranch: businessBranch,
+              welcomeMessage: welcomeMessage,
+              createdDate: format(Date.now(), " yyyy-MM-dd HH:MM:SS"),
+            }.then(() => {
+              navigate("/console");
             });
-          }
-        );
-      } catch (error) {
+
+          });
+      }
+      catch (error) {
         alert(error);
         console.log("registering catch error = ", error);
         setRegistering(false);
@@ -188,7 +222,83 @@ const Register = () => {
                 ),
               }}
             />
+            <TextField
+              className='input'
+              id='rBusiness'
+              variant='outlined'
+              type='businessName'
+              label='Business Category'
 
+              onChange={handleChange("businessCategory")}
+              fullWidth={true}
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position='end'>
+                    <Icon className='input-icon'>
+                      <Business />
+                    </Icon>
+                  </InputAdornment>
+                ),
+              }}
+            />
+            <TextField
+              className='input'
+              id='rBusiness'
+              variant='outlined'
+              type='businessName'
+              label='Business Slogan'
+              value={businessSlogan}
+              onChange={handleChange("businessSlogan")}
+              fullWidth={true}
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position='end'>
+                    <Icon className='input-icon'>
+                      <Business />
+                    </Icon>
+                  </InputAdornment>
+                ),
+              }}
+            />
+
+            <TextField
+              className='input'
+              id='rBusiness'
+              variant='outlined'
+              type='businessName'
+              label='Business Branch'
+              value={businessBranch}
+              onChange={handleChange("businessBranch")}
+              fullWidth={true}
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position='end'>
+                    <Icon className='input-icon'>
+                      <Business />
+                    </Icon>
+                  </InputAdornment>
+                ),
+              }}
+            />
+            <TextField
+              className='input'
+              id='rBusiness'
+              variant='outlined'
+              type='businessName'
+              label='Welcome Message'
+              value={welcomeMessage}
+              onChange={handleChange("welcomeMessage")}
+              fullWidth={true}
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position='end'>
+                    <Icon className='input-icon'>
+                      <Business />
+                    </Icon>
+                  </InputAdornment>
+                ),
+              }}
+            />
             <TextField
               className='input'
               id='rEmail'
@@ -231,24 +341,6 @@ const Register = () => {
                 ),
               }}
             />
-
-            {/* <div className='register-tnc'>
-               <FormControlLabel
-                                    className='register-tnc-checkbox'
-                                    color='primary'
-                                    control={
-                                        <Checkbox
-                                            checked={this.state.checkedBoxTP}
-                                            onChange={this.handleClickedCheckedBoxTP('checkedBoxTP')}
-                                            value='checkedBoxTP'
-                                        />
-                                    }
-                                /> 
-            </div> */}
-
-            {/* {this.state.checkedBoxTPError ?
-                                <p className='register-tnc-error'>^^^**You have not agreed to our
-                                    Terms of Service and Privacy Policy**</p> : <p></p>} */}
 
             <Divider variant='middle' className='register-form-divider' />
 
