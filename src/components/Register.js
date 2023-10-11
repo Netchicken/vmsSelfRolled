@@ -156,62 +156,62 @@ const Register = () => {
 
 
   //run on button click
-  // const handleRegister = () => {
+  const handleRegister = () => {
 
-  //   console.log("register running in register.js line 134");
-  //   if (email !== "" && password !== "") {
-  //     console.log("register running in register.js line 136");
+    console.log("register running in register.js line 134");
+    if (email !== "" && password !== "") {
+      console.log("register running in register.js line 136");
 
 
-  //     try {
-  //       console.log("registering");
+      try {
+        console.log("registering");
 
-  //       // await DBOperations();
+        // await DBOperations();
 
-  //     }
-  //     catch (error) {
-  //       alert(error);
-  //       console.log("registering catch error = ", error);
+      }
+      catch (error) {
+        alert(error);
+        console.log("registering catch error = ", error);
 
-  //     }
-  //   } else {
-  //     console.log("registering  error = ");
-  //   }
+      }
+    } else {
+      console.log("registering  error = ");
+    }
 
-  // };
+  };
 
-  // const DBOperations = async () => {
+  const DBOperations = async () => {
 
-  //   await createUserWithEmailAndPassword(auth, email, password)
-  //     .then((data) => {
+    await createUserWithEmailAndPassword(auth, email, password)
+      .then((data) => {
 
-  //       console.log("DB Auth data = ", data);
+        console.log("DB Auth data = ", data);
 
-  //       // setDoc(doc(db, "vcUsers"), "Admin"), {
-  //       //   businessName: business,
-  //       //   email: email,
-  //       //   ID: data.user.uid,
-  //       //   initialSetup: true,
-  //       //   user: "Admin",
-  //       //   createdDate: format(Date.now(), "yyyy-MM-dd HH:MM:SS"),
-  //       //   lastLoginDate: format(Date.now(), "yyyy-MM-dd HH:MM:SS"),
-  //       // }
-  //     })
-  //   // .then((data) => {
-  //   //   setDoc(doc(db, "settings-" + data.user.uid), "init"), {
-  //   //     businessCategory: businessCategory,
-  //   //     businessName: business,
-  //   //     businessSlogan: businessSlogan,
-  //   //     businessBranch: businessBranch,
-  //   //     welcomeMessage: welcomeMessage,
-  //   //     createdDate: format(Date.now(), " yyyy-MM-dd HH:MM:SS"),
-  //   //   }.then(() => {
-  //   //     navigate("/console");
-  //   //   });
+        setDoc(doc(db, "vcUsers"), "Admin"), {
+          businessName: business,
+          email: email,
+          ID: data.user.uid,
+          initialSetup: true,
+          user: "Admin",
+          createdDate: format(Date.now(), "yyyy-MM-dd HH:MM:SS"),
+          lastLoginDate: format(Date.now(), "yyyy-MM-dd HH:MM:SS"),
+        }
+      })
+      .then((data) => {
+        setDoc(doc(db, "settings-" + data.user.uid), "init"), {
+          businessCategory: businessCategory,
+          businessName: business,
+          businessSlogan: businessSlogan,
+          businessBranch: businessBranch,
+          welcomeMessage: welcomeMessage,
+          createdDate: format(Date.now(), " yyyy-MM-dd HH:MM:SS"),
+        }.then(() => {
+          navigate("/console");
+        });
 
-  //   // });
+      });
 
-  // }
+  }
 
 
 
@@ -312,7 +312,6 @@ const Register = () => {
           />
 
           <Button
-            type="submit"
             className='auth-button-row'
             variant='contained'
             color='primary'
@@ -321,55 +320,14 @@ const Register = () => {
           >
             Register a new Admin User
           </Button>
+
+          <Button variant="outlined" color="secondary" type="submit">Register a new Admin User</Button>
         </form>
 
         <form onSubmit={handleSubmit}>
-          <Stack spacing={2} direction="row" sx={{ marginBottom: 4 }}>
-            <TextField
-              type="text"
-              variant='outlined'
-              color='secondary'
-              label="First Name"
-              onChange={e => setBusiness(e.target.value)}
-              value={business}
-              fullWidth
-              required
-            />
-            <TextField
-              type="text"
-              variant='outlined'
-              color='secondary'
-              label="Last Name"
-              onChange={e => setWelcomeMessage(e.target.value)}
-              value={welcomeMessage}
-              fullWidth
-              required
-            />
-          </Stack>
-          <TextField
-            type="email"
-            variant='outlined'
-            color='secondary'
-            label="Email"
-            onChange={e => setEmail(e.target.value)}
-            value={email}
-            fullWidth
-            required
-            sx={{ mb: 4 }}
-          />
-          <TextField
-            type="password"
-            variant='outlined'
-            color='secondary'
-            label="Password"
-            onChange={e => setPassword(e.target.value)}
-            value={password}
-            required
-            fullWidth
-            sx={{ mb: 4 }}
-          />
 
-          <Button variant="outlined" color="secondary" type="submit">Register</Button>
+
+          <Button variant="outlined" color="secondary" type="submit">.</Button>
         </form>
       </div>
     </div>
