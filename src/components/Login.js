@@ -117,13 +117,13 @@ function Login(props) {
       <div className='login-form-area'>
         <div className='login-name-logo' onClick={goToHomePage}>
           <NameLogo height='100px' />
-          {/* <p
-                className='login-typography-secondary'
-              >
-                admin
-              </p> */}
+          <p
+            className='login-typography-secondary'
+          >
+            login to the VMS
+          </p>
         </div>
-        login to app
+
         <TextField
           className='input'
           id='lEmail'

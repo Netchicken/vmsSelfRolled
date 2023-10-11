@@ -19,12 +19,12 @@ const Home = () => {
   const goToLoginPage = () => {
     const authType = true;
     navigate("/authentication", { state: authType });
-    console.log("Login", navigate);
+    //  console.log("Login", navigate);
   };
   const goToRegisterPage = () => {
     const authType = false;
     navigate("/authentication", { state: authType });
-    console.log("Register", navigate);
+    //  console.log("Register", navigate);
   };
   const goToConsolePage = () => {
     navigate("/console");

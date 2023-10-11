@@ -15,7 +15,7 @@
     right: 0;
     position: absolute;
     margin: auto;
-    padding: 1px;
+    padding: 12px;
     flex: 0 1 auto;
 }
 
@@ -60,7 +60,7 @@
     /* height: 99.99%; */
     font-size: 14px;
     text-align: center;
-    margin-left: 20%;
+    margin: auto;
 }
 
 .setup-content-header {

@@ -23,8 +23,8 @@ const TopBar = (props) => {
   };
 
   const ppats = props.ppats ? true : false;
-  console.log("TopBar props.goToRegisterPage", props.goToRegisterPage);
-  console.log("TopBar props.goToLoginPage", props.goToLoginPage);
+  // console.log("TopBar props.goToRegisterPage", props.goToRegisterPage);
+  // console.log("TopBar props.goToLoginPage", props.goToLoginPage);
 
   return (
     <div>
