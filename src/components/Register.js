@@ -222,12 +222,12 @@ const Register = () => {
       businessSlogan: "Changing Lives for Learning",
       businessBranch: "Christchurch",
       welcomeMessage: "Welcome message to the VMS",
-      purposeOfVisitOptions: "",
       createdDate: format(Date.now(), " yyyy-MM-dd HH:MM:SS"),
     }).then(() => {
       setDoc(doc(db, "vcUsers", "zKrDsscyDXN7lQbdujUjjcj3N5K2"), {
         initialSetup: true,
       });
+      goToHomePage();
     });
   };
 
