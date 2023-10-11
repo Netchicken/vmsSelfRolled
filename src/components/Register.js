@@ -2,13 +2,13 @@ import React, { useState } from "react";
 import "../styles/Common.css";
 import "../styles/InitialSetup.css";
 
-// import {
-//   createUserWithEmailAndPassword, signInWithEmailAndPassword, getAuth, onAuthStateChanged,
-// } from "firebase/auth"; //https://firebase.google.com/docs/auth/web/password-auth#create_a_password-based_account
-// import { auth, db } from "../components/firebase/Config";
-// import { doc, setDoc, documentId, } from "firebase/firestore";
+import {
+  createUserWithEmailAndPassword, signInWithEmailAndPassword, getAuth, onAuthStateChanged,
+} from "firebase/auth"; //https://firebase.google.com/docs/auth/web/password-auth#create_a_password-based_account
+import { auth, db } from "../components/firebase/Config";
+import { doc, setDoc, documentId, } from "firebase/firestore";
 
-// import { format } from "date-fns";
+import { format } from "date-fns";
 import NameLogo from "../components/NameLogo";
 
 import {
@@ -145,11 +145,8 @@ const Register = () => {
     // const form = e.target;
 
     console.log(business + " " + email + " " + password + " " + businessSlogan + " " + businessCategory + " " + businessBranch + " " + welcomeMessage);
-    // const formData = new FormData(form);
 
-    // const formJson = Object.fromEntries(formData.entries());
-    // console.log(formJson);
-    console.log("register welcomeMessage = ", e.target.value);
+    DBOperations();
 
   }
 
@@ -187,33 +184,52 @@ const Register = () => {
 
         console.log("DB Auth data = ", data);
 
-        setDoc(doc(db, "vcUsers"), "Admin"), {
-          businessName: business,
-          email: email,
-          ID: data.user.uid,
-          initialSetup: true,
-          user: "Admin",
-          createdDate: format(Date.now(), "yyyy-MM-dd HH:MM:SS"),
-          lastLoginDate: format(Date.now(), "yyyy-MM-dd HH:MM:SS"),
-        }
-      })
-      .then((data) => {
-        setDoc(doc(db, "settings-" + data.user.uid), "init"), {
-          businessCategory: businessCategory,
-          businessName: business,
-          businessSlogan: businessSlogan,
-          businessBranch: businessBranch,
-          welcomeMessage: welcomeMessage,
-          createdDate: format(Date.now(), " yyyy-MM-dd HH:MM:SS"),
-        }.then(() => {
-          navigate("/console");
-        });
-
+        updateSettings(data.user.uid);
       });
 
   }
 
 
+  //   setDoc(doc(db, "vcUsers"), "Admin"), {
+  //     businessName: business,
+  //     email: email,
+  //     ID: data.user.uid,
+  //     initialSetup: true,
+  //     user: "Admin",
+  //     createdDate: format(Date.now(), "yyyy-MM-dd HH:MM:SS"),
+  //     lastLoginDate: format(Date.now(), "yyyy-MM-dd HH:MM:SS"),
+  //   }
+  // })
+  // .then((data) => {
+  //   setDoc(doc(db, "settings-" + data.user.uid), "init"), {
+  //     businessCategory: businessCategory,
+  //     businessName: business,
+  //     businessSlogan: businessSlogan,
+  //     businessBranch: businessBranch,
+  //     welcomeMessage: welcomeMessage,
+  //     createdDate: format(Date.now(), " yyyy-MM-dd HH:MM:SS"),
+  //   }.then(() => {
+  //     navigate("/console");
+  //   });
+
+
+  //uid  "fJnge6ROzpbktfM3oNVmFyVX7gN2"
+  const updateSettings = async (data) => {
+    console.log("updateSettings in App  " + data);
+    await setDoc(doc(db, "settings-" + data, "init"), {
+      businessCategory: "College",
+      businessName: "Vision College",
+      businessSlogan: "Changing Lives for Learning",
+      businessBranch: "Christchurch",
+      welcomeMessage: "Welcome message to the VMS",
+      purposeOfVisitOptions: "",
+      createdDate: format(Date.now(), " yyyy-MM-dd HH:MM:SS"),
+    }).then(() => {
+      setDoc(doc(db, "vcUsers", "zKrDsscyDXN7lQbdujUjjcj3N5K2"), {
+        initialSetup: true,
+      });
+    });
+  };
 
 
   const goToHomePage = () => {
