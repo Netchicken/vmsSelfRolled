@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import "../../styles/Common.css";
+// import "../../styles/Common.css";
+import "../../styles/Login.css";
 import { auth, db } from "../firebase/Config";
 import { signInWithEmailAndPassword } from "firebase/auth";
 //import { doc, updateDoc, getDoc, getFirestore, collection, addDoc, query, where, getDocs, setDoc, documentId } from "firebase/firestore";
@@ -32,6 +33,9 @@ const VisitorLogin = () => {
     const [showPassword, setShowPassword] = useState(false);
     const [loggingIn, setLoggingIn] = useState(false);
     const [businessName, setBusinessName] = useState(BusinessCategories.businessName);
+    const [businessBranch, setBusinessBranch] = useState(BusinessCategories.businessBranch);
+    const [businessSlogan, setBusinessSlogan] = useState(BusinessCategories.businessSlogan);
+    const [welcomeMessage, setWelcomeMessage] = useState(BusinessCategories.welcomeMessage);
     let navigate = useNavigate(); //https://stackoverflow.com/questions/71173957/how-to-use-history-push-in-react-router-dom-version-6-0-0
 
     useEffect(() => {
@@ -40,7 +44,11 @@ const VisitorLogin = () => {
 
     const initLoad = async () => {
 
-        //   BusinessCategories.businessName = "Vision College";
+        console.log("VisitorLogin initLoad", BusinessCategories);
+        console.log("Business", businessName + " " + businessBranch + " " + businessSlogan + " " + welcomeMessage);
+
+
+
     }
 
 
@@ -140,8 +148,8 @@ const VisitorLogin = () => {
                 </div>
 
                 <div className='home-message'>
-                    <h1>What Is <span style={{ color: '#8934FF', fontWeight: 'bold' }}>vistogram?</span></h1>
-                    <p><span style={{ fontSize: '18px', fontWeight: 'bold', }}>businessName BusinessCategories.businessBranch</span> BusinessCategories.businessSlogan
+                    <h1>Welcome to <span style={{ color: '#3485ff', fontWeight: 'bold' }}>{businessName} {businessBranch}</span></h1>
+                    <p><span style={{ fontSize: '18px', fontWeight: 'bold', }}></span> {businessSlogan}
                     </p>
 
                 </div>

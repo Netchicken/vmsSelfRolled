@@ -38,11 +38,11 @@ import {
 export let AppData = null;
 export let UserData = null;
 export let BusinessCategories = "";
-export let DefaultParameters = "";
-export let DefaultLogo = "";
-export let DefaultHomeBkgImage = "";
-export let DefaultAdvert = "";
-export let PurposeOfVisitOptions = "";
+// export let DefaultParameters = "";
+// export let DefaultLogo = "";
+// export let DefaultHomeBkgImage = "";
+// export let DefaultAdvert = "";
+// export let PurposeOfVisitOptions = "";
 export let DefaultSettings = "";
 
 function App() {
@@ -63,16 +63,11 @@ function App() {
 
         BusinessCategories = businessCategoryDataRef[0];
         console.log("BusinessCategories", BusinessCategories);
-        // businessCategoryDataRef.forEach((doc) => {
-        //   BusinessCategories.push(doc);
-        //   //sets businessdata to be exported
-        //   console.log("BusinessCategories", BusinessCategories);
-        // });
 
         // const purposeOfVisitOptionsRef = db.collection("defaultParameters").doc("purposeOfVisitOptions");
-        const purposeOfVisitOptionsRef = await getPurposeOfVisitOptionsRef();
-        console.log("purposeOfVisitOptionsRef", purposeOfVisitOptionsRef[0]);
-        // const defaultSettingsRef = db.collection("settings-default").doc("default");
+        // const purposeOfVisitOptionsRef = await getPurposeOfVisitOptionsRef();
+        // console.log("purposeOfVisitOptionsRef", purposeOfVisitOptionsRef[0]);
+        //  const defaultSettingsRef = db.collection("settings-default").doc("default");
         const defaultSettingsRef = getDefaultSettingsRef(user);
 
         userDataRef //if there is a user logged in then get the rest of the data
@@ -90,7 +85,7 @@ function App() {
                     console.log("BusinessCategories", BusinessCategories);
                   });
 
-                  defaultSettingsRef
+                  defaultSettingsRef  // not used here?
                     .get()
                     .then((doc) => {
                       if (doc.exists) {
