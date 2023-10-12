@@ -22,7 +22,8 @@ import { format } from "date-fns";
 import { useState } from "react";
 
 //https://firebase.google.com/docs/firestore/manage-data/add-data
-
+//===========================admin login===========================
+//save the first login record of the admin user
 export const SaveToDb = (user) => {
   const vcUsersRef = collection(db, "vcUsers");
   const addEntry = setDoc(doc(vcUsersRef, user.uid), {
@@ -32,20 +33,18 @@ export const SaveToDb = (user) => {
   });
   return addEntry;
 };
-
+//update the login count for the Admin User
 export const UpdateToDb = (user) => {
   const docRefUpdate = doc(db, "vcUsers", user.uid);
   var visitUpdate = 0;
   var updateData = {};
+
   //get the visitcount
   getDoc(docRefUpdate).then((docSnap) => {
     if (docSnap.exists()) {
       const count = docSnap.data().visitCount;
       visitUpdate = Number(count) + 1; //get the visitCount and add 1
-      console.log(
-        "visitupdate data:",
-        count + " " + docSnap.data().visitCount + 1
-      );
+      console.log("visitupdate data:", count + " " + docSnap.data().visitCount + 1);
 
       updateData = {
         lastDateLogin: format(Date.now(), "yyyy-MM-dd HH:MM:SS"),
@@ -63,15 +62,23 @@ export const UpdateToDb = (user) => {
   //    return updatedb;
 };
 
-export const checkDataExists = (user) => {
-  // const docRefUpdate = doc(db, 'vcUsers', user.uid);
 
-  // getDoc(docRefUpdate).then(docSnap => {
-  //     console.log("Document data visitcount:", docSnap.data().visitCount);
-  //     const visitCount = docSnap.data().visitCount;
-  return 1;
-  //})
+
+export const checkDataExists = (user) => {
+  const docRefUpdate = doc(db, 'vcUsers', user.uid);
+
+  getDoc(docRefUpdate).then(doc => {
+    if (doc.exists) {
+      return 1;
+    } else {
+      console.log("No such document!", user.uid);
+      return 0;
+    }
+  });
+
 };
+//===========================END admin login===========================
+
 export const getDataUsers = async () => {
   //https://firebase.google.com/docs/firestore/query-data/queries?hl=en&authuser=0
   // const q = query(collection(db, "vcUsers"), where("userid", "===", user.id));
@@ -87,13 +94,15 @@ export const getDataUsers = async () => {
   return "No data";
   //})
 };
+
+//in App.js
 export const getDataSingleUser = async (user) => {
   //https://firebase.google.com/docs/firestore/query-data/queries?hl=en&authuser=0
   // const q = query(collection(db, "vcUsers"), where("userid", "===", user.id));
   if (user) {
     console.log("getDataSingleUser in App  " + user);
     const allUsers = collection(db, "vcUsers");
-    const q = query(allUsers, where("ID", "==", user));
+    const q = query(allUsers, where("userid", "==", user));
 
     const querySnapshot = await getDocs(q);
     if (q) {
@@ -135,13 +144,14 @@ export const getPurposeOfVisitOptionsRef = async () => {
   }
   return "No data";
 };
-export const getDefaultSettingsRef = async () => {
+
+export const getDefaultSettingsRef = async (user) => {
   const data = [];
-  const q = query(collection(db, "settings-zKrDsscyDXN7lQbdujUjjcj3N5K2"));
+  const q = query(collection(db, "settings-" + user.uid));
   const querySnapshot = await getDocs(q);
   if (q) {
     querySnapshot.forEach((doc) => {
-      console.log("settings-zKrDsscyDXN7lQbdujUjjcj3N5K2 in App  ");
+      console.log("settings-" + user.uid + " in App  ");
       data.push(doc.data());
     });
     return Promise.all(data);
@@ -188,17 +198,17 @@ export const getAllVisitorsData = async (user) => {
 //unless you specify that the data should be merged into the existing document, as follows: setDoc(cityRef, { capital: true }, { merge: true });
 export const updateSettings = async (user) => {
   console.log("updateSettings in App  ");
-  await setDoc(doc(db, "settings-" + user.uid), "init"), {
-    businessCategory: "College",
-    businessName: "Vision College",
-    businessSlogan: "Changing Lives for Learning",
-    businessBranch: "Christchurch",
-    welcomeMessage: "Welcome message to the VMS",
-    purposeOfVisitOptions: "",
-    createdDate: format(Date.now(), " yyyy-MM-dd HH:MM:SS"),
-  }.then(() => {
-    setDoc(doc(db, "vcUsers", "zKrDsscyDXN7lQbdujUjjcj3N5K2"), {
-      initialSetup: true,
-    });
-  });
+  // await setDoc(doc(db, "settings-" + user.uid), "init"), {
+  //   businessCategory: "College",
+  //   businessName: "Vision College",
+  //   businessSlogan: "Changing Lives for Learning",
+  //   businessBranch: "Christchurch",
+  //   welcomeMessage: "Welcome message to the VMS",
+  //   purposeOfVisitOptions: "",
+  //   createdDate: format(Date.now(), " yyyy-MM-dd HH:MM:SS"),
+  // }.then(() => {
+  //   setDoc(doc(db, "vcUsers", "zKrDsscyDXN7lQbdujUjjcj3N5K2"), {
+  //     initialSetup: true,
+  //   });
+  // });
 };

@@ -13,9 +13,9 @@ function Auth() {
 
 
   let navigate = useNavigate();
-  console.log("navigate", navigate);
+
   const { state } = useLocation(); //https://stackoverflow.com/questions/71380596/pass-data-to-a-component-with-usenavigate-from-react-router-dom
-  console.log("state", state);
+
   const authType = state;
 
   const [authTypeIsLogin, setAuthTypeIsLogin] = useState(authType);
@@ -28,8 +28,8 @@ function Auth() {
 
   const loadAuthType = () => {
     setAuthTypeIsLogin(authType); //https://stackoverflow.com/questions/71380596/pass-data-to-a-component-with-usenavigate-from-react-router-dom
-    console.log("changeAuthType authType = " + authType);
-    console.log("changeAuthType authTypeIsLogin = " + authTypeIsLogin);
+    // console.log("changeAuthType authType = " + authType);
+    //  console.log("changeAuthType authTypeIsLogin = " + authTypeIsLogin);
   };
 
   const changeAuthType = () => {

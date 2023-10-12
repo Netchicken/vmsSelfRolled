@@ -77,7 +77,7 @@ function App() {
         const purposeOfVisitOptionsRef = await getPurposeOfVisitOptionsRef();
         console.log("purposeOfVisitOptionsRef", purposeOfVisitOptionsRef[0]);
         // const defaultSettingsRef = db.collection("settings-default").doc("default");
-        const defaultSettingsRef = getDefaultSettingsRef();
+        const defaultSettingsRef = getDefaultSettingsRef(user);
 
         userDataRef //if there is a user logged in then get the rest of the data
           .then((doc) => {

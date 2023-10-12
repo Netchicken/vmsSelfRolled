@@ -20,6 +20,7 @@ import {
 } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import AuthTypeContext from "../context/authTypeContext";
+import userDataContext from "../context/userDataContext";
 import { ValidateEmail, ValidatePassword } from "./functions/Validators";
 
 //https://firebase.google.com/docs/web/modular-upgrade UPGRADE TO V9 FIREBASE
@@ -81,8 +82,8 @@ function Login(props) {
 
     console.log("NAME AND pw ", loginEmail + " " + loginPassword);
 
-    await signInWithEmailAndPassword(auth, loginEmail, loginPassword).then(
-      (data) => {
+    await signInWithEmailAndPassword(auth, loginEmail, loginPassword)
+      .then((data) => {
         user = data.user;
         const dataexists = checkDataExists(user);
         console.log("checkDataExists(user)", dataexists);
@@ -91,7 +92,7 @@ function Login(props) {
           UpdateToDb(user); //just update the user
           console.log("user exists", user);
 
-          navigate("/console");
+          // navigate("/console");
 
           //  props.history.push('/console');
         } else {
@@ -104,8 +105,14 @@ function Login(props) {
         }
         console.log("userId", user.uid); // uid: 'zKrDsscyDXN7lQbdujUjjcj3N5K2'
         console.log("user", user.email); //user aaa@aaa.com
-      }
-    );
+      }).catch((error) => {
+        const errorCode = error.code;
+        console.log("errorCode", errorCode);
+        const errorMessage = error.message;
+        console.log("errorMessage", errorMessage);
+        setLoggingIn("false");
+      });
+
   };
 
   const goToHomePage = () => {
@@ -193,16 +200,16 @@ function Login(props) {
 
       {/* <div className='login-notregistered-row'>
         <AuthTypeContext.Consumer>
-         // {(context) => (
-            // <Button
-            //   className='login-notregistered-button'
-            //   variant='outlined'
-            //   color='primary'
-            //   size='large'
-            //   onClick={context.changeAuthType}
-            // >
-            //   Register
-            // </Button>
+          {(context) => (
+            <Button
+              className='login-notregistered-button'
+              variant='outlined'
+              color='primary'
+              size='large'
+              onClick={context.changeAuthType}
+            >
+              Register
+            </Button>
           )}
         </AuthTypeContext.Consumer>
       </div> */}
