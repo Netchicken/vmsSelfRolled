@@ -7,7 +7,7 @@ import {
 } from "firebase/auth"; //https://firebase.google.com/docs/auth/web/password-auth#create_a_password-based_account
 import { auth, db } from "../components/firebase/Config";
 import { doc, setDoc, documentId, } from "firebase/firestore";
-
+import { SaveToDb } from "./firebase/DBOperations";
 import { format } from "date-fns";
 import NameLogo from "../components/NameLogo";
 
@@ -185,6 +185,9 @@ const Register = () => {
         console.log("DB Auth data = ", data);
 
         updateSettings(data.user.uid);
+
+        SaveToDb(data); //generate a new entry
+
       });
 
   }

@@ -24,10 +24,10 @@ import { useState } from "react";
 //https://firebase.google.com/docs/firestore/manage-data/add-data
 //===========================admin login===========================
 //save the first login record of the admin user
-export const SaveToDb = (user) => {
+export const SaveToDb = (data) => {
   const vcUsersRef = collection(db, "vcUsers");
-  const addEntry = setDoc(doc(vcUsersRef, user.uid), {
-    userid: user.uid,
+  const addEntry = setDoc(doc(vcUsersRef, data.user.uid), {
+    userid: data.user.uid,
     lastDateLogin: format(Date.now(), "yyyy-MM-dd HH:MM:SS"),
     visitCount: 1,
   });

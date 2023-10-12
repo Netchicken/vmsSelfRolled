@@ -85,26 +85,11 @@ function Login(props) {
     await signInWithEmailAndPassword(auth, loginEmail, loginPassword)
       .then((data) => {
         user = data.user;
-        const dataexists = checkDataExists(user);
-        console.log("checkDataExists(user)", dataexists);
+        UpdateToDb(user); //just update the user
 
-        if (dataexists > 0) {
-          UpdateToDb(user); //just update the user
-          console.log("user exists", user);
-
-          // navigate("/console");
-
-          //  props.history.push('/console');
-        } else {
-          SaveToDb(user); //generate a new entry
-          console.log("user created", user);
-
-          // navigate("/settings");
-
-          // props.history.push('/settings');
-        }
         console.log("userId", user.uid); // uid: 'zKrDsscyDXN7lQbdujUjjcj3N5K2'
         console.log("user", user.email); //user aaa@aaa.com
+        goToHomePage();
       }).catch((error) => {
         const errorCode = error.code;
         console.log("errorCode", errorCode);
