@@ -63,19 +63,23 @@ export const UpdateToDb = (user) => {
 };
 
 
-
+//https://stackoverflow.com/questions/69530622/firestore-unable-to-read-document-data-uncaught-typeerror-docsnap-exists-is-n
+//Note: If there is no document at the location referenced by docRef, the resulting document will be empty and calling exists on it will return false.
 export const checkDataExists = (user) => {
   const docRefUpdate = doc(db, 'vcUsers', user.uid);
+  getDoc(docRefUpdate).then(docSnap => {
+    console.log("docRefUpdate", docSnap);
 
-  getDoc(docRefUpdate).then(doc => {
-    if (doc.exists) {
+    if (docSnap.exists()) {
+
       return 1;
     } else {
       console.log("No such document!", user.uid);
       return 0;
     }
-  });
 
+    return 2;
+  });
 };
 //===========================END admin login===========================
 
