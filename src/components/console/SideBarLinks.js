@@ -79,7 +79,7 @@ const SideBarLinks = (props) => {
         Devices
       </Button> */}
 
-      <Button
+      {/* <Button
         className='console-sidebar-links'
         style={props.activeLink === 'licences' ? activeColor : inActiveColor}
         fullWidth
@@ -92,9 +92,9 @@ const SideBarLinks = (props) => {
           height='100%'
           width='10px' />
         Licences
-      </Button>
+      </Button> */}
 
-      <Button
+      {/* <Button
         className='console-sidebar-links'
         style={props.activeLink === 'inviteManagement' ? activeColor : inActiveColor}
         fullWidth
@@ -107,7 +107,7 @@ const SideBarLinks = (props) => {
           height='100%'
           width='10px' />
         Invite Management
-      </Button>
+      </Button> */}
 
       <Button
         className='console-sidebar-links'
@@ -130,7 +130,7 @@ const SideBarLinks = (props) => {
         fullWidth
         size="large"
         variant="text"
-        onClick={() => props.click('account', 'Your Vistogram Account')}
+        onClick={() => props.click('account', 'Your Account')}
       >
         <AcUnit />
         <Margin

@@ -24,7 +24,6 @@ import { ValidateEmail } from "../functions/Validators";
 // import axios from 'axios';
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 
-//const db = []; //Firebase.firestore();
 export let SettingsArray = [];
 
 //====NEW HOOKS=====
@@ -32,13 +31,13 @@ export let SettingsArray = [];
 function Console(props) {
   const [activeLink, setActiveLink] = useState("dashboard");
   const [header, setHeader] = useState("Dashboard");
-  const [authCode, setAuthCode] = useState("");
+  // const [authCode, setAuthCode] = useState("");
   const [selectedSetting, setSelectedSetting] = useState("");
-  const [authCodeButtonLabel, setAuthCodeButtonLabel] = useState("Submit");
-  const [authCodeButtonDisabled, setAuthCodeButtonDisabled] = useState(false);
+  // const [authCodeButtonLabel, setAuthCodeButtonLabel] = useState("Submit");
+  // const [authCodeButtonDisabled, setAuthCodeButtonDisabled] = useState(false);
   const [authCodeActiveStep, setAuthCodeActiveStep] = useState(0);
   const [settingsArray, setSettingsArray] = useState([]);
-  const [authCodeArray, setAuthCodeArray] = useState([]);
+  // const [authCodeArray, setAuthCodeArray] = useState([]);
   const [openSettingsDialog, setOpenSettingsDialog] = useState(false);
   const [openACDeleteDialog, setOpenACDeleteDialog] = useState(false);
   const [acToDelete, setAcToDelete] = useState("");
@@ -49,7 +48,7 @@ function Console(props) {
   const [dateToday, setDateToday] = useState(format(Date.now(), "yyyy-MM-dd"));
   const [activeDevices, setActiveDevices] = useState(0);
   const [visitorsData, setVisitorsData] = useState([]);
-  const [invitersData, setInvitersData] = useState([]);
+  // const [invitersData, setInvitersData] = useState([]);
   const [registerInvertersForm, setRegisterInvertersForm] = useState(false);
   const [vRegStep, setVRegStep] = useState(0);
   const [vRegistering, setVRegistering] = useState(false);
@@ -133,109 +132,15 @@ function Console(props) {
     }
   };
 
-  // if (props.location.state) {
-  //   //TODO: FIX THIS
-  // setActiveLink(props.location.state.activeLink),
-  //   setHeader(props.location.state.header)
 
-  // }
 
-  const submitAuthCode = () => {
-    setAuthCodeButtonLabel("Submiting....");
-    setAuthCodeButtonDisabled(true);
-    setAuthCode("");
-    setAuthCodeActiveStep(0);
-    setSelectedSetting("");
-
-    db.collection("licenceCodes")
-      .doc(authCode)
-      .set({
-        AC: authCode,
-        ID: UserData.ID,
-        AID: "",
-        rAID: false,
-        setup: selectedSetting,
-        status: "Inactive",
-        licence: UserData.licences === 0 ? "Trial" : "Full",
-        // businessName: UserData.businessName,
-        deviceDataPlatform: "No Device",
-        deviceData: "No Device",
-        createdDate: format(Date.now(), "yyyy-MM-dd HH:MM:SS"),
-        expiryDate:
-          UserData.licences === 0
-            ? format(addDays(Date.now(), 14), "yyyy-MM-dd HH:MM:SS")
-            : "Never",
-        lastUsedDate: "",
-      })
-      .then(() => {
-        db.collection("users")
-          .doc(UserData.ID)
-          .update({
-            generateTrialLicence: false,
-            activeLicences:
-              UserData.licences === 0 ? 0 : UserData.activeLicences + 1,
-          })
-          .then(() => {
-            setAuthCodeButtonLabel("Submit");
-            setAuthCodeButtonDisabled(false);
-          });
-      });
-  };
-
-  const deleteAuthCode = (d) => {
-    setOpenACDeleteDialog(false);
-    setAcToDelete("");
-
-    db.collection("licenceCodes")
-      .doc(d)
-      .update({
-        rAID: true,
-      })
-      .then(() => {
-        db.collection("licenceCodes")
-          .doc(d)
-          .delete()
-          .then(() => {
-            db.collection("users")
-              .doc(UserData.ID)
-              .update({
-                activeLicences:
-                  UserData.licences === 0 ? 0 : UserData.activeLicences - 1,
-              });
-          })
-          .catch(function (error) {
-            console.error("Error removing document: ", error);
-          });
-      });
-  };
-
-  const authCodeActiveStepNext = () => {
-    if (authCodeActiveStep < 2) {
-      setAuthCodeActiveStep(
-        authCodeActiveStep === 0 ? authCodeActiveStep + 1 : authCodeActiveStep
-      );
-      setAuthCode(authCodeActiveStep === 0 ? AuthCode(24) : authCode);
-      setOpenSettingsDialog(
-        authCodeActiveStep === 1 ? true : openSettingsDialog
-      );
-    } else {
-    }
-  };
-
-  const authCodeActiveStepBack = () => {
-    setAuthCodeActiveStep(authCodeActiveStep - 1);
-    setAuthCode(authCodeActiveStep === 0 + 1 ? "" : authCode);
-    setSelectedSetting(authCodeActiveStep === 0 + 2 ? "" : selectedSetting);
-  };
 
   const handleSideBarLinkClick = (l, h) => {
     setActiveLink(l);
     setHeader(h);
   };
 
-  const generateAuthCode = () => {
-    setAuthCode(AuthCode(24));
-  };
+
 
   const handleOpenDialog = (d) => {
     this.setState({
@@ -437,14 +342,14 @@ function Console(props) {
         <div className='console-content'>
           <div className='console-content-header'>{header}</div>
           <div className='console-content-children'>
-            activeLink === 'dashboard' ?
+
             <DashboardPage
               currentVisitors={currentVisitors}
               todayVisitors={todayVisitors}
               activeDevices={activeDevices}
-              userData={UserData}
+              userData={UserData} //pass in Userdata to the dashboard page
             />{" "}
-            : activeLink === 'visitors' ?
+
             <VisitorsPage visitorsData={visitorsData} userData={UserData} />
           </div>
         </div>

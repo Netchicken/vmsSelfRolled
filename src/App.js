@@ -54,7 +54,7 @@ function App() {
   // const [appData, setAppData] = useState(null);
 
   useEffect(() => {
-    // initLoad();
+    initLoad();
     //updateSettings();
   }, []);
 
@@ -64,10 +64,6 @@ function App() {
         // const userDataRef = db.collection("vsUsers").doc(user.uid);
         const userDataRef = getDataSingleUser(user.uid);
         console.log("userDataRef", userDataRef);
-        // const defaultLogoRef = db.collection("defaultParameters").doc('logoImage');
-        // const defaultHomeBkgImageRef = db.collection("defaultParameters").doc('backgroundImage');
-        // const defaultAdvertRef = db.collection("defaultParameters").doc('advertImage');
-        // const businessCategoryDataRef = db.collection("businessCategories");
 
         const businessCategoryDataRef = await getBusinessData(user);
         console.log("businessCategoryDataRef", businessCategoryDataRef[0]);
@@ -111,53 +107,20 @@ function App() {
                           defaultSettings: DefaultSettings,
                         };
 
-                        //   setAuthenticated(true);
-                        //   setCurrentUser(user);
-                        //   setUserData(doc.data());
-                        //   setLoading(false);
-                        //   setAppData(AppData);
-                        // } else {
-                        //   setAuthenticated(false);
-                        //   setCurrentUser(null);
-                        //   setUserData(null);
-                        //   setLoading(false);
-                        //   setAppData(null);
-
-                        //   console.log("No such document!");
                       }
                     })
-                  // .catch((error) => {
-                  //   // setAuthenticated(false);
-                  //   // setCurrentUser(null);
-                  //   // setUserData(null);
-                  //   // setLoading(false);
-                  //   // setAppData(null);
-                  //   console.log("Error getting document:", error);
-                  // });
                 })
                 .catch((error) => {
-                  // setAuthenticated(false);
-                  // setCurrentUser(null);
-                  // setUserData(null);
-                  // setLoading(false);
-                  // setAppData(null);
+
                   console.log("Error getting documents: ", error);
                 });
             } else {
-              // setAuthenticated(false);
-              // setCurrentUser(null);
-              // setUserData(null);
-              // setLoading(false);
-              // setAppData(null);
+
               console.log("No such document!");
             }
           });
       } else {
-        // setAuthenticated(false);
-        // setCurrentUser(null);
-        // setUserData(null);
-        // setLoading(false);
-        // setAppData(null);
+
         console.log("No user login");
       }
     });
