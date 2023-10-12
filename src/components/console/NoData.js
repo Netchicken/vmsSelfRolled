@@ -1,5 +1,5 @@
 import React from 'react';
-import novImage from '../../assets/noVisitor.png';
+//import novImage from '../../assets/noVisitor.png';
 import { IconButton, Close, Tooltip, Button, Chip, Fingerprint, Stepper } from '@mui/material';
 import '../../styles/Console.css';
 
@@ -40,7 +40,7 @@ const NoData = props => {
                     margin: '20px auto',
                     height: '300px',
                     width: '300px',
-                    backgroundImage: 'url(' + novImage + ')',
+                    // backgroundImage: 'url(' + novImage + ')',
                     backgroundRepeat: 'no-repeat',
                     backgroundSize: 'contain',
                     backgroundPosition: 'center',

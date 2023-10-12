@@ -53,10 +53,13 @@ const TopBar = (props) => {
             color='primary'
             onClick={props.goToVisitorLoginPage}
           >
-            Load the Visitor Login Page
+            Load the Visitor Login Page  {props.businessdata.businessName} {props.businessdata.businessBranch}
           </Button>
         </div>
-        <div></div>
+        <div className='home-title'>
+          {props.businessdata.businessName} {props.businessdata.businessBranch}
+
+        </div>
         {/* {ppats ? ( 
          
         ) : props.userData ? (*/}

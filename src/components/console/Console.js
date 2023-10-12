@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Logo from "../Logo";
 import "../../styles/Console.css";
 import SideBarLinks from "../../components/console/SideBarLinks";
-import { AuthCode, VistocodeSKU } from "../functions/AuthCodeGenerator";
+//import { AuthCode, VistocodeSKU } from "../functions/AuthCodeGenerator";
 import { auth, db } from "../firebase/Config";
 import { UserData } from "../../App"; //bring in the USerdata from APP.js
 import { format, addDays } from "date-fns";
@@ -270,7 +270,7 @@ function Console(props) {
         fullName: fullName,
         email: email,
         phoneNumber: "",
-        sku: VistocodeSKU(6),
+        // sku: VistocodeSKU(6),
         // businessName: UserData.businessName,
         location: department,
         defaultPassword: true,

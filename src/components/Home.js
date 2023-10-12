@@ -4,7 +4,7 @@ import "../styles/Home.css";
 import TopBar from "../components/home/TopBar";
 //import TopBanner from "../components/home/TopBanner";
 import BottomBar from "../components/BottomBar";
-import { UserData } from "../App";
+import { UserData, BusinessCategories } from "../App"; //imports data from app
 // import HowItWorks from '../components/home/HowItWorks';
 // import ContactUs from '../components/home/ContactUs';
 //import { Button } from "@mui/material";
@@ -40,6 +40,7 @@ const Home = () => {
   return (
     <div className='home-body'>
       <TopBar
+        businessdata={BusinessCategories}
         userData={UserData}
         goToHomePage={goToHomePage}
         goToConsolePage={goToConsolePage}

@@ -6,7 +6,7 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 //import { doc, updateDoc, getDoc, getFirestore, collection, addDoc, query, where, getDocs, setDoc, documentId } from "firebase/firestore";
 import { SaveToDb, UpdateToDb, checkDataExists } from "../firebase/DBOperations";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
-import { UserData, BusinessCategories, DefaultSettings } from "../../App"; //imports data from app
+import { UserData, BusinessCategories } from "../../App"; //imports data from app
 import NameLogo from "../../components/NameLogo";
 // import { format } from "date-fns";
 import {
@@ -26,11 +26,10 @@ const VisitorLogin = () => {
 
     //if there is an admin login, then check to see if there is a visitor login for the current date
 
-    const [email, setEmail] = useState("");
-    const [emailError, setEmailError] = useState("");
-    const [password, setPassword] = useState("");
-    const [passwordError, setPasswordError] = useState("");
-    const [showPassword, setShowPassword] = useState(false);
+    const [visitorName, setVisitorName] = useState("");
+    const [visitorPhone, setVisitorPhone] = useState("");
+    const [department, setDepartment] = useState("");
+    const [departmentPerson, setDepartmentPerson] = useState("");
     const [loggingIn, setLoggingIn] = useState(false);
     const [businessName, setBusinessName] = useState(BusinessCategories.businessName);
     const [businessBranch, setBusinessBranch] = useState(BusinessCategories.businessBranch);
@@ -44,190 +43,106 @@ const VisitorLogin = () => {
 
     const initLoad = async () => {
 
-        console.log("VisitorLogin initLoad", BusinessCategories);
-        console.log("Business", businessName + " " + businessBranch + " " + businessSlogan + " " + welcomeMessage);
+        console.log("VisitorLogin UserData", UserData);
 
-
-
+        // console.log("VisitorLogin initLoad", BusinessCategories);
+        //  console.log("Business", businessName + " " + businessBranch + " " + businessSlogan + " " + welcomeMessage);
     }
 
 
-    const handleChange = (prop) => (event) => {
-        if (prop === "email") {
-            setEmail(event.target.value);
-            setEmailError("");
-        }
-        if (prop === "password") {
-            setPassword(event.target.value);
-            setPasswordError("");
-        }
-    };
-
-    const handleClickShowPassword = () => {
-        setShowPassword(!showPassword);
-    };
-
-    const checkLoginInputs = () => {
-        if (email === "") {
-            setEmailError("Please enter your email");
-        } else {
-            if (!ValidateEmail(email)) {
-                setEmailError("Your email is invalid");
-            } else {
-                if (password === "") {
-                    setPasswordError("Enter a password");
-                } else {
-                    if (!ValidatePassword(password)) {
-                        setPasswordError("Your password must be at least 6 characters");
-                    } else {
-                        //  login();
-                    }
-                }
-            }
-        }
-    };
-
     const login = async () => {
-        const loginEmail = email;
-        const loginPassword = password;
-        let user = "";
-
         setLoggingIn("true");
 
-        console.log("NAME AND pw ", loginEmail + " " + loginPassword);
-
-        await signInWithEmailAndPassword(auth, loginEmail, loginPassword)
-            .then((data) => {
-                user = data.user;
-                UpdateToDb(user); //just update the user
-
-                console.log("userId", user.uid); // uid: 'zKrDsscyDXN7lQbdujUjjcj3N5K2'
-                console.log("user", user.email); //user aaa@aaa.com
-                goToHomePage();
-            }).catch((error) => {
-                const errorCode = error.code;
-                console.log("errorCode", errorCode);
-                const errorMessage = error.message;
-                console.log("errorMessage", errorMessage);
-                setLoggingIn("false");
-            });
-
     };
 
+    const SaveToDb = (data) => {
+        // const vcUsersRef = collection(db, "vcUsers");
+        // const addEntry = setDoc(doc(vcUsersRef, data.user.uid), {
+        //     userid: data.user.uid,
+        //     lastDateLogin: format(Date.now(), "yyyy-MM-dd HH:MM:SS"),
+        //     visitCount: 1,
+        // });
+        // return addEntry;
+    };
     const goToHomePage = () => {
         navigate("/");
     };
 
-    // businessBranch
-    // "Christchurch"
-    // businessCategory
-    // :
-    // "College"
-    // businessName
-    // :
-    // "Vision College"
-    // businessSlogan
-    // :
-    // "Changing Lives for Learning"
-    // createdDate
-    // :
-    // " 2023-10-13 08:10:62"
-    // welcomeMessage
-    // :
-    // "Welcome message to the VMS"
+
     return (
         <div className='login-container'>
             <div className='login-form-area'>
                 <div className='login-name-logo' onClick={goToHomePage}>
                     <NameLogo height='100px' />
-                    <p
-                        className='login-typography-secondary'
-                    >
-                        login to the VMS
-                    </p>
+                    <p className='login-typography-secondary'>login to the VMS</p>
                 </div>
 
-                <div className='home-message'>
-                    <h1>Welcome to <span style={{ color: '#3485ff', fontWeight: 'bold' }}>{businessName} {businessBranch}</span></h1>
-                    <p><span style={{ fontSize: '18px', fontWeight: 'bold', }}></span> {businessSlogan}
-                    </p>
+                <div>
+                    <h2>Welcome to <span style={{ color: '#3485ff', fontWeight: 'bold' }}>{businessName} {businessBranch}</span></h2>
+                    <p><span style={{ fontSize: '18px', fontWeight: 'bold', }}></span> {businessSlogan}                    </p>
 
                 </div>
-
-
-
-
-
-
                 <TextField
+                    className='input'
+                    id='lvisitorname'
+                    variant='outlined'
+                    type='email'
+                    label='Please enter your name'
+
+                    onChange={e => setVisitorName(e.target.value)}
+                    fullWidth={true}
+                    required={true}
+
+                /> <TextField
                     className='input'
                     id='lEmail'
                     variant='outlined'
                     type='email'
-                    label='Email'
-                    value={email}
-                    onChange={handleChange("email")}
-                    fullWidth={true}
-                    // helperText={setEmailError}
-                    error={setEmailError !== ""}
-                    InputProps={{
-                        endAdornment: (
-                            <InputAdornment position='end'>
-                                <Icon className='input-icon'>{/* <AlternateEmail /> */}</Icon>
-                            </InputAdornment>
-                        ),
-                    }}
-                />
+                    label='Please enter your contact number?'
 
+                    onChange={e => setVisitorPhone(e.target.value)}
+                    fullWidth={true}
+                    required={true}
+
+                />
                 <TextField
                     className='input'
-                    id='lPassword'
+                    id='lDepartment'
                     variant='outlined'
-                    type={setShowPassword ? "text" : "password"}
-                    label='Password'
-                    value={password}
-                    onChange={handleChange("password")}
+                    type='email'
+                    label='What department are you visiting?'
+
+                    onChange={e => setDepartment(e.target.value)}
                     fullWidth={true}
-                    // helperText={setPasswordError}
-                    error={setPasswordError !== ""}
-                    InputProps={{
-                        endAdornment: (
-                            <InputAdornment position='end'>
-                                <Icon className='input-icon' onClick={handleClickShowPassword}>
-                                    {setShowPassword ? <Visibility /> : <VisibilityOff />}
-                                </Icon>
-                            </InputAdornment>
-                        ),
-                    }}
+                    required={true}
+                />
+                <TextField
+                    className='input'
+                    id='lperson'
+                    variant='outlined'
+                    type='email'
+                    label='Who are you visiting?'
+
+                    onChange={e => setDepartmentPerson(e.target.value)}
+                    fullWidth={true}
+                    required={true}
                 />
 
-                <div className='auth-button-row'>
-                    {/* <Link
-                        className='auth-forgot'
-                        component='button'
-                        variant='body2'
-                        onClick={() => {
-                            alert("I'm a button.");
-                        }}
-                    >
-                        Forgot Password?
-                    </Link> */}
-
-                    <Button
-                        className='auth-button'
-                        variant='contained'
-                        color='primary'
-                        size='large'
-                        // disabled={setLoggingIn}
-                        onClick={checkLoginInputs}
-                    >
-                        {loggingIn ? "Logging In..." : "Login"}
-                    </Button>
-                </div>
+                <Button
+                    className='auth-button'
+                    variant='contained'
+                    color='primary'
+                    size='large'
+                    // // disabled={setLoggingIn}
+                    onClick={login}
+                >
+                    {loggingIn ? "Logging In..." : "Login"}
+                </Button>
             </div>
+        </div>
 
 
-        </div >
+
     )
 }
 
