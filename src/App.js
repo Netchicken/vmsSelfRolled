@@ -14,6 +14,7 @@ import Home from "./components/Home";
 import Auth from "./components/auth/Auth";
 import Console from "./components/console/Console";
 import InitialSetup from "./components/InitialSetup";
+import VisitorLogin from "./components/Visitors/VisitorLogin";
 import Login from "./components/Login";
 import { auth, db } from "./components/firebase/Config";
 import {
@@ -36,9 +37,7 @@ import {
 
 export let AppData = null;
 export let UserData = null;
-export let BusinessCategories = [
-  { id: "SLCT", label: "None", identifier: "NA" },
-];
+export let BusinessCategories = "";
 export let DefaultParameters = "";
 export let DefaultLogo = "";
 export let DefaultHomeBkgImage = "";
@@ -47,11 +46,6 @@ export let PurposeOfVisitOptions = "";
 export let DefaultSettings = "";
 
 function App() {
-  // const [loading, setLoading] = useState(true);
-  // const [authenticated, setAuthenticated] = useState(false);
-  // const [currentUser, setCurrentUser] = useState(null);
-  // const [userData, setUserData] = useState(null);
-  // const [appData, setAppData] = useState(null);
 
   useEffect(() => {
     initLoad();
@@ -66,12 +60,14 @@ function App() {
         console.log("userDataRef", userDataRef);
 
         const businessCategoryDataRef = await getBusinessData(user);
-        console.log("businessCategoryDataRef", businessCategoryDataRef[0]);
-        businessCategoryDataRef.forEach((doc) => {
-          BusinessCategories.push(doc);
-          //sets businessdata to be exported
-          console.log("BusinessCategories", BusinessCategories);
-        });
+
+        BusinessCategories = businessCategoryDataRef[0];
+        console.log("BusinessCategories", BusinessCategories);
+        // businessCategoryDataRef.forEach((doc) => {
+        //   BusinessCategories.push(doc);
+        //   //sets businessdata to be exported
+        //   console.log("BusinessCategories", BusinessCategories);
+        // });
 
         // const purposeOfVisitOptionsRef = db.collection("defaultParameters").doc("purposeOfVisitOptions");
         const purposeOfVisitOptionsRef = await getPurposeOfVisitOptionsRef();
@@ -82,7 +78,7 @@ function App() {
         userDataRef //if there is a user logged in then get the rest of the data
           .then((doc) => {
             if (doc.exists) {
-              // setUserData(doc.data());
+
               UserData = doc.data(); //sets the data to be exported
 
               businessCategoryDataRef
@@ -135,6 +131,7 @@ function App() {
 
           <Route path='/' element={<Home />} />
           <Route path='/setup' element={<InitialSetup />} />
+          <Route path='/visitorLogin' element={<VisitorLogin />} />
           <Route path='/authentication' element={<Auth />} />
 
           <Route path='/console' element={<Console />} />

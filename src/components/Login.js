@@ -19,8 +19,6 @@ import {
   Link,
 } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
-import AuthTypeContext from "../context/authTypeContext";
-import userDataContext from "../context/userDataContext";
 import { ValidateEmail, ValidatePassword } from "./functions/Validators";
 
 //https://firebase.google.com/docs/web/modular-upgrade UPGRADE TO V9 FIREBASE

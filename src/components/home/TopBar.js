@@ -42,13 +42,6 @@ const TopBar = (props) => {
           >
             <NameLogo height='60px' />
           </div>
-          <Button
-            style={{ textTransform: "none" }}
-            color='primary'
-            onClick={props.goToConsolePage}
-          >
-            What Is This mess?
-          </Button>
 
           <Button
             style={{
@@ -58,9 +51,9 @@ const TopBar = (props) => {
             }}
             variant='contained'
             color='primary'
-            onClick={props.goToConsolePage}
+            onClick={props.goToVisitorLoginPage}
           >
-            Download
+            Load the Visitor Login Page
           </Button>
         </div>
         <div></div>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import "../styles/Home.css";
 import TopBar from "../components/home/TopBar";
@@ -21,6 +21,11 @@ const Home = () => {
     navigate("/authentication", { state: authType });
     //  console.log("Login", navigate);
   };
+  const goToVisitorLoginPage = () => {
+    const authType = false;
+    navigate("/visitorLogin", { state: authType });
+    //  console.log("Register", navigate);
+  };
   const goToRegisterPage = () => {
     const authType = false;
     navigate("/authentication", { state: authType });
@@ -40,6 +45,7 @@ const Home = () => {
         goToConsolePage={goToConsolePage}
         goToLoginPage={goToLoginPage}
         goToRegisterPage={goToRegisterPage}
+        goToVisitorLoginPage={goToVisitorLoginPage}
       />
       {/* <TopBanner goToRegisterPage={this.goToRegisterPage} /> */}
 
