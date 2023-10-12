@@ -37,6 +37,7 @@ import {
 
 export let AppData = null;
 export let UserData = null;
+export let UserID = null;
 export let BusinessCategories = "";
 // export let DefaultParameters = "";
 // export let DefaultLogo = "";
@@ -55,14 +56,16 @@ function App() {
   const initLoad = async () => {
     auth.onAuthStateChanged(async (user) => {
       if (user) {
+
+        UserID = user.uid;
         // const userDataRef = db.collection("vsUsers").doc(user.uid);
         const userDataRef = getDataSingleUser(user.uid);
-        console.log("userDataRef", userDataRef);
+        //  console.log("userDataRef", userDataRef);
 
         const businessCategoryDataRef = await getBusinessData(user);
 
         BusinessCategories = businessCategoryDataRef[0];
-        console.log("BusinessCategories", BusinessCategories);
+        // console.log("BusinessCategories", BusinessCategories);
 
         // const purposeOfVisitOptionsRef = db.collection("defaultParameters").doc("purposeOfVisitOptions");
         // const purposeOfVisitOptionsRef = await getPurposeOfVisitOptionsRef();
@@ -82,7 +85,7 @@ function App() {
                   querySnapshot.forEach((doc) => {
                     BusinessCategories.push(doc.data());
                     //sets businessdata to be exported
-                    console.log("BusinessCategories", BusinessCategories);
+                    //  console.log("BusinessCategories", BusinessCategories);
                   });
 
                   defaultSettingsRef  // not used here?

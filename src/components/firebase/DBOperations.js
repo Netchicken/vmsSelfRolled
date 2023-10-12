@@ -18,7 +18,7 @@ import {
   documentId,
 } from "firebase/firestore";
 import { auth, db } from "../firebase/Config";
-import { format } from "date-fns";
+import { format, getDayOfYear } from "date-fns";
 import { useState } from "react";
 
 //https://firebase.google.com/docs/firestore/manage-data/add-data
@@ -165,6 +165,7 @@ export const getDefaultSettingsRef = async (user) => {
 
 export const getTodayUsersVisitorsData = async (user) => {
   const data = [];
+
   const q = query(collection(db, "visitors-" + user.uid)).where(
     "signedInDate",
     "==",
@@ -195,7 +196,31 @@ export const getAllVisitorsData = async (user) => {
   return "No data";
 };
 
+//https://firebase.google.com/docs/firestore/query-data/queries#compound_and_queries
 
+// where(format("signedInDate", "yyyy-MM-dd"), "==", dateToday),, where("userID", "==", user)
+
+export const getVisitorsNotLoggedOut = async (user) => {
+  console.log("getVisitorsNotLoggedOut", user);
+  const data = [];
+  const today = getDayOfYear(Date.now());
+
+  const q = query(collection(db, "visitors"),
+    where("dateOut", "==", ""),
+    where("dayOfYear", "==", today)
+  );
+
+
+  const querySnapshot = await getDocs(q);
+  if (q) {
+    querySnapshot.forEach((doc) => {
+      console.log("getVisitorsNotLoggedOut", " => ", doc.data());
+      data.push(doc.data());
+    });
+    return Promise.all(data);
+  }
+  return "No data";
+};
 
 //https://firebase.google.com/docs/firestore/manage-data/add-data?hl=en&authuser=0
 //setDoc overwrites the document If the document does not exist, it will be created. If the document does exist, its contents will be overwritten with the newly provided data
