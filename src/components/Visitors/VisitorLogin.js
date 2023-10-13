@@ -28,8 +28,9 @@ const VisitorLogin = () => {
     const [businessBranch, setBusinessBranch] = useState(BusinessCategories.businessBranch);
     const [businessSlogan, setBusinessSlogan] = useState(BusinessCategories.businessSlogan);
     const [welcomeMessage, setWelcomeMessage] = useState(BusinessCategories.welcomeMessage);
-    // const [notLoggedOut, setnotLoggedOut] = useState([]);
-    let notLoggedOut = [];
+    const [notLoggedOut, setnotLoggedOut] = useState([]);
+
+    //let notLoggedOut = [];
     let navigate = useNavigate(); //https://stackoverflow.com/questions/71173957/how-to-use-history-push-in-react-router-dom-version-6-0-0
 
     useEffect(() => {
@@ -42,24 +43,18 @@ const VisitorLogin = () => {
 
         const NLO = await getVisitorsNotLoggedOut(UserID);
         console.log("NLO", NLO);
+        setnotLoggedOut(NLO);
 
-        // getVisitorsNotLoggedOut.get()
-        //     .then((querySnapshot) => {
-        //         querySnapshot.forEach((doc) => {
-        //             notLoggedOut.push(doc.data());
-        //             //sets businessdata to be exported
-        //             console.log("notLoggedOut", notLoggedOut);
-        //         });
-
-
-        //         // console.log("VisitorLogin initLoad", BusinessCategories);
-        //         //  console.log("Business", businessName + " " + businessBranch + " " + businessSlogan + " " + welcomeMessage);
-        //     });
     };
 
     const login = async () => {
         setLoggingIn("true");
         SaveToDb();
+    };
+
+    const logout = async () => {
+        setLoggingIn("true");
+        // SaveToDb();
     };
 
     const SaveToDb = () => {
@@ -82,78 +77,101 @@ const VisitorLogin = () => {
 
 
     return (
-        <div className='container'>
-            {/* <div className='login-form-area'> */}
-            <div className='login-name-logo' onClick={goToHomePage}>
-                <NameLogo height='100px' />
-                <p><span style={{ fontSize: '18px', fontWeight: 'bold', }}></span>   Login                 </p>
+        <div>
+            <div className='container'>
+                {/* <div className='login-form-area'> */}
+                <div className='login-name-logo' onClick={goToHomePage}>
+                    <NameLogo height='100px' />
+                    <p><span style={{ fontSize: '18px', fontWeight: 'bold', }}></span>   Login                 </p>
+                </div>
+
+                <div>
+                    <h2>Welcome to <span style={{ color: '#3485ff', fontWeight: 'bold' }}>{businessName} {businessBranch}</span></h2>
+
+                </div>
+                <div className="form-group">
+                    <Stack spacing={2} direction="row" sx={{ marginBottom: 2 }}>
+                        <TextField
+                            className='input'
+                            id='lvisitorname'
+                            variant='outlined'
+                            type='text'
+                            label='Please enter your name'
+
+                            onChange={e => setVisitorName(e.target.value)}
+                            fullWidth={true}
+                            required={true}
+
+                        /> <TextField
+                            className='input'
+                            id='lphonel'
+                            variant='outlined'
+                            type='text'
+                            label='Please enter your phone number'
+
+                            onChange={e => setVisitorPhone(e.target.value)}
+                            fullWidth={true}
+                            required={true}
+
+                        />
+                    </Stack>
+                    <Stack spacing={2} direction="row" sx={{ marginBottom: 2 }}>
+                        <TextField
+                            className='input'
+                            id='lDepartment'
+                            variant='outlined'
+                            type='text'
+                            label='What department are you visiting'
+
+                            onChange={e => setDepartment(e.target.value)}
+                            fullWidth={true}
+                            required={true}
+                        />
+                        <TextField
+                            className='input'
+                            id='lperson'
+                            variant='outlined'
+                            type='text'
+                            label='Who are you visiting'
+
+                            onChange={e => setDepartmentPerson(e.target.value)}
+                            fullWidth={true}
+                            required={true}
+                        />
+                    </Stack>
+                    <Button
+                        className='auth-button'
+                        variant='contained'
+                        color='primary'
+                        size='large'
+                        // // disabled={setLoggingIn}
+                        onClick={login}
+                    >
+                        {loggingIn ? "Logging In..." : "Login"}
+                    </Button>
+
+                    <div>
+                    </div>
+
+
+                </div>
             </div>
 
-            <div>
-                <h2>Welcome to <span style={{ color: '#3485ff', fontWeight: 'bold' }}>{businessName} {businessBranch}</span></h2>
+            <div className='container'>
+                {notLoggedOut.map(item => <span>
+                    <Button
+                        variant='contained'
+                        color='primary'
+                        size='small'
+                        // // disabled={setLoggingIn}
+                        onClick={logout}> {item.visitorName} </Button>
 
 
-            </div>
-            <Stack spacing={2} direction="row" sx={{ marginBottom: 2 }}>
-                <TextField
-                    className='input'
-                    id='lvisitorname'
-                    variant='outlined'
-                    type='text'
-                    label='Please enter your name'
+                </span>)
 
-                    onChange={e => setVisitorName(e.target.value)}
-                    fullWidth={true}
-                    required={true}
 
-                /> <TextField
-                    className='input'
-                    id='lphonel'
-                    variant='outlined'
-                    type='text'
-                    label='Please enter your phone number'
+                } </div>
 
-                    onChange={e => setVisitorPhone(e.target.value)}
-                    fullWidth={true}
-                    required={true}
-
-                />
-            </Stack>
-            <Stack spacing={2} direction="row" sx={{ marginBottom: 2 }}>
-                <TextField
-                    className='input'
-                    id='lDepartment'
-                    variant='outlined'
-                    type='text'
-                    label='What department are you visiting'
-
-                    onChange={e => setDepartment(e.target.value)}
-                    fullWidth={true}
-                    required={true}
-                />
-                <TextField
-                    className='input'
-                    id='lperson'
-                    variant='outlined'
-                    type='text'
-                    label='Who are you visiting'
-
-                    onChange={e => setDepartmentPerson(e.target.value)}
-                    fullWidth={true}
-                    required={true}
-                />
-            </Stack>
-            <Button
-                className='auth-button'
-                variant='contained'
-                color='primary'
-                size='large'
-                // // disabled={setLoggingIn}
-                onClick={login}
-            >
-                {loggingIn ? "Logging In..." : "Login"}
-            </Button>
-            {/* </div> */}
         </div>
 
 
