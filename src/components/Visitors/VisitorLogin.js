@@ -10,8 +10,8 @@ import { UserID, UserData, BusinessCategories } from "../../App"; //imports data
 import NameLogo from "../../components/NameLogo";
 import { format, getDayOfYear } from "date-fns";
 import { TextField, Stack, Button, } from "@mui/material";
-import { Visibility, VisibilityOff } from "@mui/icons-material";
-import { ValidateEmail, ValidatePassword } from "../functions/Validators";
+import NotLoggedOut from "./NotLoggedOut";
+
 
 const VisitorLogin = () => {
 
@@ -30,22 +30,22 @@ const VisitorLogin = () => {
     const [welcomeMessage, setWelcomeMessage] = useState(BusinessCategories.welcomeMessage);
     const [notLoggedOut, setnotLoggedOut] = useState([]);
 
-    //let notLoggedOut = [];
+
     let navigate = useNavigate(); //https://stackoverflow.com/questions/71173957/how-to-use-history-push-in-react-router-dom-version-6-0-0
 
-    useEffect(() => {
-        initLoad();
-    }, []);
+    // useEffect(() => {
+    //     initLoad();
+    // }, []);
 
-    const initLoad = async () => {
+    // const initLoad = async () => {
 
-        console.log("VisitorLogin UserID", UserID);
+    //     console.log("VisitorLogin UserID", UserID);
 
-        const NLO = await getVisitorsNotLoggedOut(UserID);
-        console.log("NLO", NLO);
-        setnotLoggedOut(NLO);
+    //     const NLO = await getVisitorsNotLoggedOut(UserID);
+    //     console.log("NLO", NLO);
+    //     setnotLoggedOut(NLO);
 
-    };
+    // };
 
     const login = async () => {
         setLoggingIn("true");
@@ -54,15 +54,15 @@ const VisitorLogin = () => {
 
 
 
-    const Logout = async (props) => {
+    // const Logout = async (props) => {
 
-        console.log("Logout", props.visitorName,
-            props.visitorPhone, props.department, props.departmentPerson, props.dateIn, props.dateOut, props.userID, props.dayOfYear);
-        // const logout = doc(db, "visitors-" + user.uid)
-        // await updateDoc(logout, {
-        //     dateOut: format(Date.now(), "yyyy-MM-dd HH:MM:SS"),
-        // });
-    }
+    //     console.log("Logout", props.visitorName,
+    //         props.visitorPhone, props.department, props.departmentPerson, props.dateIn, props.dateOut, props.userID, props.dayOfYear);
+    //     // const logout = doc(db, "visitors-" + user.uid)
+    //     // await updateDoc(logout, {
+    //     //     dateOut: format(Date.now(), "yyyy-MM-dd HH:MM:SS"),
+    //     // });
+    // }
 
 
 
@@ -165,13 +165,8 @@ const VisitorLogin = () => {
                 </div>
             </div>
 
-            <div className='container'>
-                <h2>Please  <span style={{ color: '#3485ff', fontWeight: 'bold' }}>Log Out</span></h2>
-                <ul>
-                    {notLoggedOut.map(item =>
-                        <li ><a onClick={Logout(item.visitorName)} class="round green">{item.visitorName} <span class="round">Thank You!</span></a></li>)}
-                </ul>
-            </div>
+            <NotLoggedOut UserID={UserID} />
+
         </div>
     )
 }
