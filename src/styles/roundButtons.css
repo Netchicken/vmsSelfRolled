@@ -1,22 +1,22 @@
-//https: //codepen.io/sethabbott/pen/nmyxbx
+/* //https: //codepen.io/sethabbott/pen/nmyxbx */
 
-* {
+/* * {
     margin: 0;
     padding: 0;
     -moz-box-sizing: border-box;
     -o-box-sizing: border-box;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
-}
+} */
 
-body {
+/* body {
     width: 100%;
     height: 100%;
     font-family: "helvetica neue", helvetica, arial, sans-serif;
     font-size: 13px;
     text-align: center;
-    background: #333 url('http://subtlepatterns.subtlepatterns.netdna-cdn.com/patterns/low_contrast_linen.png');
-}
+     background: #333 url('http://subtlepatterns.subtlepatterns.netdna-cdn.com/patterns/low_contrast_linen.png'); 
+}*/
 
 ul {
     margin: 30px auto;
@@ -84,7 +84,7 @@ li {
     font-size: 25px;
     text-shadow: 0 1px 0 rgba(255, 255, 255, .7);
     letter-spacing: -.065em;
-    font-family: "Hammersmith One", sans-serif;
+    /* font-family: "Hammersmith One", sans-serif; */
     -webkit-transition: all .25s ease-in-out;
     -o-transition: all .25s ease-in-out;
     -moz-transition: all .25s ease-in-out;
