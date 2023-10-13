@@ -222,6 +222,16 @@ export const getVisitorsNotLoggedOut = async (user) => {
   return "No data";
 };
 
+export const Logout = async (user) => {
+
+  const logout = doc(db, "visitors-" + user.uid)
+
+  await updateDoc(logout, {
+    dateOut: format(Date.now(), "yyyy-MM-dd HH:MM:SS"),
+  });
+}
+
+
 //https://firebase.google.com/docs/firestore/manage-data/add-data?hl=en&authuser=0
 //setDoc overwrites the document If the document does not exist, it will be created. If the document does exist, its contents will be overwritten with the newly provided data
 //unless you specify that the data should be merged into the existing document, as follows: setDoc(cityRef, { capital: true }, { merge: true });

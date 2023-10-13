@@ -2,9 +2,8 @@ import React, { useState, useEffect } from "react";
 // import "../../styles/Common.css";
 import "../../styles/visitorLogin.css";
 import "../../styles/roundButtons.css";
-import { doc, collection, setDoc } from "firebase/firestore";
+import { doc, collection, setDoc, updateDoc } from "firebase/firestore";
 import { auth, db } from "../firebase/Config";
-//import { doc, updateDoc, getDoc, getFirestore, collection, addDoc, query, where, getDocs, setDoc, documentId } from "firebase/firestore";
 import { getVisitorsNotLoggedOut, } from "../firebase/DBOperations";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { UserID, UserData, BusinessCategories } from "../../App"; //imports data from app
@@ -53,10 +52,19 @@ const VisitorLogin = () => {
         SaveToDb();
     };
 
-    const logout = async () => {
-        setLoggingIn("true");
-        // SaveToDb();
-    };
+
+
+    const Logout = async (props) => {
+
+        console.log("Logout", props.visitorName,
+            props.visitorPhone, props.department, props.departmentPerson, props.dateIn, props.dateOut, props.userID, props.dayOfYear);
+        // const logout = doc(db, "visitors-" + user.uid)
+        // await updateDoc(logout, {
+        //     dateOut: format(Date.now(), "yyyy-MM-dd HH:MM:SS"),
+        // });
+    }
+
+
 
     const SaveToDb = () => {
         const vcUsersRef = collection(db, "visitors");
@@ -70,8 +78,9 @@ const VisitorLogin = () => {
             userID: UserID,
             dayOfYear: getDayOfYear(Date.now()),
         });
-        //  return addEntry;
+
     };
+
     const goToHomePage = () => {
         navigate("/");
     };
@@ -82,16 +91,14 @@ const VisitorLogin = () => {
             <div className='container'>
                 {/* <div className='login-form-area'> */}
                 <div className='login-name-logo' onClick={goToHomePage}>
-                    <NameLogo height='100px' />
-                    <p><span style={{ fontSize: '18px', fontWeight: 'bold', }}></span>   Login                 </p>
-                </div>
-
+                    <NameLogo height='60px' /> </div>
                 <div>
+                    <h2>Please  <span style={{ color: '#3485ff', fontWeight: 'bold' }}>Log In</span></h2>
                     <h2>Welcome to <span style={{ color: '#3485ff', fontWeight: 'bold' }}>{businessName} {businessBranch}</span></h2>
 
                 </div>
                 <div className="form-group">
-                    <Stack spacing={2} direction="row" sx={{ marginBottom: 2 }}>
+                    <Stack spacing={2} direction="row" sx={{ marginBottom: 0.5 }}>
                         <TextField
                             className='input'
                             id='lvisitorname'
@@ -159,21 +166,14 @@ const VisitorLogin = () => {
             </div>
 
             <div className='container'>
+                <h2>Please  <span style={{ color: '#3485ff', fontWeight: 'bold' }}>Log Out</span></h2>
                 <ul>
                     {notLoggedOut.map(item =>
-                        <li><a href="#" class="round green">{item.visitorName} <span class="round">That is, if you already have an account.</span></a></li>)}
-
-
-
+                        <li ><a onClick={Logout(item.visitorName)} class="round green">{item.visitorName} <span class="round">Thank You!</span></a></li>)}
                 </ul>
-
             </div>
-
         </div>
-
-
     )
-
 }
 
 export default VisitorLogin

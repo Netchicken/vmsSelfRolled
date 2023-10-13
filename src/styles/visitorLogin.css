@@ -1,14 +1,14 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto);
 
-body,
+/* body,
 input,
 textarea,
 body * {
     font-family: 'Roboto', sans-serif;
     box-sizing: border-box;
-}
+} */
 
-body::after,
+/* body::after,
 body::before,
 input::after,
 input::before,
@@ -17,20 +17,20 @@ textarea::before,
 body *::after,
 body *::before {
     box-sizing: border-box;
-}
+} */
 
-body {
+/* body {
     background-image: -webkit-linear-gradient(top, #f2f2f2, #e6e6e6);
     background-image: linear-gradient(top, #f2f2f2, #e6e6e6);
-}
+} */
 
 .container {
     position: relative;
     max-width: 40rem;
-    margin: 5rem auto;
+    margin: 2rem auto;
     background: #fff;
     width: 100%;
-    padding: 3rem 5rem;
+    padding: 0.1rem 3rem;
     border-radius: 1px;
 }
 
@@ -99,7 +99,7 @@ fieldset {
     margin-top: -1rem;
 }
 
-
+/* 
 .login-container {
     position: relative;
     max-width: 40rem;
@@ -117,10 +117,10 @@ fieldset {
     width: 350px;
     height: 400px;
     padding: 20px;
-}
+} */
 
 .login-name-logo {
-    margin: 30px;
+    margin: 10px;
     cursor: pointer;
 }
 
