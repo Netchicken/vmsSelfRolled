@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 // import "../../styles/Common.css";
 import "../../styles/visitorLogin.css";
+import "../../styles/roundButtons.css";
 import { doc, collection, setDoc } from "firebase/firestore";
 import { auth, db } from "../firebase/Config";
 //import { doc, updateDoc, getDoc, getFirestore, collection, addDoc, query, where, getDocs, setDoc, documentId } from "firebase/firestore";
@@ -158,25 +159,23 @@ const VisitorLogin = () => {
             </div>
 
             <div className='container'>
-                {notLoggedOut.map(item => <span>
-                    <Button
-                        variant='contained'
-                        color='primary'
-                        size='small'
-                        // // disabled={setLoggingIn}
-                        onClick={logout}> {item.visitorName} </Button>
+                <ul>
+                    {notLoggedOut.map(item =>
+                        <li><a href="#" class="round green">{item.visitorName} <span class="round">That is, if you already have an account.</span></a></li>)}
 
 
-                </span>)
 
+                </ul>
 
-                } </div>
+            </div>
 
         </div>
 
 
-
     )
+
 }
 
 export default VisitorLogin
+
+// <li><a href="#" class="round green">Login<span class="round">That is, if you already have an account.</span></a></li>
