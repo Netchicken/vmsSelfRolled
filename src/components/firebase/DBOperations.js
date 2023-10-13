@@ -166,11 +166,9 @@ export const getDefaultSettingsRef = async (user) => {
 export const getTodayUsersVisitorsData = async (user) => {
   const data = [];
 
-  const q = query(collection(db, "visitors-" + user.uid)).where(
-    "signedInDate",
-    "==",
-    this.state.dateToday
-  );
+  const q = query(collection(db, "visitors-" + user.uid))
+    .where("signedInDate", "==", this.state.dateToday)
+    .where("userID", "==", user.uid);
   const querySnapshot = await getDocs(q);
   if (q) {
     querySnapshot.forEach((doc) => {

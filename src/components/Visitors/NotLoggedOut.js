@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { getVisitorsNotLoggedOut, } from "../firebase/DBOperations";
 import { TextField, Stack, Button, } from "@mui/material";
+import { doc, collection, setDoc, updateDoc, query, where, getDocs } from "firebase/firestore";
+import { format, getDayOfYear } from "date-fns";
+import { auth, db } from "../firebase/Config";
 
 const NotLoggedOut = ({ UserID }) => {
     const [notLoggedOut, setnotLoggedOut] = useState([]);
@@ -12,12 +15,12 @@ const NotLoggedOut = ({ UserID }) => {
 
     const initLoad = async () => {
 
-        console.log("NotLoggedOut UserID", UserID);
+        // console.log("NotLoggedOut UserID", UserID);
 
         NLO = await getVisitorsNotLoggedOut(UserID);
         setnotLoggedOut(NLO);
 
-        NLO.map(person => console.log("initload NLO", person.visitorName));
+        //   NLO.map(person => console.log("initload NLO", person.visitorName));
 
         NLOList = NLO.map(item =>
             <li ><a href='#' class="round green">{item.visitorName} <span class="round">Thank You!</span></a></li>
@@ -26,14 +29,53 @@ const NotLoggedOut = ({ UserID }) => {
 
     };
 
-    const Logout = async ({ item }) => {
 
-        console.log("Logout", item);
-        //  console.log("Logout", item.visitorName, item.visitorPhone, item.department, item.departmentPerson, item.dateIn, item.dateOut, item.userID, item.dayOfYear);
-        // const logout = doc(db, "visitors-" + user.uid)
-        // await updateDoc(logout, {
-        //     dateOut: format(Date.now(), "yyyy-MM-dd HH:MM:SS"),
-        // });
+    // const SaveToDb = () => {
+    //     const vcUsersRef = collection(db, "visitors");
+    //     setDoc(doc(vcUsersRef, UserID + " " + visitorPhone), {
+    //         visitorName: visitorName,
+    //         visitorPhone: visitorPhone,
+    //         department: department,
+    //         departmentPerson: departmentPerson,
+    //         dateIn: format(Date.now(), "yyyy-MM-dd HH:MM:SS"),
+    //         dateOut: "",
+    //         userID: UserID,
+    //         dayOfYear: getDayOfYear(Date.now()),
+    //     });
+
+    // };
+
+
+
+    const Logout = async ({ item }) => {
+        const today = getDayOfYear(Date.now());
+        const timeLogout = format(Date.now(), "yyyy-MM-dd HH:MM:SS");
+        console.log("Logout", UserID + "  " + item);
+        console.log("time", timeLogout);
+        console.log("Logout", item.visitorName, item.visitorPhone, item.department, item.departmentPerson, item.dateIn, item.dateOut, item.userID, item.dayOfYear);
+
+        const visitors = collection(db, 'visitors');
+
+        const q = query(collection(visitors, UserID + " " + item.visitorPhone),
+            where("dateOut", "==", ""),
+            where("dayOfYear", "==", today));
+
+        const querySnapshot = await getDocs(q);
+
+        console.log("querySnapshot", querySnapshot);
+
+        // try {
+        if (querySnapshot.size > 0) {
+
+            const docRef = querySnapshot.docs[0].ref;
+            console.log("Logout docref", docRef);
+
+            await updateDoc(docRef, { dateOut: timeLogout });
+            //   }
+            // } catch (error) {
+
+            //     console.log("Error saving user data to Firestore:", error);
+        }
     }
 
 

@@ -24,51 +24,24 @@ const VisitorLogin = () => {
     const [department, setDepartment] = useState("");
     const [departmentPerson, setDepartmentPerson] = useState("");
     const [loggingIn, setLoggingIn] = useState(false);
-    const [businessName, setBusinessName] = useState(BusinessCategories.businessName);
-    const [businessBranch, setBusinessBranch] = useState(BusinessCategories.businessBranch);
-    const [businessSlogan, setBusinessSlogan] = useState(BusinessCategories.businessSlogan);
-    const [welcomeMessage, setWelcomeMessage] = useState(BusinessCategories.welcomeMessage);
-    const [notLoggedOut, setnotLoggedOut] = useState([]);
+    // const [businessName, setBusinessName] = useState(BusinessCategories.businessName);
+    // const [businessBranch, setBusinessBranch] = useState(BusinessCategories.businessBranch);
+    // const [businessSlogan, setBusinessSlogan] = useState(BusinessCategories.businessSlogan);
+    // const [welcomeMessage, setWelcomeMessage] = useState(BusinessCategories.welcomeMessage);
+    // const [notLoggedOut, setnotLoggedOut] = useState([]);
 
 
     let navigate = useNavigate(); //https://stackoverflow.com/questions/71173957/how-to-use-history-push-in-react-router-dom-version-6-0-0
-
-    // useEffect(() => {
-    //     initLoad();
-    // }, []);
-
-    // const initLoad = async () => {
-
-    //     console.log("VisitorLogin UserID", UserID);
-
-    //     const NLO = await getVisitorsNotLoggedOut(UserID);
-    //     console.log("NLO", NLO);
-    //     setnotLoggedOut(NLO);
-
-    // };
 
     const login = async () => {
         setLoggingIn("true");
         SaveToDb();
     };
 
-
-
-    // const Logout = async (props) => {
-
-    //     console.log("Logout", props.visitorName,
-    //         props.visitorPhone, props.department, props.departmentPerson, props.dateIn, props.dateOut, props.userID, props.dayOfYear);
-    //     // const logout = doc(db, "visitors-" + user.uid)
-    //     // await updateDoc(logout, {
-    //     //     dateOut: format(Date.now(), "yyyy-MM-dd HH:MM:SS"),
-    //     // });
-    // }
-
-
-
     const SaveToDb = () => {
         const vcUsersRef = collection(db, "visitors");
-        setDoc(doc(vcUsersRef, UserID + " " + visitorPhone), {
+        const DayOfTheYear = getDayOfYear(Date.now());
+        setDoc(doc(vcUsersRef, UserID + visitorPhone), {
             visitorName: visitorName,
             visitorPhone: visitorPhone,
             department: department,
@@ -77,8 +50,15 @@ const VisitorLogin = () => {
             dateOut: "",
             userID: UserID,
             dayOfYear: getDayOfYear(Date.now()),
-        });
+        }).then(() => {
 
+
+            setLoggingIn(false);
+            setVisitorName("");
+            setDepartment("");
+            setVisitorPhone("");
+            setDepartmentPerson("");
+        });
     };
 
     const goToHomePage = () => {
