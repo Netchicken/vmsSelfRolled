@@ -1,6 +1,13 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
-const SummaryArea = props => {
+const SummaryArea = ({ countOnsiteNow, countOnsiteToday, countOnsiteEver, userData }) => {
+
+    useEffect(() => {
+        console.log("Visitors in SummaryArea  ", countOnsiteNow + " " + countOnsiteToday + " " + countOnsiteEver + " " + userData);
+    }, []);
+
+
+
     return (
         <div>
             <div className='console-visitor-summary'>
@@ -14,7 +21,7 @@ const SummaryArea = props => {
                             color: '#ffffff',
                             textAlign: 'center'
                         }}>
-                        {props.currentVisitors}
+                        {countOnsiteNow}
                     </h1>
                 </div>
 
@@ -28,14 +35,14 @@ const SummaryArea = props => {
                             // color: '#ffffff', 
                             textAlign: 'center'
                         }}>
-                        {props.todayVisitors}
+                        {countOnsiteToday}
                     </h1>
 
                 </div>
 
                 <div className='console-activeDevices'>
                     <div>
-                        Active Devices
+                        Visitors Ever
                     </div>
                     <h1
                         style={{
@@ -43,8 +50,8 @@ const SummaryArea = props => {
                             color: '#8934FF',
                             textAlign: 'center'
                         }}>
-                        {props.activeDevices}
-                        <span style={{ fontSize: '60px', textAlign: 'center' }}> / </span>
+                        {countOnsiteEver}
+
                         {/* {props.userData.licences === 0 ? props.activeDevices : props.userData.licences} */}
                     </h1>
                 </div>
