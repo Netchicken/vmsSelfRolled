@@ -212,7 +212,7 @@ export const getVisitorsNotLoggedOut = async (user) => {
   const querySnapshot = await getDocs(q);
   if (q) {
     querySnapshot.forEach((doc) => {
-      console.log("getVisitorsNotLoggedOut", " => ", doc.data());
+      //   console.log("getVisitorsNotLoggedOut", " => ", doc.data());
       data.push(doc.data());
     });
     return Promise.all(data);

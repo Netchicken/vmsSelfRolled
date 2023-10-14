@@ -7,31 +7,18 @@ import { auth, db } from "../firebase/Config";
 
 const NotLoggedOut = ({ UserID }) => {
     const [notLoggedOut, setnotLoggedOut] = useState([]);
-    const [visitorLoggedOut, setvisitorLoggedOut] = useState("");
-    let NLO = [];
+    const [visitorLoggedOut, setvisitorLoggedOut] = useState(false);
+    
     let NLOList = [];
     useEffect(() => {
         initLoad();
-    }, []);
+    });
 
     const initLoad = async () => {
-
-        // console.log("NotLoggedOut UserID", UserID);
-
-        NLO = await getVisitorsNotLoggedOut(UserID);
-        setnotLoggedOut(NLO);
-
-        //   NLO.map(person => console.log("initload NLO", person.visitorName));
-
-        NLOList = NLO.map(item =>
-            <li ><a href='#' class="round green">{item.visitorName} <span class="round">Thank You!</span></a></li>
-        );
-
-
+   let NLO = await getVisitorsNotLoggedOut(UserID);
+        setnotLoggedOut(NLO);      
+        setvisitorLoggedOut(false);
     };
-
-
-
     // https://firebase.google.com/docs/firestore/manage-data/transactions
     const runUpdateTrans = async ({ item }) => {
         let docRef = doc(db, "visitors", UserID + item.visitorPhone);
@@ -45,11 +32,24 @@ const NotLoggedOut = ({ UserID }) => {
                 transaction.update(docRef, { dateOut: timeLogout });
             });
             console.log("Transaction successfully committed!");
+            setvisitorLoggedOut(true)
         } catch (e) {
             console.log("Transaction failed: ", e);
         }
 
     }
+
+
+
+    return (
+        <div className='container'>
+            <h2>Please  <span style={{ color: '#3485ff', fontWeight: 'bold' }}>Log Out</span></h2>
+            <ul>{notLoggedOut.map(item => <li key={item.visitorName} onClick={() => { runUpdateTrans(item = { item }) }}><a href='#' className="round green">{item.visitorName} <span className="round">Thank You!</span></a></li>)}</ul>
+        </div>
+    )
+}
+export default NotLoggedOut
+
 
 
     // const Logout = async ({ item }) => {
@@ -87,27 +87,3 @@ const NotLoggedOut = ({ UserID }) => {
     //     //     console.log("Error saving user data to Firestore:", error);
     //     //  }
     // }
-
-
-    return (
-        <div className='container'>
-            <h2>Please  <span style={{ color: '#3485ff', fontWeight: 'bold' }}>Log Out</span></h2>
-
-            <ul>{notLoggedOut.map(item => <li key={item.visitorName} onClick={() => { runUpdateTrans(item = { item }) }}><a href='#' className="round green">{item.visitorName} <span class="round">Thank You!</span></a></li>)}</ul>
-
-
-
-        </div>
-    )
-}
-
-export default NotLoggedOut
-
-{/* <li onClick={Logout(item)}><a href='#' class="round green">{item.visitorName} <span class="round">Thank You!</span></a></li>)} */ }
-
-// <Button
-//     className='auth-button'
-//     variant='contained'
-//     color='primary'
-//     size='small'
-//     onClick={Logout(item = { item })}>{item.visitorName}</Button> onClick={Logout(item = { item })}
