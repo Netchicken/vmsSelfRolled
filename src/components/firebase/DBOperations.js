@@ -199,7 +199,7 @@ export const getAllVisitorsData = async (user) => {
 // where(format("signedInDate", "yyyy-MM-dd"), "==", dateToday),, where("userID", "==", user)
 
 export const getVisitorsNotLoggedOut = async (user) => {
-  console.log("getVisitorsNotLoggedOut", user);
+  // console.log("getVisitorsNotLoggedOut", user);
   const data = [];
   const today = getDayOfYear(Date.now());
 

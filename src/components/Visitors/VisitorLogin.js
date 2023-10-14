@@ -24,10 +24,10 @@ const VisitorLogin = () => {
     const [department, setDepartment] = useState("");
     const [departmentPerson, setDepartmentPerson] = useState("");
     const [loggingIn, setLoggingIn] = useState(false);
-    // const [businessName, setBusinessName] = useState(BusinessCategories.businessName);
-    // const [businessBranch, setBusinessBranch] = useState(BusinessCategories.businessBranch);
-    // const [businessSlogan, setBusinessSlogan] = useState(BusinessCategories.businessSlogan);
-    // const [welcomeMessage, setWelcomeMessage] = useState(BusinessCategories.welcomeMessage);
+    const [businessName, setBusinessName] = useState(BusinessCategories.businessName);
+    const [businessBranch, setBusinessBranch] = useState(BusinessCategories.businessBranch);
+    const [businessSlogan, setBusinessSlogan] = useState(BusinessCategories.businessSlogan);
+    const [welcomeMessage, setWelcomeMessage] = useState(BusinessCategories.welcomeMessage);
     // const [notLoggedOut, setnotLoggedOut] = useState([]);
 
 
@@ -85,7 +85,7 @@ const VisitorLogin = () => {
                             variant='outlined'
                             type='text'
                             label='Please enter your name'
-
+                            value={visitorName}
                             onChange={e => setVisitorName(e.target.value)}
                             fullWidth={true}
                             required={true}
@@ -96,7 +96,7 @@ const VisitorLogin = () => {
                             variant='outlined'
                             type='text'
                             label='Please enter your phone number'
-
+                            value={visitorPhone}
                             onChange={e => setVisitorPhone(e.target.value)}
                             fullWidth={true}
                             required={true}
@@ -110,7 +110,7 @@ const VisitorLogin = () => {
                             variant='outlined'
                             type='text'
                             label='What department are you visiting'
-
+                            value={department}
                             onChange={e => setDepartment(e.target.value)}
                             fullWidth={true}
                             required={true}
@@ -121,7 +121,7 @@ const VisitorLogin = () => {
                             variant='outlined'
                             type='text'
                             label='Who are you visiting'
-
+                            value={departmentPerson}
                             onChange={e => setDepartmentPerson(e.target.value)}
                             fullWidth={true}
                             required={true}
@@ -153,4 +153,3 @@ const VisitorLogin = () => {
 
 export default VisitorLogin
 
-// <li><a href="#" class="round green">Login<span class="round">That is, if you already have an account.</span></a></li>
