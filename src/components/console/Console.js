@@ -4,7 +4,7 @@ import "../../styles/Console.css";
 import SideBarLinks from "../../components/console/SideBarLinks";
 //import { AuthCode, VistocodeSKU } from "../functions/AuthCodeGenerator";
 import { auth, db } from "../firebase/Config";
-import { UserData } from "../../App"; //bring in the USerdata from APP.js
+import { UserData, BusinessCategories } from "../../App"; //bring in the USerdata from APP.js
 import { format, addDays } from "date-fns";
 import {
   getData,
@@ -31,6 +31,8 @@ export let SettingsArray = [];
 function Console(props) {
   const [activeLink, setActiveLink] = useState("dashboard");
   const [header, setHeader] = useState("Dashboard");
+  const [businessName, setBusinessName] = useState(BusinessCategories.businessName);
+  const [businessBranch, setBusinessBranch] = useState(BusinessCategories.businessBranch);
   // const [authCode, setAuthCode] = useState("");
   const [selectedSetting, setSelectedSetting] = useState("");
   // const [authCodeButtonLabel, setAuthCodeButtonLabel] = useState("Submit");
@@ -340,7 +342,7 @@ function Console(props) {
         </div>
 
         <div className='console-content'>
-          <div className='console-content-header'>{header}</div>
+          <div className='console-content-header'>{header} {businessName}  {businessBranch}</div>
           <div className='console-content-children'>
 
             <DashboardPage
