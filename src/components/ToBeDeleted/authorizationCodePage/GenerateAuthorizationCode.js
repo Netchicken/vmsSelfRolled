@@ -3,7 +3,7 @@ import '../../../styles/Console.css';
 
 
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-import SimpleDialog from '../SimpleDialog';
+import SimpleDialog from '../../console/SimpleDialog';
 
 import { Radio, RadioGroup, StepContent, StepLabel, Step, Button, Stepper } from '@mui/material';
 import { SetupIcon, DeleteIcon, Chip, LicencesIcon, AuthorizationIcon, VisitorsIcon, DashboardIcon } from '@mui/icons-material';

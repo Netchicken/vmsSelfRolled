@@ -15,13 +15,9 @@ import {
   getTodayUsersVisitorsData,
   getAllVisitorsData,
 } from "../firebase/DBOperations";
-// import AuthorizationCodePage from '../../components/console/authorizationCodePage/AuthorizationCodePage';
 import DashboardPage from "../../components/console/dashboardPage/DashboardPage";
-// import LicencePage from '../../components/console/licencePage/LicencePage';
 import VisitorsPage from "../../components/console/visitorsPage/VisitorsPage";
-// import InviteManagementPage from '../../components/console/inviteManagementPage/InviteManagementPage';
 import { ValidateEmail } from "../functions/Validators";
-// import axios from 'axios';
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 
 export let SettingsArray = [];
