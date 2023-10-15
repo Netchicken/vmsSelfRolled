@@ -34,7 +34,7 @@ const TopBar = (props) => {
           color='primary'
           onClick={props.goToVisitorLoginPage}
         >
-          Load the Visitor Login Page
+          Visitor Login
         </Button>
 
         <div>

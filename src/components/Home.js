@@ -47,14 +47,14 @@ const Home = () => {
         goToVisitorLoginPage={goToVisitorLoginPage}
       />
       <div className='container'>
-        <p className='home-title'>Steps to use this VMS</p>
+        <h3>Steps to use this VMS</h3>
         {/* <div className="home-listtext"> */}
         <div className="list">
 
-          <p className="ptext">Register your business</p>
-          <p className="ptext">Login in with Admin Login</p>
-          <p className="ptext">Click on "Load the visitor Login Page"</p>
-          <p className="ptext">Check your Stats with the Go to Console page</p>
+          <p className="ptext">Register your business with "Register For Admin"</p>
+          <p className="ptext">Login in with "Admin Login"</p>
+          <p className="ptext">Click on "Visitor Login" to get the VMS running</p>
+          <p className="ptext">Check your Stats on "Go to Console"</p>
           <p className="ptext">Click the logo to go back to this page</p>
 
         </div>
