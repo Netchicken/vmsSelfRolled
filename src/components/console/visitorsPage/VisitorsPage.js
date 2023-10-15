@@ -3,7 +3,7 @@ import React from 'react';
 import NoVisitor from '../NoData';
 
 import { Tooltip, Paper, InputBase, Typography, Button, Link, } from '@mui/material';
-import { IconButton, DeleteIcon, SearchIcon, AcUnit, AuthorizationIcon, VillaSharp, DashboardRounded } from '@mui/icons-material';
+
 
 const VisitorsPage = props => {
 
@@ -60,9 +60,7 @@ const VisitorsPage = props => {
                 <div>
                     <div>
                         <Paper elevation={1}>
-                            <AcUnit aria-label="Search">
-                                {/* <SearchIcon /> */}
-                            </AcUnit>
+
                             <InputBase placeholder="Search Visitors" />
                         </Paper>
                     </div>
@@ -95,17 +93,13 @@ const VisitorsPage = props => {
                                     <div style={{ color: '#ef0c00' }}>Not Signed Out</div>
                                     : <div>{vs.signedOutDate} {vs.signedOutTime}</div>}
                                 <div style={{ textAlign: 'right' }}>
-                                    <Tooltip title='Delete Authorization Code'>
-                                        <AcUnit>
-                                            {/* <DeleteIcon fontSize="small" style={{ color: '#ef0c00' }} /> */}
-                                        </AcUnit>
-                                    </Tooltip>
+
                                 </div>
                             </div>
                         ))}
                     </div>
-                </div>}
-        </div>
+                </div >}
+        </div >
     )
 }
 
