@@ -37,18 +37,14 @@ const TopBar = (props) => {
           }}
         >
           <div
-            style={{ width: "200px", marginLeft: "30px", cursor: "pointer" }}
+            style={{ width: "200px", marginLeft: "20px", cursor: "pointer" }}
             onClick={props.goToHomePage}
           >
             <NameLogo height='60px' />
           </div>
 
           <Button
-            style={{
-              textTransform: "none",
-              borderRadius: "50px",
-              marginLeft: "50px",
-            }}
+            style={consoleButton}
             variant='contained'
             color='primary'
             onClick={props.goToVisitorLoginPage}
@@ -60,9 +56,7 @@ const TopBar = (props) => {
           {props.businessdata.businessName} {props.businessdata.businessBranch}
 
         </div>
-        {/* {ppats ? ( 
-         
-        ) : props.userData ? (*/}
+
         <div>
           <Button
             style={consoleButton}
@@ -72,9 +66,7 @@ const TopBar = (props) => {
           >
             Go To Console
           </Button>
-          {/* </div>
-        ) : (
-          <div> */}
+
           <Button
             style={authButtons}
             color='primary'
@@ -84,9 +76,9 @@ const TopBar = (props) => {
             Admin Login
           </Button>
 
-          <Button style={orButton} color='primary' disabled>
+          {/* <Button style={orButton} color='primary' disabled>
             Or
-          </Button>
+          </Button> */}
 
           <Button
             style={authButtons}

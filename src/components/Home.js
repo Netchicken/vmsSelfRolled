@@ -51,11 +51,11 @@ const Home = () => {
         {/* <div className="home-listtext"> */}
         <div className="list">
 
-          <span>1.</span><p className="ptext">Register your business</p>
-          <span>2.</span><p className="ptext">Login in with Admin Login</p>
-          <span>3.</span><p className="ptext">Click on "Load the visitor Login Page"</p>
-          <span>4.</span><p className="ptext">Check your Stats with the Go to Console page</p>
-          <span>5.</span><p className="ptext">Click the logo to go back to this page</p>
+          <p className="ptext">Register your business</p>
+          <p className="ptext">Login in with Admin Login</p>
+          <p className="ptext">Click on "Load the visitor Login Page"</p>
+          <p className="ptext">Check your Stats with the Go to Console page</p>
+          <p className="ptext">Click the logo to go back to this page</p>
 
         </div>
       </div>
