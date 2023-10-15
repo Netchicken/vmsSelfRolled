@@ -19,12 +19,6 @@ import {
   Divider,
   FormControl
 } from "@mui/material";
-// import {
-//   Visibility,
-//   VisibilityOff,
-//   Business,
-//   AlternateEmail,
-// } from "@mui/icons-material";
 
 //import UserDataContext from "../context/userDataContext";
 //import { ValidateEmail, ValidatePassword } from "./functions/Validators";

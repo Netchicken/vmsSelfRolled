@@ -1,13 +1,10 @@
 import React, { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import "../styles/Home.css";
-import TopBar from "../components/home/TopBar";
-//import TopBanner from "../components/home/TopBanner";
+import "../styles/Common.css";
+import TopBar from "./TopBar";
 import BottomBar from "../components/BottomBar";
 import { UserData, BusinessCategories } from "../App"; //imports data from app
-// import HowItWorks from '../components/home/HowItWorks';
-// import ContactUs from '../components/home/ContactUs';
-//import { Button } from "@mui/material";
 
 
 //HOME IS THE EMPTY HOMEPAGE WITH THE TOPBAR
@@ -38,7 +35,8 @@ const Home = () => {
     navigate("/");
   };
   return (
-    <div className='home-body'>
+
+    <div>
       <TopBar
         businessdata={BusinessCategories}
         userData={UserData}
@@ -48,13 +46,21 @@ const Home = () => {
         goToRegisterPage={goToRegisterPage}
         goToVisitorLoginPage={goToVisitorLoginPage}
       />
-      {/* <TopBanner goToRegisterPage={this.goToRegisterPage} /> */}
+      <div className='container'>
+        <p className='home-title'>Steps to use this VMS</p>
+        {/* <div className="home-listtext"> */}
+        <div className="list">
 
-      <BottomBar
-      // goToPrivacyPolicyPage={this.goToPrivacyPolicyPage}
-      // goToTermsAndConditionsPage={this.goToTermsAndConditionsPage}
-      />
+          <span>1.</span><p className="ptext">Register your business</p>
+          <span>2.</span><p className="ptext">Login in with Admin Login</p>
+          <span>3.</span><p className="ptext">Click on "Load the visitor Login Page"</p>
+          <span>4.</span><p className="ptext">Check your Stats with the Go to Console page</p>
+          <span>5.</span><p className="ptext">Click the logo to go back to this page</p>
+
+        </div>
+      </div>
     </div>
+
   );
 };
 

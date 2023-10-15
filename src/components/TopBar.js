@@ -1,6 +1,6 @@
 import React from "react";
-import NameLogo from "../../components/NameLogo";
-import "../../styles/Home.css";
+import NameLogo from "./NameLogo";
+import "../styles/Home.css";
 import { Button } from "@mui/material";
 
 const TopBar = (props) => {
