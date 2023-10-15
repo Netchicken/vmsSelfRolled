@@ -15,7 +15,7 @@ import {
   Button,
   Link,
 } from "@mui/material";
-import { Visibility, VisibilityOff } from "@mui/icons-material";
+// import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { ValidateEmail, ValidatePassword } from "./functions/Validators";
 
 //https://firebase.google.com/docs/web/modular-upgrade UPGRADE TO V9 FIREBASE
@@ -142,15 +142,15 @@ function Login(props) {
           fullWidth={true}
           // helperText={setPasswordError}
           error={setPasswordError !== ""}
-          InputProps={{
-            endAdornment: (
-              <InputAdornment position='end'>
-                <Icon className='input-icon' onClick={handleClickShowPassword}>
-                  {setShowPassword ? <Visibility /> : <VisibilityOff />}
-                </Icon>
-              </InputAdornment>
-            ),
-          }}
+        // InputProps={{
+        //   endAdornment: (
+        //     <InputAdornment position='end'>
+        //       <Icon className='input-icon' onClick={handleClickShowPassword}>
+        //         {/* {setShowPassword ? <Visibility /> : <VisibilityOff />} */}
+        //       </Icon>
+        //     </InputAdornment>
+        //   ),
+        // }}
         />
 
         <div className='auth-button-row'>
