@@ -84,7 +84,7 @@ const VisitorLogin = () => {
                             id='lvisitorname'
                             variant='outlined'
                             type='text'
-                            label='Please enter your name'
+                            label='Enter your name'
                             value={visitorName}
                             onChange={e => setVisitorName(e.target.value)}
                             fullWidth={true}
@@ -95,7 +95,7 @@ const VisitorLogin = () => {
                             id='lphonel'
                             variant='outlined'
                             type='text'
-                            label='Please enter your phone number'
+                            label='Enter your phone number'
                             value={visitorPhone}
                             onChange={e => setVisitorPhone(e.target.value)}
                             fullWidth={true}

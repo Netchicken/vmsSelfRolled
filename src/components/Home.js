@@ -47,8 +47,8 @@ const Home = () => {
         goToVisitorLoginPage={goToVisitorLoginPage}
       />
       <div className='container'>
-        <h3>Steps to use this Visitor Management System</h3>
-        {/* <div className="home-listtext"> */}
+        <h3 className="home-title">Steps to use this Visitor Management System</h3>
+
         <div className="list">
 
           <span className="ptext">Register your business with "Register For Admin. This creates your business profile and gives you a unique ID"</span>
