@@ -9,35 +9,27 @@ const TopBar = (props) => {
     marginRight: "30px",
     padding: "10px",
   };
-
+  // className="topbarImage"
 
   return (
     <div>
       <div className='home-topBar'>
         <div
           style={{ width: "100px", marginLeft: "20px", cursor: "pointer" }}
-          onClick={props.goToHomePage}
-        >
+          onClick={props.goToHomePage} >
           <NameLogo height='60px' />
         </div>
-
-
-
 
         <div className='home-title'>
           {props.businessdata.businessName} {props.businessdata.businessBranch}
         </div>
-
-        <Button
-          style={consoleButton}
-          variant='contained'
-          color='primary'
-          onClick={props.goToVisitorLoginPage}
-        >
-          Visitor Login
-        </Button>
-
-        <div>
+        <ul class="navigation">
+          <li>  <a onClick={props.goToVisitorLoginPage}> Visitor Login </a></li>
+          <li>  <a onClick={props.goToRegisterPage}> Register for Admin </a></li>
+          <li>  <a onClick={props.goToLoginPage}> Admin Login </a></li>
+          <li>  <a onClick={props.goToConsolePage}> Go to Console </a></li>
+        </ul>
+        {/* <div>
           <Button
             style={consoleButton}
             color='primary'
@@ -64,8 +56,8 @@ const TopBar = (props) => {
             onClick={props.goToRegisterPage}
           >
             Register for Admin
-          </Button>
-        </div>
+          </Button> 
+        </div>*/}
       </div>
     </div>
   );

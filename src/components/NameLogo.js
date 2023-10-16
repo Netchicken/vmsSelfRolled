@@ -1,6 +1,6 @@
 import React from 'react';
 import vsLogo from '../assets/vsLogo.png';
-//vms\src\assets
+
 const NameLogo = (props) => {
 
     const nameLogo = {
@@ -10,6 +10,7 @@ const NameLogo = (props) => {
         backgroundRepeat: 'no-repeat',
         backgroundSize: 'contain',
         display: 'inline-block',
+        alignContent: 'center',
         textAlign: 'center',
         backgroundPosition: 'center',
     }

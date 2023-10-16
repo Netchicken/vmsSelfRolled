@@ -42,7 +42,7 @@ const NotLoggedOut = ({ UserID }) => {
 
 
     return (
-        <div className='container'>
+        <div className='vcontainer'>
             <h2>Please  <span style={{ color: '#3485ff', fontWeight: 'bold' }}>Log Out</span></h2>
             <ul>{notLoggedOut.map(item => <li key={item.visitorName} onClick={() => { runUpdateTrans(item = { item }) }}><a href='#' className="round green">{item.visitorName} <span className="round">Thank You!</span></a></li>)}</ul>
         </div>

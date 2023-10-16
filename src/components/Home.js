@@ -46,7 +46,8 @@ const Home = () => {
         goToRegisterPage={goToRegisterPage}
         goToVisitorLoginPage={goToVisitorLoginPage}
       />
-      <div className='container'>
+      <div className='containerhome {
+'>
         <h3 className="home-title">Steps to use this Visitor Management System</h3>
 
         <div className="list">

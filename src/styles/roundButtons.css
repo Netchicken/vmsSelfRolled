@@ -18,12 +18,12 @@
      background: #333 url('http://subtlepatterns.subtlepatterns.netdna-cdn.com/patterns/low_contrast_linen.png'); 
 }*/
 
-ul {
+.vcontainer ul {
     /* margin: 30px auto; */
     text-align: center;
 }
 
-li {
+.vcontainer li {
     list-style: none;
     position: relative;
     display: inline-block;

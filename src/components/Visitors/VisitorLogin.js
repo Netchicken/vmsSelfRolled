@@ -68,7 +68,7 @@ const VisitorLogin = () => {
 
     return (
         <div>
-            <div className='container'>
+            <div className='vcontainer'>
                 {/* <div className='login-form-area'> */}
                 <div className='login-name-logo' onClick={goToHomePage}>
                     <NameLogo height='60px' /> </div>
