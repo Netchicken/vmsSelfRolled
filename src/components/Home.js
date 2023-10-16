@@ -47,15 +47,17 @@ const Home = () => {
         goToVisitorLoginPage={goToVisitorLoginPage}
       />
       <div className='container'>
-        <h3>Steps to use this VMS</h3>
+        <h3>Steps to use this Visitor Management System</h3>
         {/* <div className="home-listtext"> */}
         <div className="list">
 
-          <p className="ptext">Register your business with "Register For Admin"</p>
-          <p className="ptext">Login in with "Admin Login"</p>
-          <p className="ptext">Click on "Visitor Login" to get the VMS running</p>
+          <span className="ptext">Register your business with "Register For Admin. This creates your business profile and gives you a unique ID"</span>
+
+          <p className="ptext">Login in with "Admin Login" on the public machine that will be used. </p>
+
+          <p className="ptext">Click on "Visitor Login" to get the VMS running. This shows the login screen for the visitors to fill in</p>
           <p className="ptext">Check your Stats on "Go to Console"</p>
-          <p className="ptext">Click the logo to go back to this page</p>
+          <p className="ptext">Click the logo to get back to this page</p>
 
         </div>
       </div>
