@@ -5,7 +5,7 @@
     max-width: 40rem;
     display: block;
     margin: auto;
-    top: 100px;
+    top: 50px;
     right: 0;
     bottom: 0;
     left: 0;
@@ -55,12 +55,46 @@
     color: #253061;
 }
 
+
+.home-logo {
+    float: left;
+    transition: 0.7s all;
+}
+
+
+
 .topbarImage {
     align-items: left;
     width: "100px";
     margin-Left: "20px";
     cursor: "pointer";
 
+}
+
+.topbarheader {
+    position: fixed;
+    width: 100%;
+    padding-top: 50px;
+    background: #000;
+    transition: 0.7s all;
+    z-index: 100;
+}
+
+.topbarheader.alt-header {
+    background: #fff;
+}
+
+.alt-header a {
+    color: #000;
+}
+
+body.header-fixed header {
+    position: fixed;
+    top: 0;
+    right: 0;
+    padding-top: 0;
+    width: 100%;
+    z-index: 2;
 }
 
 .home-topBar {
@@ -160,6 +194,7 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    text-align: center;
 }
 
 .home-message {

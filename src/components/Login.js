@@ -5,7 +5,7 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 //import { doc, updateDoc, getDoc, getFirestore, collection, addDoc, query, where, getDocs, setDoc, documentId } from "firebase/firestore";
 import { SaveToDb, UpdateToDb, checkDataExists } from "./firebase/DBOperations";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
-import NameLogo from "../components/NameLogo";
+import NameLogo from "../components/LogoNavBar";
 import { format } from "date-fns";
 import {
   TextField,

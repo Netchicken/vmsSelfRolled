@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Logo from "../Logo";
+import Logo from "../LogoNavBar";
 import "../../styles/Console.css";
 import SideBarLinks from "../../components/console/SideBarLinks";
 //import { AuthCode, VistocodeSKU } from "../functions/AuthCodeGenerator";

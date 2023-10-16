@@ -5,11 +5,18 @@ import "../styles/Common.css";
 import TopBar from "./TopBar";
 import BottomBar from "../components/BottomBar";
 import { UserData, BusinessCategories } from "../App"; //imports data from app
+import styled from 'styled-components';
 
 
 //HOME IS THE EMPTY HOMEPAGE WITH THE TOPBAR
+const AppContainer = styled.div`
+  max-width: 1200px;
+  margin: 0 auto;
+`;
 
 const Home = () => {
+
+
   console.log("Home Loading");
   let navigate = useNavigate();
 
@@ -37,15 +44,17 @@ const Home = () => {
   return (
 
     <div>
-      <TopBar
-        businessdata={BusinessCategories}
-        userData={UserData}
-        goToHomePage={goToHomePage}
-        goToConsolePage={goToConsolePage}
-        goToLoginPage={goToLoginPage}
-        goToRegisterPage={goToRegisterPage}
-        goToVisitorLoginPage={goToVisitorLoginPage}
-      />
+      <AppContainer>
+        <TopBar
+          businessdata={BusinessCategories}
+          userData={UserData}
+          goToHomePage={goToHomePage}
+          goToConsolePage={goToConsolePage}
+          goToLoginPage={goToLoginPage}
+          goToRegisterPage={goToRegisterPage}
+          goToVisitorLoginPage={goToVisitorLoginPage}
+        />
+      </AppContainer>
       <div className='containerhome {
 '>
         <h3 className="home-title">Steps to use this Visitor Management System</h3>
