@@ -126,9 +126,10 @@ const TopBar = (props) => {
 
       <MobileNav style={{ display: isMobileNavOpen ? 'flex' : 'none' }}>
         <NavItem>  <a onClick={goToVisitorLoginPage}> Visitor Login </a></NavItem>
-        <NavItem>  <a onClick={goToRegisterPage}> Register for Admin </a></NavItem>
+        <NavItem>  <a onClick={goToRegisterPage}> Register</a></NavItem>
         <NavItem>  <a onClick={goToLoginPage}> Admin Login </a></NavItem>
-        <NavItem>  <a onClick={goToConsolePage}> Go to Console </a></NavItem>
+        <NavItem>  <a onClick={goToConsolePage}>Console</a></NavItem>
+        <NavItem>  <a onClick={goToHomePage}>Home</a></NavItem>
       </MobileNav>
     </Nav>
   );
