@@ -46,7 +46,7 @@ const SummaryArea = ({ countOnsiteNow, countOnsiteToday, countOnsiteEver, userDa
                     </div>
                     <h1
                         style={{
-                            fontSize: '50px',
+                            fontSize: '60px',
                             color: '#8934FF',
                             textAlign: 'center'
                         }}>

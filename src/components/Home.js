@@ -15,45 +15,13 @@ const AppContainer = styled.div`
 `;
 
 const Home = () => {
-
-
   console.log("Home Loading");
-  let navigate = useNavigate();
 
-  const goToLoginPage = () => {
-    const authType = true;
-    navigate("/authentication", { state: authType });
-    //  console.log("Login", navigate);
-  };
-  const goToVisitorLoginPage = () => {
-    const authType = false;
-    navigate("/visitorLogin", { state: authType });
-    //  console.log("Register", navigate);
-  };
-  const goToRegisterPage = () => {
-    const authType = false;
-    navigate("/authentication", { state: authType });
-    //  console.log("Register", navigate);
-  };
-  const goToConsolePage = () => {
-    navigate("/console");
-  };
-  const goToHomePage = () => {
-    navigate("/");
-  };
   return (
 
     <div>
       <AppContainer>
-        <TopBar
-          businessdata={BusinessCategories}
-          userData={UserData}
-          goToHomePage={goToHomePage}
-          goToConsolePage={goToConsolePage}
-          goToLoginPage={goToLoginPage}
-          goToRegisterPage={goToRegisterPage}
-          goToVisitorLoginPage={goToVisitorLoginPage}
-        />
+        <TopBar />
       </AppContainer>
       <div className='containerhome {
 '>

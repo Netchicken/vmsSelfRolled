@@ -10,24 +10,16 @@ import { doc, setDoc, documentId, } from "firebase/firestore";
 import { SaveToDb } from "./firebase/DBOperations";
 import { format } from "date-fns";
 import NameLogo from "../components/LogoNavBar";
-
-import {
-  TextField,
-  Icon,
-  InputAdornment,
-  Button,
-  Divider,
-  FormControl
-} from "@mui/material";
-
-//import UserDataContext from "../context/userDataContext";
-//import { ValidateEmail, ValidatePassword } from "./functions/Validators";
+import styled from 'styled-components';
+import { TextField, Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-
 import { Container, Stack } from '@mui/material';
+import TopBar from "./TopBar";
 
-
-
+const AppContainer = styled.div`
+  max-width: 1200px;
+  margin: 0 auto;
+`;
 
 //https://www.copycat.dev/blog/material-ui-form/ example of form
 
@@ -228,12 +220,15 @@ const Register = () => {
   };
 
   return (
+
     <div className='setup-content'>
+      <AppContainer>
+        <TopBar />
+      </AppContainer>
       <div className='login-form-area'>
-        <div className='login-name-logo' onClick={goToHomePage}>
-          <NameLogo height='50px' />
-          <h3>            Register a new Business with an Admin User          </h3>
-        </div>
+
+        <h3>Register a new Business with an Admin User</h3>
+
 
         <form onSubmit={handleSubmit}>
           <Stack spacing={2} direction="row" sx={{ marginBottom: 2 }}>

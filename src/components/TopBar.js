@@ -3,16 +3,17 @@ import NameLogo from "./LogoNavBar";
 import "../styles/Home.css";
 import styled from 'styled-components';
 import vsLogo from '../assets/logo-mobile.svg';
+import { useNavigate, useLocation } from "react-router-dom";
+import { UserData, BusinessCategories } from "../App"; //imports data from app
 
 const Nav = styled.nav`
+  display: inline; 
   display: flex;
   justify-content: space-between;
   align-items: center;
   background-color: #1565C0;
   color: #fff;
-  // padding: 1rem;
- 
-   //  z- index: 9999;
+
 `;
 
 const NavItem = styled.li`
@@ -37,7 +38,8 @@ const Logo = styled.h1`
 `;
 
 const MobileNavToggle = styled.button`
-  display: block;
+
+display: block;
   background-color: transparent;
   border: none;
   color: #fff;
@@ -76,12 +78,35 @@ const MobileNav = styled.ul`
 
 
 const TopBar = (props) => {
+  let navigate = useNavigate();
+
+  const goToLoginPage = () => {
+    const authType = true;
+    navigate("/authentication", { state: authType });
+    //  console.log("Login", navigate);
+  };
+  const goToVisitorLoginPage = () => {
+    const authType = false;
+    navigate("/visitorLogin", { state: authType });
+    //  console.log("Register", navigate);
+  };
+  const goToRegisterPage = () => {
+    const authType = false;
+    navigate("/authentication", { state: authType });
+    //  console.log("Register", navigate);
+  };
+  const goToConsolePage = () => {
+    navigate("/console");
+  };
+  const goToHomePage = () => {
+    navigate("/");
+  };
 
   const [isMobileNavOpen, setIsMobileNavOpen] = React.useState(false);
   return (
     <Nav>
 
-      <div onClick={props.goToHomePage} >
+      <div onClick={goToHomePage} >
         <Logo><NameLogo></NameLogo></Logo>
       </div>
 
@@ -90,20 +115,20 @@ const TopBar = (props) => {
         {isMobileNavOpen ? 'Close' : 'Menu'}
       </MobileNavToggle>
 
-      {props.businessdata.businessName} {props.businessdata.businessBranch}
+      {BusinessCategories.businessName} {BusinessCategories.businessBranch}
 
       <DesktopNav>
-        <NavItem>  <a onClick={props.goToVisitorLoginPage}> Visitor Login </a></NavItem>
-        <NavItem>  <a onClick={props.goToRegisterPage}> Register for Admin </a></NavItem>
-        <NavItem>  <a onClick={props.goToLoginPage}> Admin Login </a></NavItem>
-        <NavItem>  <a onClick={props.goToConsolePage}> Go to Console </a></NavItem>
+        <NavItem>  <a onClick={goToVisitorLoginPage}> Visitor Login </a></NavItem>
+        <NavItem>  <a onClick={goToRegisterPage}> Register for Admin </a></NavItem>
+        <NavItem>  <a onClick={goToLoginPage}> Admin Login </a></NavItem>
+        <NavItem>  <a onClick={goToConsolePage}> Go to Console </a></NavItem>
       </DesktopNav>
 
       <MobileNav style={{ display: isMobileNavOpen ? 'flex' : 'none' }}>
-        <NavItem>  <a onClick={props.goToVisitorLoginPage}> Visitor Login </a></NavItem>
-        <NavItem>  <a onClick={props.goToRegisterPage}> Register for Admin </a></NavItem>
-        <NavItem>  <a onClick={props.goToLoginPage}> Admin Login </a></NavItem>
-        <NavItem>  <a onClick={props.goToConsolePage}> Go to Console </a></NavItem>
+        <NavItem>  <a onClick={goToVisitorLoginPage}> Visitor Login </a></NavItem>
+        <NavItem>  <a onClick={goToRegisterPage}> Register for Admin </a></NavItem>
+        <NavItem>  <a onClick={goToLoginPage}> Admin Login </a></NavItem>
+        <NavItem>  <a onClick={goToConsolePage}> Go to Console </a></NavItem>
       </MobileNav>
     </Nav>
   );

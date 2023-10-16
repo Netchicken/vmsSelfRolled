@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Logo from "../LogoNavBar";
+
 import "../../styles/Console.css";
 import SideBarLinks from "../../components/console/SideBarLinks";
 //import { AuthCode, VistocodeSKU } from "../functions/AuthCodeGenerator";
@@ -19,10 +19,18 @@ import DashboardPage from "../../components/console/dashboardPage/DashboardPage"
 import VisitorsPage from "../../components/console/visitorsPage/VisitorsPage";
 import { ValidateEmail } from "../functions/Validators";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
+import TopBar from "../../components/TopBar";
+import styled from 'styled-components';
 
 export let SettingsArray = [];
 
 //====NEW HOOKS=====
+
+const AppContainer = styled.div`
+  max-width: 1200px;
+  margin: 0 auto;
+`;
+
 
 function Console(props) {
   const [activeLink, setActiveLink] = useState("dashboard");
@@ -306,51 +314,28 @@ function Console(props) {
   };
 
   return (
-    //const { activeLink } = this.state;
+
     <div>
-      <div className='console-container'>
-        <div className='console-sidebar'>
-          <div>
-            <div className='console-logo' onClick={goToHomePage}>
-              <Logo height='50px' />
-            </div>
+      < div className='console-content' >
 
-            <div className='console-sidebar-content'>
-              <SideBarLinks
-                activeLink={activeLink}
-                goToSettingsPage={goToSettingsPage}
-                click={(link, header) => handleSideBarLinkClick(link, header)}
-              />
-            </div>
-          </div>
+        <AppContainer>
+          <TopBar />
+        </AppContainer>
+        {/* <div className='console-content-header'>{header} {businessName}  {businessBranch}</div>
+        <div className='console-content-children'> */}
 
-          <div className='console-sidebar-footer'>
-            {/* <h4
-              style={{
-                color: '#FFC233',
-                margin: '0',
-                fontSize: '18px',
-              }}>{UserData.businessName}</h4> 
-            {UserData.email}*/}
-          </div>
-        </div>
+        <DashboardPage
+          currentVisitors={currentVisitors}
+          todayVisitors={todayVisitors}
+          activeDevices={activeDevices}
+          userData={UserData} //pass in Userdata to the dashboard page
+        />
 
-        <div className='console-content'>
-          <div className='console-content-header'>{header} {businessName}  {businessBranch}</div>
-          <div className='console-content-children'>
-
-            <DashboardPage
-              currentVisitors={currentVisitors}
-              todayVisitors={todayVisitors}
-              activeDevices={activeDevices}
-              userData={UserData} //pass in Userdata to the dashboard page
-            />{" "}
-
-            <VisitorsPage visitorsData={visitorsData} userData={UserData} />
-          </div>
-        </div>
+        {/* <VisitorsPage visitorsData={visitorsData} userData={UserData} /> */}
       </div>
-    </div>
+    </div >
+    // </div >
+
   );
   //hooks close of tags
 }
