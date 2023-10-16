@@ -36,9 +36,6 @@ const Register = () => {
   let navigate = useNavigate();
 
   const [showPassword, setShowPassword] = useState(false);
-  // const [checkedBoxTP, setCheckedBoxTP] = useState(false);
-  // const [registering, setRegistering] = useState(false);
-  // const [authenticated, setAuthenticated] = useState(false);
   const [business, setBusiness] = useState("Vision College");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("123qwe");
@@ -234,10 +231,8 @@ const Register = () => {
     <div className='setup-content'>
       <div className='login-form-area'>
         <div className='login-name-logo' onClick={goToHomePage}>
-          <NameLogo height='100px' />
-          <p className='login-typography-secondary'>
-            Register a new Admin User
-          </p>
+          <NameLogo height='50px' />
+          <h3>            Register a new Business with an Admin User          </h3>
         </div>
 
         <form onSubmit={handleSubmit}>
@@ -331,12 +326,10 @@ const Register = () => {
             Register a new Admin User
           </Button>
 
-          <Button variant="outlined" color="secondary" type="submit">Register a new Admin User</Button>
+          <Button variant="outlined" color="secondary" type="submit">.</Button>
         </form>
 
         <form onSubmit={handleSubmit}>
-
-
           <Button variant="outlined" color="secondary" type="submit">.</Button>
         </form>
       </div>
