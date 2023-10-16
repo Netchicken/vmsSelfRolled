@@ -292,30 +292,32 @@ const Register = () => {
             onChange={e => setWelcomeMessage(e.target.value)}
             fullWidth={true}
           />
-          <TextField
-            className='input'
-            id='rEmail'
-            variant='outlined'
-            type='email'
-            label='Email'
-            value={email}
-            onChange={e => setEmail(e.target.value)}
-            fullWidth={true}
-            required
-          />
 
-          <TextField
-            className='input'
-            id='lPassword'
-            variant='outlined'
-            type={showPassword ? "text" : "password"}
-            label='Password'
-            value={password}
-            onChange={e => setPassword(e.target.value)}
-            fullWidth={true}
-            required
-          />
+          <Stack spacing={2} direction="row" sx={{ marginBottom: 2 }}>
+            <TextField
+              className='input'
+              id='rEmail'
+              variant='outlined'
+              type='email'
+              label='Email'
+              value={email}
+              onChange={e => setEmail(e.target.value)}
+              fullWidth={true}
+              required
+            />
 
+            <TextField
+              className='input'
+              id='lPassword'
+              variant='outlined'
+              type={showPassword ? "text" : "password"}
+              label='Password'
+              value={password}
+              onChange={e => setPassword(e.target.value)}
+              fullWidth={true}
+              required
+            />
+          </Stack>
           <Button
             className='auth-button-row'
             variant='contained'
