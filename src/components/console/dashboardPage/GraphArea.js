@@ -1,65 +1,80 @@
 import React from 'react';
-import {
-    LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ReferenceLine,
-  } from 'recharts';
+import { BarChart, Bar, Rectangle, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
-const GraphArea = props => {
 
-    const data = [
-        {
-          name: 'Sunday', Visitors: 0,
-        },
-        {
-          name: 'Monday', Visitors: 21,
-        },
-        {
-          name: 'Tuesday', Visitors: 90,
-        },
-        {
-          name: 'Wednessday', Visitors: 20,
-        },
-        {
-          name: 'Thursday', Visitors: 81,
-        },
-        {
-          name: 'Friday', Visitors: 25,
-        },
-        {
-          name: 'Saturday', Visitors: 0,
-        },
-      ];
+//https://recharts.org/en-US/examples
+
+const GraphArea = () => {
+
+
+  const data = [
+    {
+      name: 'Page A',
+      uv: 4000,
+      pv: 2400,
+      amt: 2400,
+    },
+    {
+      name: 'Page B',
+      uv: 3000,
+      pv: 1398,
+      amt: 2210,
+    },
+    {
+      name: 'Page C',
+      uv: 2000,
+      pv: 9800,
+      amt: 2290,
+    },
+    {
+      name: 'Page D',
+      uv: 2780,
+      pv: 3908,
+      amt: 2000,
+    },
+    {
+      name: 'Page E',
+      uv: 1890,
+      pv: 4800,
+      amt: 2181,
+    },
+    {
+      name: 'Page F',
+      uv: 2390,
+      pv: 3800,
+      amt: 2500,
+    },
+    {
+      name: 'Page G',
+      uv: 3490,
+      pv: 4300,
+      amt: 2100,
+    },
+  ];
 
   return (
     <div>
-        <div className='console-graph-area'>
-        <div className='console-graph-header'>
-        <p>Visitors</p>
-        <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-around', fontSize: '12px', color: '#253061', width: '300px'}}>
-            <p>Past Week</p>
-            <p>Past Month</p>
-            <p>Past Year</p>
-        </div>
-        </div>
-       
-        <LineChart
-        width={1000}
-        height={400}
-        data={data}
-        margin={{
-          top: 20, right: 50, left: 20, bottom: 5,
-        }}
-      >
-        <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="name" padding={{ left: 30, right: 30 }}/>
-        <YAxis />
-        <Tooltip />
-        <Legend />
-        <ReferenceLine x="Tuesday" stroke="red" label="Highest Number of Visitors" />
-        <ReferenceLine y={90} label="Max" stroke="red" />
-        <Line type="monotone" dataKey="Visitors" stroke="#8884d8" />
-      </LineChart>
-
-      </div>
+      <ResponsiveContainer width="100%" height="100%">
+        <BarChart
+          width={500}
+          height={300}
+          data={data}
+          margin={{
+            top: 5,
+            right: 30,
+            left: 20,
+            bottom: 5,
+          }}
+        >
+          <CartesianGrid strokeDasharray="3 3" />
+          <XAxis dataKey="name" />
+          <YAxis />
+          <Tooltip />
+          <Legend />
+          <Bar dataKey="pv" fill="#8884d8" activeBar={<Rectangle fill="pink" stroke="blue" />} />
+          <Bar dataKey="uv" fill="#82ca9d" activeBar={<Rectangle fill="gold" stroke="purple" />} />
+        </BarChart>
+      </ResponsiveContainer>
     </div>
   )
 }

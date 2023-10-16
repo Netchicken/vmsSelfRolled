@@ -29,13 +29,9 @@ function Console(props) {
   const [header, setHeader] = useState("Dashboard");
   const [businessName, setBusinessName] = useState(BusinessCategories.businessName);
   const [businessBranch, setBusinessBranch] = useState(BusinessCategories.businessBranch);
-  // const [authCode, setAuthCode] = useState("");
   const [selectedSetting, setSelectedSetting] = useState("");
-  // const [authCodeButtonLabel, setAuthCodeButtonLabel] = useState("Submit");
-  // const [authCodeButtonDisabled, setAuthCodeButtonDisabled] = useState(false);
   const [authCodeActiveStep, setAuthCodeActiveStep] = useState(0);
   const [settingsArray, setSettingsArray] = useState([]);
-  // const [authCodeArray, setAuthCodeArray] = useState([]);
   const [openSettingsDialog, setOpenSettingsDialog] = useState(false);
   const [openACDeleteDialog, setOpenACDeleteDialog] = useState(false);
   const [acToDelete, setAcToDelete] = useState("");
@@ -46,7 +42,7 @@ function Console(props) {
   const [dateToday, setDateToday] = useState(format(Date.now(), "yyyy-MM-dd"));
   const [activeDevices, setActiveDevices] = useState(0);
   const [visitorsData, setVisitorsData] = useState([]);
-  // const [invitersData, setInvitersData] = useState([]);
+
   const [registerInvertersForm, setRegisterInvertersForm] = useState(false);
   const [vRegStep, setVRegStep] = useState(0);
   const [vRegistering, setVRegistering] = useState(false);
@@ -89,6 +85,8 @@ function Console(props) {
           .catch((error) => {
             console.log("Error getting documents: ", error);
           });
+
+        //query gets all the visitors signed in today and then passes that to the visitors page
 
         getTodayUsersVisitorsData("visitors-" + UserData.ID)
           .where("signedInDate", "==", this.state.dateToday)

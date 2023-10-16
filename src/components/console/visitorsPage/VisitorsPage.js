@@ -55,7 +55,7 @@ const VisitorsPage = props => {
         <div>
             {visitors.length === 0 ?
                 <NoVisitor
-                    message='No Visitor'
+                    message='There are no Visitors. App is sad.'
                 /> :
                 <div>
                     <div>

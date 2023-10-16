@@ -5,12 +5,13 @@ import '../../styles/Console.css';
 
 const NoData = props => {
 
+    //just formats up the no visitor message
     const container = {
 
         width: '100%',
-        height: '80vh',
-        color: '253061',
-        padding: '50px',
+        height: '70vh',
+        // color: '253061',
+        padding: '30px',
         display: 'flex',
         flexDirection: 'row',
         alignItems: 'center',
@@ -18,7 +19,7 @@ const NoData = props => {
     }
 
     const text = {
-        fontSize: '12px',
+        fontSize: '16px',
         width: '300px',
         padding: '10px',
         textAlign: 'center',
@@ -35,16 +36,7 @@ const NoData = props => {
                     onClick={props.clickChip ? props.onClickChip : null}
                 />
 
-                <div style={{
-                    display: 'block',
-                    margin: '20px auto',
-                    height: '300px',
-                    width: '300px',
-                    // backgroundImage: 'url(' + novImage + ')',
-                    backgroundRepeat: 'no-repeat',
-                    backgroundSize: 'contain',
-                    backgroundPosition: 'center',
-                }}></div>
+
             </div>
         </div>
     )

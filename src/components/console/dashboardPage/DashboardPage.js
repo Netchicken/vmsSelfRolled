@@ -5,7 +5,7 @@ import { CountVisitorsOnSiteNowDB, CountVisitorsOnSiteToday, CountVisitorsOnSite
 import { UserData, UserID } from "../../../App"; //imports data from app
 
 
-
+//dashboard page is inside of Console page
 
 const DashboardPage = () => {
 
