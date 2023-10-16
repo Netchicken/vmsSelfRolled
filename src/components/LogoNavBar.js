@@ -1,28 +1,42 @@
-import React from 'react';
-import vsLogo from '../assets/logo-mobile.svg';
+import React, { useRef } from 'react';
 import { ReactComponent as Logo } from "../assets/logo-mobile.svg";
-
+import { useEffect, useState } from 'react';
+//This removes the logo on the mobile version when it interfers with showing the menu. https://bobbyhadz.com/blog/react-get-window-width-height
 const NameLogo = (props) => {
+    const [windowSize, setWindowSize] = useState(getWindowSize());
 
-    const nameLogo = {
-        // height: props.height,
-        // width: '100%',
-        backgroundImage: 'url(' + vsLogo + ')',
+    useEffect(() => {
+        function handleWindowResize() {
+            setWindowSize(getWindowSize());
+        }
 
-        // backgroundRepeat: 'no-repeat',
-        // backgroundSize: 'contain',
-        // display: 'inline-block',
-        // alignContent: 'center',
-        // textAlign: 'center',
-        // backgroundPosition: 'center',
+        window.addEventListener('resize', handleWindowResize);
+
+        return () => {
+            window.removeEventListener('resize', handleWindowResize);
+        };
+    }, []);
+
+
+    function getWindowSize() {
+        const { innerWidth, innerHeight } = window;
+        return { innerWidth, innerHeight };
     }
 
+
+    const windowWidth = useRef(window.innerWidth);
+    console.log("windowWidth", windowWidth);
     return (
-        <div >
-            <Logo height={50} />
-            {/* <img src="../assets/logo-mobile.svg" alt="Vision College" height={50} /> */}
+        <div>
+
+            {windowSize.innerWidth < 500 ? "" : <Logo height={50} />}
+            {/* <Logo height={50} /> */}
+
         </div>
     )
 };
+
+
+
 
 export default NameLogo;

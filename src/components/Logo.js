@@ -15,6 +15,10 @@ const Logo = (props) => {
         backgroundPosition: 'center',
     }
 
+
+
+
+
     return (
         <div style={logo}>
         </div>

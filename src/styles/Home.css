@@ -139,6 +139,8 @@ body.header-fixed header {
     }
 }
 
+
+
 @media all and (max-width: 600px) {
     .navigation {
         flex-flow: column wrap;
@@ -157,7 +159,7 @@ body.header-fixed header {
     }
 }
 
-
+@media all and (max-width: 400) {}
 
 .home-topBanner {
     width: 100%;
