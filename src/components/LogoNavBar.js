@@ -29,7 +29,7 @@ const NameLogo = (props) => {
     return (
         <div>
 
-            {windowSize.innerWidth < 500 ? "" : <Logo height={50} />}
+            {windowSize.innerWidth < 600 ? "" : <Logo height={50} />}
             {/* <Logo height={50} /> */}
 
         </div>
