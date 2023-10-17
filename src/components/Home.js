@@ -1,10 +1,7 @@
 import React, { useState } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
 import "../styles/Home.css";
 import "../styles/Common.css";
 import TopBar from "./TopBar";
-import BottomBar from "../components/BottomBar";
-import { UserData, BusinessCategories } from "../App"; //imports data from app
 import styled from 'styled-components';
 
 

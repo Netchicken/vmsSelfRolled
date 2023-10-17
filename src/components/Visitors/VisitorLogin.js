@@ -26,8 +26,7 @@ const VisitorLogin = () => {
     const [loggingIn, setLoggingIn] = useState(false);
     const [businessName, setBusinessName] = useState(BusinessCategories.businessName);
     const [businessBranch, setBusinessBranch] = useState(BusinessCategories.businessBranch);
-    const [businessSlogan, setBusinessSlogan] = useState(BusinessCategories.businessSlogan);
-    const [welcomeMessage, setWelcomeMessage] = useState(BusinessCategories.welcomeMessage);
+
     // const [notLoggedOut, setnotLoggedOut] = useState([]);
 
 
@@ -51,8 +50,6 @@ const VisitorLogin = () => {
             userID: UserID,
             dayOfYear: getDayOfYear(Date.now()),
         }).then(() => {
-
-
             setLoggingIn(false);
             setVisitorName("");
             setDepartment("");
@@ -78,7 +75,7 @@ const VisitorLogin = () => {
 
                 </div>
                 <div className="form-group">
-                    {/* <Stack spacing={2} direction="row" sx={{ marginBottom: 0.5 }}> */}
+
                     <TextField
                         className='input'
                         id='lvisitorname'
@@ -102,8 +99,6 @@ const VisitorLogin = () => {
                         required={true}
 
                     />
-                    {/* </Stack> */}
-                    {/* <Stack spacing={2} direction="row" sx={{ marginBottom: 2 }}> */}
                     <TextField
                         className='input'
                         id='lDepartment'
@@ -126,7 +121,7 @@ const VisitorLogin = () => {
                         fullWidth={true}
                         required={true}
                     />
-                    {/* </Stack> */}
+
                     <Button
                         className='auth-button'
                         variant='contained'
@@ -137,16 +132,11 @@ const VisitorLogin = () => {
                     >
                         {loggingIn ? "Logging In..." : "Login"}
                     </Button>
-
                     <div>
                     </div>
-
-
                 </div>
             </div>
-
             <NotLoggedOut UserID={UserID} />
-
         </div>
     )
 }
