@@ -19,41 +19,6 @@
     flex: 0 1 auto;
 }
 
-.setup-sidebar {
-    width: 20%;
-    background-color: white;
-    height: 100%;
-    font-size: 14px;
-    border-right: solid 1px #E0E5F6;
-    position: fixed;
-    /* Fixed Sidebar (stay in place on scroll) */
-    z-index: 1;
-    /* Stay on top */
-    overflow-x: hidden;
-    /* Disable horizontal scroll */
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-
-.setup-sidebar-content {
-    padding: 20px;
-}
-
-.setup-sidebar-footer {
-    border-top: solid 1px #E0E5F6;
-    padding: 20px 10px 20px 10px;
-    font-size: 12px;
-}
-
-.setup-logo {
-    margin-bottom: 40px;
-    padding: 50px;
-    border-bottom: solid 1px #E0E5F6;
-    background-color: white;
-    cursor: pointer;
-}
-
 .setup-content {
     /* width: 80%; */
     background-color: white;

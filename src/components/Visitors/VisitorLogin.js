@@ -78,55 +78,55 @@ const VisitorLogin = () => {
 
                 </div>
                 <div className="form-group">
-                    <Stack spacing={2} direction="row" sx={{ marginBottom: 0.5 }}>
-                        <TextField
-                            className='input'
-                            id='lvisitorname'
-                            variant='outlined'
-                            type='text'
-                            label='Enter your name'
-                            value={visitorName}
-                            onChange={e => setVisitorName(e.target.value)}
-                            fullWidth={true}
-                            required={true}
+                    {/* <Stack spacing={2} direction="row" sx={{ marginBottom: 0.5 }}> */}
+                    <TextField
+                        className='input'
+                        id='lvisitorname'
+                        variant='outlined'
+                        type='text'
+                        label='Enter your name'
+                        value={visitorName}
+                        onChange={e => setVisitorName(e.target.value)}
+                        fullWidth={true}
+                        required={true}
 
-                        /> <TextField
-                            className='input'
-                            id='lphonel'
-                            variant='outlined'
-                            type='text'
-                            label='Enter your phone number'
-                            value={visitorPhone}
-                            onChange={e => setVisitorPhone(e.target.value)}
-                            fullWidth={true}
-                            required={true}
+                    /> <TextField
+                        className='input'
+                        id='lphonel'
+                        variant='outlined'
+                        type='text'
+                        label='Enter your phone number'
+                        value={visitorPhone}
+                        onChange={e => setVisitorPhone(e.target.value)}
+                        fullWidth={true}
+                        required={true}
 
-                        />
-                    </Stack>
-                    <Stack spacing={2} direction="row" sx={{ marginBottom: 2 }}>
-                        <TextField
-                            className='input'
-                            id='lDepartment'
-                            variant='outlined'
-                            type='text'
-                            label='What department are you visiting'
-                            value={department}
-                            onChange={e => setDepartment(e.target.value)}
-                            fullWidth={true}
-                            required={true}
-                        />
-                        <TextField
-                            className='input'
-                            id='lperson'
-                            variant='outlined'
-                            type='text'
-                            label='Who are you visiting'
-                            value={departmentPerson}
-                            onChange={e => setDepartmentPerson(e.target.value)}
-                            fullWidth={true}
-                            required={true}
-                        />
-                    </Stack>
+                    />
+                    {/* </Stack> */}
+                    {/* <Stack spacing={2} direction="row" sx={{ marginBottom: 2 }}> */}
+                    <TextField
+                        className='input'
+                        id='lDepartment'
+                        variant='outlined'
+                        type='text'
+                        label='What department are you visiting'
+                        value={department}
+                        onChange={e => setDepartment(e.target.value)}
+                        fullWidth={true}
+                        required={true}
+                    />
+                    <TextField
+                        className='input'
+                        id='lperson'
+                        variant='outlined'
+                        type='text'
+                        label='Who are you visiting'
+                        value={departmentPerson}
+                        onChange={e => setDepartmentPerson(e.target.value)}
+                        fullWidth={true}
+                        required={true}
+                    />
+                    {/* </Stack> */}
                     <Button
                         className='auth-button'
                         variant='contained'
