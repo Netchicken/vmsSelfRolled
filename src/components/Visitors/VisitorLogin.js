@@ -7,7 +7,7 @@ import { auth, db } from "../firebase/Config";
 import { getVisitorsNotLoggedOut, } from "../firebase/DBOperations";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { UserID, UserData, BusinessCategories } from "../../App"; //imports data from app
-import NameLogo from "../../components/NameLogo";
+import NameLogo from "../../components/LogoNavBar";
 import { format, getDayOfYear } from "date-fns";
 import { TextField, Stack, Button, } from "@mui/material";
 import NotLoggedOut from "./NotLoggedOut";
@@ -71,7 +71,7 @@ const VisitorLogin = () => {
             <div className='vcontainer'>
                 {/* <div className='login-form-area'> */}
                 <div className='login-name-logo' onClick={goToHomePage}>
-                    <NameLogo height='60px' /> </div>
+                    <NameLogo height='50px' /> </div>
                 <div>
                     <h2>Please  <span style={{ color: '#3485ff', fontWeight: 'bold' }}>Log In</span></h2>
                     <h2>Welcome to <span style={{ color: '#3485ff', fontWeight: 'bold' }}>{businessName} {businessBranch}</span></h2>

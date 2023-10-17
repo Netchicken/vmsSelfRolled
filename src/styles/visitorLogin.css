@@ -130,7 +130,12 @@ fieldset {
 } */
 
 .login-name-logo {
-    margin: 10px;
+    display: inline;
+    display: flex;
+    margin: auto;
+    align-self: center;
+    align-content: center;
+    align-items: center;
     cursor: pointer;
 }
 
