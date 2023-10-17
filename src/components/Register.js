@@ -227,7 +227,7 @@ const Register = () => {
       </AppContainer>
       <div className='login-form-area'>
 
-        <h3>Register a new Business with an Admin User</h3>
+        <div style={{ fontSize: "1.5em", fontWeight: 'bold' }}>Register a new Business with an Admin User</div>
 
 
         <form onSubmit={handleSubmit}>
@@ -318,17 +318,16 @@ const Register = () => {
             variant='contained'
             color='primary'
             size='large'
-            onClick={handleSubmit}
-          >
+            type="submit"
+            onClick={handleSubmit}>
             Register a new Admin User
           </Button>
 
-          <Button variant="outlined" color="secondary" type="submit">.</Button>
         </form>
 
         <form onSubmit={handleSubmit}>
-          <Button variant="outlined" color="secondary" type="submit">.</Button>
-        </form>
+          <Button variant="" color="secondary" type="submit">.</Button>
+        </form>test
       </div>
     </div>
 
