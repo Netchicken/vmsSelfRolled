@@ -28,15 +28,21 @@ const QRCoder = () => {
     const [back, setBack] = useState('#FFFFFF');
     const [fore, setFore] = useState('#000000');
     const [size, setSize] = useState(256);
-    const location = useLocation()
+    const location = useLocation();
+
 
     let locFull = window.location.href;  //location.pathname;
     let locUsed = locFull.split("/")[0] + locFull.split("/")[1] + locFull.split("/")[2] + "/vloginqr/${" + UserID + "}";
     const [value, setValue] = useState(locUsed);
     //http://localhost:3000/visitorLogin
-
+    //http://localhost:3000/vloginqr/$%7BzKrDsscyDXN7lQbdujUjjcj3N5K2%7D
     console.log("location", locFull);
 
+
+    let navigate = useNavigate();
+    const goToVisitorLoginPage = () => {
+        navigate("/vloginqr/${" + UserID + "}");
+    }
     return (
         <div className='setup-content'>
             <AppContainer>
@@ -46,6 +52,7 @@ const QRCoder = () => {
 
                 <h2>{title}</h2>
                 <h3>{value}</h3>
+                <h4> <a onClick={goToVisitorLoginPage}> Check Login Page Link ... </a></h4>
                 <center>
 
                     {value && (
@@ -58,6 +65,9 @@ const QRCoder = () => {
                         />
                     )}
                 </center>
+
+
+
             </div>
         </div >
     )

@@ -18,7 +18,7 @@ const VisitorLogin = () => {
     //check to make sure that there is an admin login
 
     //if there is an admin login, then check to see if there is a visitor login for the current date
-
+    const { UserIDParam, setUserIDParam } = useParams();
     const [visitorName, setVisitorName] = useState("");
     const [visitorPhone, setVisitorPhone] = useState("");
     const [department, setDepartment] = useState("");
@@ -29,7 +29,7 @@ const VisitorLogin = () => {
 
     // const [notLoggedOut, setnotLoggedOut] = useState([]);
 
-
+    console.log("UserIDParam", UserIDParam);
     let navigate = useNavigate(); //https://stackoverflow.com/questions/71173957/how-to-use-history-push-in-react-router-dom-version-6-0-0
 
     const login = async () => {
