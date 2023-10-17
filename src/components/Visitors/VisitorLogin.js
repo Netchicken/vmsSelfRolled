@@ -4,7 +4,7 @@ import "../../styles/visitorLogin.css";
 import "../../styles/roundButtons.css";
 import { doc, collection, setDoc, updateDoc } from "firebase/firestore";
 import { auth, db } from "../firebase/Config";
-import { getVisitorsNotLoggedOut, } from "../firebase/DBOperations";
+
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { UserID, UserData, BusinessCategories } from "../../App"; //imports data from app
 import NameLogo from "../../components/LogoNavBar";
