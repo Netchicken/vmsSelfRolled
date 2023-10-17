@@ -215,8 +215,10 @@ body.header-fixed header {
 .ptext {
     font: 20px/1.5 Helvetica, sans-serif;
     /* padding-left: 60px; */
-    color: #568eb4;
-    background: rgb(200, 214, 214);
+    color: #031a29;
+    border: 0.5px solid #1565C0;
+
+    /* background: rgb(200, 214, 214); */
     border-radius: 0 0.9rem 0.9rem 0.9rem;
     margin: 0.5rem 0.5rem 0.5rem 0.5rem;
     min-height: 3rem;

@@ -2,9 +2,10 @@
 
 
 .vcontainer {
-    display: flex;
+    /* display: flex; */
     height: 100%;
     /*   width: 100%; */
+    padding-top: 0.5em;
     max-width: 40rem;
     display: block;
     margin: auto;
@@ -99,9 +100,7 @@
 } */
 
 .login-name-logo {
-    display: inline;
-    display: flex;
-    margin: auto;
+
     align-self: center;
     align-content: center;
     align-items: center;

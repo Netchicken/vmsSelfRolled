@@ -28,7 +28,7 @@ const NameLogo = (props) => {
     console.log("windowWidth", windowWidth);
     return (
         <div>
-            {windowSize.innerWidth < 600 ? "" : <Logo height={50} />}
+            {windowSize.innerWidth < 500 ? "" : <Logo height={50} />}
         </div>
     )
 };

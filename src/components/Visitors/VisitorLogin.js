@@ -67,11 +67,12 @@ const VisitorLogin = () => {
         <div>
             <div className='vcontainer'>
                 {/* <div className='login-form-area'> */}
-                <div className='login-name-logo' onClick={goToHomePage}>
+                <div style={{ alignItems: "center" }} className='login-name-logo' onClick={goToHomePage}>
                     <NameLogo height='50px' /> </div>
-                <div>
-                    <h2>Please  <span style={{ color: '#3485ff', fontWeight: 'bold' }}>Log In</span></h2>
-                    <h2>Welcome to <span style={{ color: '#3485ff', fontWeight: 'bold' }}>{businessName} {businessBranch}</span></h2>
+                <div style={{ paddingLeft: "0.3em", fontSize: "1.5em", fontWeight: 'bold' }}>
+                    <div >Welcome to <span style={{ color: '#3485ff' }}>{businessName} {businessBranch}</span></div>
+                    <div>Please  <span style={{ color: '#3485ff', }}>Log In</span></div>
+
 
                 </div>
                 <div className="form-group">
