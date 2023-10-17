@@ -26,10 +26,12 @@ const VisitorLogin = () => {
     const [loggingIn, setLoggingIn] = useState(false);
     const [businessName, setBusinessName] = useState(BusinessCategories.businessName);
     const [businessBranch, setBusinessBranch] = useState(BusinessCategories.businessBranch);
-
+    let userid = useParams();
     // const [notLoggedOut, setnotLoggedOut] = useState([]);
-
-    console.log("UserIDParam", UserIDParam);
+    let newuserid = userid.userid.slice(2);
+    userid = newuserid.replace(/}/, '');
+    console.log("userid", userid); //${zKrDsscyDXN7lQbdujUjjcj3N5K2}  zKrDsscyDXN7lQbdujUjjcj3N5K2
+    //console.log("UserIDParam", UserIDParam.userid);
     let navigate = useNavigate(); //https://stackoverflow.com/questions/71173957/how-to-use-history-push-in-react-router-dom-version-6-0-0
 
     const login = async () => {
@@ -40,14 +42,14 @@ const VisitorLogin = () => {
     const SaveToDb = () => {
         const vcUsersRef = collection(db, "visitors");
         const DayOfTheYear = getDayOfYear(Date.now());
-        setDoc(doc(vcUsersRef, UserID + visitorPhone), {
+        setDoc(doc(vcUsersRef, UserIDParam + visitorPhone), {
             visitorName: visitorName,
             visitorPhone: visitorPhone,
             department: department,
             departmentPerson: departmentPerson,
             dateIn: format(Date.now(), "yyyy-MM-dd HH:MM:SS"),
             dateOut: "",
-            userID: UserID,
+            userID: UserIDParam,
             dayOfYear: getDayOfYear(Date.now()),
         }).then(() => {
             setLoggingIn(false);
@@ -71,10 +73,12 @@ const VisitorLogin = () => {
                     <NameLogo height='50px' /> </div>
                 <div style={{ paddingLeft: "0.3em", fontSize: "1.5em", fontWeight: 'bold' }}>
                     <div >Welcome to <span style={{ color: '#3485ff' }}>{businessName} {businessBranch}</span></div>
-                    <div>Please  <span style={{ color: '#3485ff', }}>Log In</span></div>
-
-
+                    <div>Please  <span style={{ color: '#3485ff', }}>Log In</span>  </div>
                 </div>
+                <div>Param = {userid.userid}   Mobile version</div>
+
+
+
                 <div className="form-group">
 
                     <TextField
@@ -137,7 +141,7 @@ const VisitorLogin = () => {
                     </div>
                 </div>
             </div>
-            <NotLoggedOut UserID={UserID} />
+            <NotLoggedOut UserID={UserIDParam} />
         </div>
     )
 }
