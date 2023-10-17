@@ -16,6 +16,7 @@ import Console from "./components/console/Console";
 import InitialSetup from "./components/InitialSetup";
 import VisitorLogin from "./components/Visitors/VisitorLogin";
 import Login from "./components/Login";
+import QRCode from "./components/qrCodeGen/QRCoder";
 import { auth, db } from "./components/firebase/Config";
 import {
   getData,
@@ -39,11 +40,6 @@ export let AppData = null;
 export let UserData = null;
 export let UserID = null;
 export let BusinessCategories = "";
-// export let DefaultParameters = "";
-// export let DefaultLogo = "";
-// export let DefaultHomeBkgImage = "";
-// export let DefaultAdvert = "";
-// export let PurposeOfVisitOptions = "";
 export let DefaultSettings = "";
 
 function App() {
@@ -131,7 +127,7 @@ function App() {
           <Route path='/setup' element={<InitialSetup />} />
           <Route path='/visitorLogin' element={<VisitorLogin />} />
           <Route path='/authentication' element={<Auth />} />
-
+          <Route path='/qrcode' element={<QRCode />} />
           <Route path='/console' element={<Console />} />
         </Routes>
       </div>

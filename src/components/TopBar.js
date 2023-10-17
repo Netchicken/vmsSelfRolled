@@ -80,6 +80,12 @@ const MobileNav = styled.ul`
 const TopBar = (props) => {
   let navigate = useNavigate();
 
+  const goToQRPage = () => {
+    const authType = true;
+    navigate("/qrcode", { state: authType });
+    console.log("QRCoder", navigate);
+  };
+
   const goToLoginPage = () => {
     const authType = true;
     navigate("/authentication", { state: authType });
@@ -122,6 +128,7 @@ const TopBar = (props) => {
         <NavItem>  <a onClick={goToRegisterPage}> Register for Admin </a></NavItem>
         <NavItem>  <a onClick={goToLoginPage}> Admin Login </a></NavItem>
         <NavItem>  <a onClick={goToConsolePage}> Go to Console </a></NavItem>
+        <NavItem>  <a onClick={goToQRPage}> Go to QR Page </a></NavItem>
       </DesktopNav>
 
       <MobileNav style={{ display: isMobileNavOpen ? 'flex' : 'none' }}>
