@@ -29,14 +29,13 @@ const QRCoder = () => {
     const [fore, setFore] = useState('#000000');
     const [size, setSize] = useState(256);
     const location = useLocation()
-    //  let loc = location.pathname.split("/");
+
     let locFull = window.location.href;  //location.pathname;
-    let loc = locFull.split("/")[2] + "/visitorLogin";
-    let locUsed = locFull.split("/")[0] + locFull.split("/")[1] + locFull.split("/")[2] + "/visitorLogin";
+    let locUsed = locFull.split("/")[0] + locFull.split("/")[1] + locFull.split("/")[2] + "/vloginqr/${" + UserID + "}";
     const [value, setValue] = useState(locUsed);
     //http://localhost:3000/visitorLogin
 
-    console.log("location", locFull + " " + loc);
+    console.log("location", locFull);
 
     return (
         <div className='setup-content'>

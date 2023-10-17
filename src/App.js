@@ -17,6 +17,7 @@ import InitialSetup from "./components/InitialSetup";
 import VisitorLogin from "./components/Visitors/VisitorLogin";
 import Login from "./components/Login";
 import QRCode from "./components/qrCodeGen/QRCoder";
+import VisitorLoginQR from "./components/qrCodeGen/VisitorLoginQR";
 import { auth, db } from "./components/firebase/Config";
 import {
   getData,
@@ -128,6 +129,7 @@ function App() {
           <Route path='/visitorLogin' element={<VisitorLogin />} />
           <Route path='/authentication' element={<Auth />} />
           <Route path='/qrcode' element={<QRCode />} />
+          <Route path='/vloginqr' element={<VisitorLoginQR />} />
           <Route path='/console' element={<Console />} />
         </Routes>
       </div>
