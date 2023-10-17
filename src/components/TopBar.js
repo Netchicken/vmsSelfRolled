@@ -2,7 +2,6 @@ import React from "react";
 import NameLogo from "./LogoNavBar";
 import "../styles/Home.css";
 import styled from 'styled-components';
-import vsLogo from '../assets/logo-mobile.svg';
 import { useNavigate, useLocation } from "react-router-dom";
 import { UserData, BusinessCategories } from "../App"; //imports data from app
 
@@ -19,6 +18,7 @@ const Nav = styled.nav`
 const NavItem = styled.li`
   list-style: none;
   margin: 0 1rem;
+  padding: 0.25rem 0.5rem;
 
   a {
     color: #fff;
