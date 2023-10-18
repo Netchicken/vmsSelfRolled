@@ -31,11 +31,23 @@ const VisitorLoginQR = () => {
     const [logIn, setLogIn] = useState("Log in");
     let { userid } = useParams();
     //http://localhost:3000/vloginqr/userid=zKrDsscyDXN7lQbdujUjjcj3N5K2
-    let newuserid = userid.slice(7);
-    userid = newuserid.replace(/}/, '');
-    console.log("userid", userid); //${zKrDsscyDXN7lQbdujUjjcj3N5K2}  zKrDsscyDXN7lQbdujUjjcj3N5K2
-    //console.log("UserIDParam", UserIDParam.userid);
+
     let navigate = useNavigate(); //https://stackoverflow.com/questions/71173957/how-to-use-history-push-in-react-router-dom-version-6-0-0
+
+    useEffect(() => {
+
+        formatUserID();
+    }, [UserIDParam]);
+
+
+
+    const formatUserID = () => {
+        //let newuserid = userid.slice(7);
+        let newuserid = userid;
+        userid = newuserid.replace(/}/, '');
+        console.log("userid", userid); //${zKrDsscyDXN7lQbdujUjjcj3N5K2}  zKrDsscyDXN7lQbdujUjjcj3N5K2
+        console.log("UserIDParam", UserIDParam.userid);
+    }
 
     const login = async () => {
         setLoggingIn("true");
@@ -43,6 +55,8 @@ const VisitorLoginQR = () => {
         //   SaveToDb();
         setVisible(!visible);
     };
+
+
 
     const SaveToDb = () => {
         const vcUsersRef = collection(db, "visitors");
