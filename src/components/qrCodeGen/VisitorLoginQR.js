@@ -27,6 +27,7 @@ const VisitorLoginQR = () => {
     const [businessName, setBusinessName] = useState(BusinessCategories.businessName);
     const [businessBranch, setBusinessBranch] = useState(BusinessCategories.businessBranch);
     const [visible, setVisible] = useState(true);
+    const [logIn, setLogIn] = useState("Log in");
     let userid = useParams();
     // const [notLoggedOut, setnotLoggedOut] = useState([]);
     let newuserid = userid.userid.slice(2);
@@ -37,6 +38,7 @@ const VisitorLoginQR = () => {
 
     const login = async () => {
         setLoggingIn("true");
+        setLogIn("Log out");
         //   SaveToDb();
         setVisible(!visible);
     };
@@ -64,6 +66,7 @@ const VisitorLoginQR = () => {
 
     const LogOut = () => {
         setVisible(!visible);
+        setLogIn("Log in");
     }
 
     const goToHomePage = () => {
@@ -79,7 +82,7 @@ const VisitorLoginQR = () => {
                     <NameLogo height='50px' /> </div>
                 <div style={{ paddingLeft: "0.3em", fontSize: "1.5em", fontWeight: 'bold' }}>
                     <div >Welcome to <span style={{ color: '#3485ff' }}>{businessName} {businessBranch}</span></div>
-                    <div>Please  <span style={{ color: '#3485ff', }}>Log In</span>  </div>
+                    <div>Please  <span style={{ color: '#3485ff', }}>{logIn}</span>  </div>
                 </div>
                 <div>Param = {userid}   Mobile version</div>
 
@@ -143,9 +146,10 @@ const VisitorLoginQR = () => {
                                 variant='contained'
                                 color='primary'
                                 size='large'
+                                disabled={!visible}
                                 onClick={login}
                             >
-                                {loggingIn ? "Logging In..." : "Login"}
+                                Login
                             </Button>
 
                             <Button
@@ -153,6 +157,7 @@ const VisitorLoginQR = () => {
                                 variant='contained'
                                 color='error'
                                 size='large'
+                                disabled={visible}
                                 onClick={LogOut}
                             >
                                 Logout
