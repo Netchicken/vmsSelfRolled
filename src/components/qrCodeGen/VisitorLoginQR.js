@@ -29,9 +29,9 @@ const VisitorLoginQR = () => {
     const [businessBranch, setBusinessBranch] = useState(BusinessCategories.businessBranch);
     const [visible, setVisible] = useState(true);
     const [logIn, setLogIn] = useState("Log in");
-    let userid = useParams();
-    // const [notLoggedOut, setnotLoggedOut] = useState([]);
-    let newuserid = userid.userid.slice(2);
+    let { userid } = useParams();
+    //http://localhost:3000/vloginqr/userid=zKrDsscyDXN7lQbdujUjjcj3N5K2
+    let newuserid = userid.slice(7);
     userid = newuserid.replace(/}/, '');
     console.log("userid", userid); //${zKrDsscyDXN7lQbdujUjjcj3N5K2}  zKrDsscyDXN7lQbdujUjjcj3N5K2
     //console.log("UserIDParam", UserIDParam.userid);
