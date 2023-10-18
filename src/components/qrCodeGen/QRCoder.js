@@ -32,7 +32,7 @@ const QRCoder = () => {
 
 
     let locFull = window.location.href;  //location.pathname;
-    let locUsed = locFull.split("/")[0] + locFull.split("/")[1] + locFull.split("/")[2] + "/vloginqr/userid=" + UserID;
+    let locUsed = locFull.split("/")[0] + locFull.split("/")[1] + locFull.split("/")[2] + "/vloginqr/?userid=" + UserID;
     const [value, setValue] = useState(locUsed);
     //http://localhost:3000/visitorLogin
     //http://localhost:3000/vloginqr/$%7BzKrDsscyDXN7lQbdujUjjcj3N5K2%7D
