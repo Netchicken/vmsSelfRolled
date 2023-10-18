@@ -24,7 +24,7 @@ const Home = () => {
 '>
         <h3 className="home-title">Steps to use this Visitor Management System</h3>
 
-        <p className="ptext">Register your business with "Register For Admin". This creates your business profile and gives you a unique ID" Try <b>aaa@aaa.com</b> and PW <b>123qwe</b> </p>
+        <p className="ptext">Register your business with "Register For Admin". This creates your business profile and gives you a unique ID" Try aaa@aaa.com and PW 123qwe </p>
 
         <p className="ptext">Login in with "Admin Login" on the public machine that will be used. </p>
 
