@@ -2,15 +2,16 @@ import React, { useState, useEffect, Fragment } from "react";
 // import "../../styles/Common.css";
 import "../../styles/visitorLogin.css";
 import "../../styles/roundButtons.css";
-import { doc, collection, setDoc, updateDoc } from "firebase/firestore";
+
 import { auth, db } from "../firebase/Config";
+import { doc, collection, setDoc, updateDoc, query, where, getDoc, runTransaction } from "firebase/firestore";
 
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { UserID, UserData, BusinessCategories } from "../../App"; //imports data from app
 import NameLogo from "../LogoNavBar";
 import { format, getDayOfYear } from "date-fns";
 import { TextField, Stack, Button, Box } from "@mui/material";
-import NotLoggedOut from "../../components/Visitors/NotLoggedOut";
+
 
 
 const VisitorLoginQR = () => {
@@ -57,21 +58,44 @@ const VisitorLoginQR = () => {
             dayOfYear: getDayOfYear(Date.now()),
         }).then(() => {
             setLoggingIn(false);
-            setVisitorName("");
-            setDepartment("");
-            setVisitorPhone("");
-            setDepartmentPerson("");
+            // setVisitorName("");
+            // setDepartment("");
+            // setVisitorPhone("");
+            // setDepartmentPerson("");
         });
     };
 
     const LogOut = () => {
         setVisible(!visible);
         setLogIn("Log in");
+        //   runUpdateTrans();
     }
 
     const goToHomePage = () => {
         navigate("/");
     };
+    // https://firebase.google.com/docs/firestore/manage-data/transactions
+    const runUpdateTrans = async () => {
+        let docRef = doc(db, "visitors", userid + visitorPhone);
+        const timeLogout = format(Date.now(), "yyyy-MM-dd HH:MM:SS");
+        try {
+            await runTransaction(db, async (transaction) => {
+                const sfDoc = await transaction.get(docRef);
+                if (!sfDoc.exists()) {
+                    throw "Document does not exist!";
+                }
+                transaction.update(docRef, { dateOut: timeLogout });
+            });
+            console.log("Transaction successfully committed!");
+
+        } catch (e) {
+            console.log("Transaction failed: ", e);
+        }
+
+    }
+
+
+
 
 
     return (
