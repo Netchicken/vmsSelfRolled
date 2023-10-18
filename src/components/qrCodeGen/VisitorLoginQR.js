@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Fragment } from "react";
 // import "../../styles/Common.css";
 import "../../styles/visitorLogin.css";
 import "../../styles/roundButtons.css";
@@ -9,11 +9,11 @@ import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { UserID, UserData, BusinessCategories } from "../../App"; //imports data from app
 import NameLogo from "../LogoNavBar";
 import { format, getDayOfYear } from "date-fns";
-import { TextField, Stack, Button, } from "@mui/material";
+import { TextField, Stack, Button, Box } from "@mui/material";
 import NotLoggedOut from "../../components/Visitors/NotLoggedOut";
 
 
-const VisitorLogin = () => {
+const VisitorLoginQR = () => {
 
     //check to make sure that there is an admin login
 
@@ -26,6 +26,7 @@ const VisitorLogin = () => {
     const [loggingIn, setLoggingIn] = useState(false);
     const [businessName, setBusinessName] = useState(BusinessCategories.businessName);
     const [businessBranch, setBusinessBranch] = useState(BusinessCategories.businessBranch);
+    const [visible, setVisible] = useState(true);
     let userid = useParams();
     // const [notLoggedOut, setnotLoggedOut] = useState([]);
     let newuserid = userid.userid.slice(2);
@@ -36,20 +37,21 @@ const VisitorLogin = () => {
 
     const login = async () => {
         setLoggingIn("true");
-        SaveToDb();
+        //   SaveToDb();
+        setVisible(!visible);
     };
 
     const SaveToDb = () => {
         const vcUsersRef = collection(db, "visitors");
         const DayOfTheYear = getDayOfYear(Date.now());
-        setDoc(doc(vcUsersRef, UserIDParam + visitorPhone), {
+        setDoc(doc(vcUsersRef, userid + visitorPhone), {
             visitorName: visitorName,
             visitorPhone: visitorPhone,
             department: department,
             departmentPerson: departmentPerson,
             dateIn: format(Date.now(), "yyyy-MM-dd HH:MM:SS"),
             dateOut: "",
-            userID: UserIDParam,
+            userID: userid,
             dayOfYear: getDayOfYear(Date.now()),
         }).then(() => {
             setLoggingIn(false);
@@ -59,6 +61,10 @@ const VisitorLogin = () => {
             setDepartmentPerson("");
         });
     };
+
+    const LogOut = () => {
+        setVisible(!visible);
+    }
 
     const goToHomePage = () => {
         navigate("/");
@@ -75,76 +81,95 @@ const VisitorLogin = () => {
                     <div >Welcome to <span style={{ color: '#3485ff' }}>{businessName} {businessBranch}</span></div>
                     <div>Please  <span style={{ color: '#3485ff', }}>Log In</span>  </div>
                 </div>
-                <div>Param = {userid.userid}   Mobile version</div>
+                <div>Param = {userid}   Mobile version</div>
 
 
 
                 <div className="form-group">
+                    {visible && (
+                        <Fragment>
+                            <TextField
+                                className='input'
+                                id='lvisitorname'
+                                variant='outlined'
+                                type='text'
+                                label='Enter your name'
+                                value={visitorName}
+                                onChange={e => setVisitorName(e.target.value)}
+                                fullWidth={true}
+                                required={true} />
 
-                    <TextField
-                        className='input'
-                        id='lvisitorname'
-                        variant='outlined'
-                        type='text'
-                        label='Enter your name'
-                        value={visitorName}
-                        onChange={e => setVisitorName(e.target.value)}
-                        fullWidth={true}
-                        required={true}
 
-                    /> <TextField
-                        className='input'
-                        id='lphonel'
-                        variant='outlined'
-                        type='text'
-                        label='Enter your phone number'
-                        value={visitorPhone}
-                        onChange={e => setVisitorPhone(e.target.value)}
-                        fullWidth={true}
-                        required={true}
+                            <TextField
+                                className='input'
+                                id='lphonel'
+                                variant='outlined'
+                                type='text'
+                                label='Enter your phone number'
+                                value={visitorPhone}
+                                onChange={e => setVisitorPhone(e.target.value)}
+                                fullWidth={true}
+                                required={true}
 
-                    />
-                    <TextField
-                        className='input'
-                        id='lDepartment'
-                        variant='outlined'
-                        type='text'
-                        label='What department are you visiting'
-                        value={department}
-                        onChange={e => setDepartment(e.target.value)}
-                        fullWidth={true}
-                        required={true}
-                    />
-                    <TextField
-                        className='input'
-                        id='lperson'
-                        variant='outlined'
-                        type='text'
-                        label='Who are you visiting'
-                        value={departmentPerson}
-                        onChange={e => setDepartmentPerson(e.target.value)}
-                        fullWidth={true}
-                        required={true}
-                    />
+                            />
+                            <TextField
+                                className='input'
+                                id='lDepartment'
+                                variant='outlined'
+                                type='text'
+                                label='What department are you visiting'
+                                value={department}
+                                onChange={e => setDepartment(e.target.value)}
+                                fullWidth={true}
+                                required={true}
+                            />
+                            <TextField
+                                className='input'
+                                id='lperson'
+                                variant='outlined'
+                                type='text'
+                                label='Who are you visiting'
+                                value={departmentPerson}
+                                onChange={e => setDepartmentPerson(e.target.value)}
+                                fullWidth={true}
+                                required={true}
+                            />
+                        </Fragment>
+                    )}
+                    <Fragment>
+                        <Stack direction="row" spacing={2}>
+                            <Button
+                                className='auth-button'
+                                variant='contained'
+                                color='primary'
+                                size='large'
+                                onClick={login}
+                            >
+                                {loggingIn ? "Logging In..." : "Login"}
+                            </Button>
 
-                    <Button
-                        className='auth-button'
-                        variant='contained'
-                        color='primary'
-                        size='large'
-                        // // disabled={setLoggingIn}
-                        onClick={login}
-                    >
-                        {loggingIn ? "Logging In..." : "Login"}
-                    </Button>
+                            <Button
+                                className='auth-button'
+                                variant='contained'
+                                color='error'
+                                size='large'
+                                onClick={LogOut}
+                            >
+                                Logout
+                            </Button>
+                        </Stack>
+                    </Fragment>
                     <div>
+
+
                     </div>
                 </div>
             </div>
-            <NotLoggedOut UserID={UserIDParam} />
+
+            {/* <NotLoggedOut UserID={userid} /> */}
         </div>
     )
 }
 
-export default VisitorLogin
+export default VisitorLoginQR
 
