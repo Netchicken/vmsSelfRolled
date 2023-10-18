@@ -37,16 +37,17 @@ const VisitorLoginQR = () => {
     useEffect(() => {
 
         formatUserID();
-    }, [UserIDParam]);
+    }, [userid]);
 
 
 
     const formatUserID = () => {
-        //let newuserid = userid.slice(7);
-        let newuserid = userid;
+        let newuserid = userid.slice(1);
+        // let newuserid = userid;
         userid = newuserid.replace(/}/, '');
         console.log("userid", userid); //${zKrDsscyDXN7lQbdujUjjcj3N5K2}  zKrDsscyDXN7lQbdujUjjcj3N5K2
-        console.log("UserIDParam", UserIDParam.userid);
+        // console.log("UserIDParam", UserIDParam.userid);
+        //aram = ${zKrDsscyDXN7lQbdujUjjcj3N5K2}
     }
 
     const login = async () => {

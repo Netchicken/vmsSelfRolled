@@ -83,7 +83,7 @@ const TopBar = (props) => {
   const goToQRPage = () => {
     const authType = true;
     navigate("/qrcode", { state: authType });
-    console.log("QRCoder", navigate);
+    //console.log("QRCoder", navigate);
   };
 
   const goToLoginPage = () => {

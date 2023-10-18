@@ -41,7 +41,7 @@ export let AppData = null;
 export let UserData = null;
 export let UserID = null;
 export let BusinessCategories = "";
-//export let DefaultSettings = "";
+export let DefaultSettings = "";
 
 function App() {
 
@@ -68,7 +68,7 @@ function App() {
         // const purposeOfVisitOptionsRef = await getPurposeOfVisitOptionsRef();
         // console.log("purposeOfVisitOptionsRef", purposeOfVisitOptionsRef[0]);
         //  const defaultSettingsRef = db.collection("settings-default").doc("default");
-        // const defaultSettingsRef = getDefaultSettingsRef(user);
+        const defaultSettingsRef = getDefaultSettingsRef(user);
 
         userDataRef //if there is a user logged in then get the rest of the data
           .then((doc) => {
@@ -85,58 +85,57 @@ function App() {
                     //  console.log("BusinessCategories", BusinessCategories);
                   });
 
-                  //   defaultSettingsRef  // not used here?
-                  //     .get()
-                  //     .then((doc) => {
-                  //       if (doc.exists) {
-                  //         DefaultSettings = doc.data(); //sets default settings to be exported
+                  defaultSettingsRef  // not used here?
+                    .get()
+                    .then((doc) => {
+                      if (doc.exists) {
+                        DefaultSettings = doc.data(); //sets default settings to be exported
 
-                  //         AppData = {
-                  //           //sets app data to be exported
-                  //           userData: UserData,
-                  //           businessCategories: BusinessCategories,
-                  //           defaultSettings: DefaultSettings,
-                  //         };
+                        AppData = {
+                          //sets app data to be exported
+                          userData: UserData,
+                          businessCategories: BusinessCategories,
+                          defaultSettings: DefaultSettings,
+                        };
 
-                  //       }
-                  //     })
-                  // })
-                  // .catch((error) => {
+                      }
+                    })
+                })
+                .catch((error) => {
 
-                  //   console.log("Error getting documents: ", error);
-                  // });
-                  // } else {
-
-                  //   console.log("No such document!");
-                  // }
+                  console.log("Error getting documents: ", error);
                 });
             } else {
 
-              console.log("No BusinessCategories login");
+              console.log("No such document!");
             }
           });
-      };
+      } else {
 
-      return (
-        <BrowserRouter>
-          <div>
-            <CssBaseline />
-            <Routes>
-              <Route path='/login' element={<Login />} />
+        console.log("No BusinessCategories login");
+      }
+    });
+  };
 
-              <Route path='/' element={<Home />} />
-              <Route path='/setup' element={<InitialSetup />} />
-              <Route path='/visitorLogin' element={<VisitorLogin />} />
-              <Route path='/authentication' element={<Auth />} />
-              <Route path='/qrcode' element={<QRCode />} />
-              <Route path='/vloginqr/:userid' element={<VisitorLoginQR />} />
-              <Route path='/console' element={<Console />} />
-            </Routes>
-          </div>
-        </BrowserRouter>
-      );
-    }
-    )
-  }
+  return (
+    <BrowserRouter>
+      <div>
+        <CssBaseline />
+        <Routes>
+          <Route path='/login' element={<Login />} />
+
+          <Route path='/' element={<Home />} />
+          <Route path='/setup' element={<InitialSetup />} />
+          <Route path='/visitorLogin' element={<VisitorLogin />} />
+          <Route path='/authentication' element={<Auth />} />
+          <Route path='/qrcode' element={<QRCode />} />
+          <Route path='/vloginqr/?userid=' element={<VisitorLoginQR />} />
+          <Route path='/console' element={<Console />} />
+        </Routes>
+      </div>
+    </BrowserRouter>
+  );
 }
+
+//
 export default App;
