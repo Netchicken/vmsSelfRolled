@@ -36,16 +36,16 @@ const VisitorLoginQR = () => {
 
     useEffect(() => {
 
-        formatUserID();
+        FormatUserID();
     }, [userid]);
 
 
 
-    const formatUserID = () => {
+    const FormatUserID = () => {
         // let newuserid = userid.slice(1);
         // let newuserid = userid;
         // userid = newuserid.replace(/}/, '');
-        // console.log("userid", userid); //${zKrDsscyDXN7lQbdujUjjcj3N5K2}  zKrDsscyDXN7lQbdujUjjcj3N5K2
+
         // console.log("UserIDParam", UserIDParam.userid);
         //aram = ${zKrDsscyDXN7lQbdujUjjcj3N5K2}
 
@@ -53,7 +53,7 @@ const VisitorLoginQR = () => {
         // get userId
         userid = location.state.userID;
 
-
+        console.log("userid visitorLogin", userid); //https://vmsnz.netlify.app/vloginqr/?userid=zKrDsscyDXN7lQbdujUjjcj3N5K2
         // const { state } = useLocation();
         // userid = state || {};
 
