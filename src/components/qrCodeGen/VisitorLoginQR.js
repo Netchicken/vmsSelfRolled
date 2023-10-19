@@ -19,7 +19,7 @@ const VisitorLoginQR = () => {
     //check to make sure that there is an admin login
 
     //if there is an admin login, then check to see if there is a visitor login for the current date
-    const { UserIDParam, setUserIDParam } = useParams();
+    // const { UserIDParam, setUserIDParam } = useParams();
     const [visitorName, setVisitorName] = useState("");
     const [visitorPhone, setVisitorPhone] = useState("");
     const [department, setDepartment] = useState("");
@@ -42,12 +42,22 @@ const VisitorLoginQR = () => {
 
 
     const formatUserID = () => {
-        let newuserid = userid.slice(1);
+        // let newuserid = userid.slice(1);
         // let newuserid = userid;
-        userid = newuserid.replace(/}/, '');
-        console.log("userid", userid); //${zKrDsscyDXN7lQbdujUjjcj3N5K2}  zKrDsscyDXN7lQbdujUjjcj3N5K2
+        // userid = newuserid.replace(/}/, '');
+        // console.log("userid", userid); //${zKrDsscyDXN7lQbdujUjjcj3N5K2}  zKrDsscyDXN7lQbdujUjjcj3N5K2
         // console.log("UserIDParam", UserIDParam.userid);
         //aram = ${zKrDsscyDXN7lQbdujUjjcj3N5K2}
+
+        const location = useLocation();
+        // get userId
+        userid = location.state.userID;
+
+
+        // const { state } = useLocation();
+        // userid = state || {};
+
+
     }
 
     const login = async () => {
