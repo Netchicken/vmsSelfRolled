@@ -21,6 +21,7 @@ const NotLoggedOut = ({ UserID }) => {
     };
     // https://firebase.google.com/docs/firestore/manage-data/transactions
     const runUpdateTrans = async ({ item }) => {
+        
         let docRef = doc(db, "visitors", UserID + item.visitorPhone);
         const timeLogout = format(Date.now(), "yyyy-MM-dd HH:MM:SS");
         try {

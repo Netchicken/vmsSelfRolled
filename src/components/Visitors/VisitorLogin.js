@@ -40,6 +40,7 @@ const VisitorLogin = () => {
     const SaveToDb = () => {
         const vcUsersRef = collection(db, "visitors");
         const DayOfTheYear = getDayOfYear(Date.now());
+        const dateNow = Date.now();
         setDoc(doc(vcUsersRef, UserID + visitorPhone), {
             visitorName: visitorName,
             visitorPhone: visitorPhone,

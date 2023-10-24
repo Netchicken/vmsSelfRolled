@@ -42,8 +42,10 @@ const QRCoder = () => {
     let navigate = useNavigate();
     const goToVisitorLoginPage = () => {
 
+
         // navigate('/detail-post', { state: { UserId } });
-        navigate('/vloginqr', { state: { userID: UserID, } });
+        // navigate('/vloginqr', { state: { userID: UserID, } });
+        navigate('/vloginqr');
     }
     console.log("UserID", UserID);
     return (

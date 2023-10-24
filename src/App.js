@@ -129,7 +129,7 @@ function App() {
           <Route path='/visitorLogin' element={<VisitorLogin />} />
           <Route path='/authentication' element={<Auth />} />
           <Route path='/qrcode' element={<QRCode />} />
-          <Route path='/vloginqr/:userid' element={<VisitorLoginQR />} />
+          <Route path='/vloginqr' element={<VisitorLoginQR />} />
           <Route path='/console' element={<Console />} />
         </Routes>
       </div>
@@ -137,5 +137,5 @@ function App() {
   );
 }
 
-//
+///:userid
 export default App;

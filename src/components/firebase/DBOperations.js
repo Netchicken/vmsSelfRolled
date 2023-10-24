@@ -163,6 +163,8 @@ export const getDefaultSettingsRef = async (user) => {
   return "No data";
 };
 
+
+//not used
 export const getTodayUsersVisitorsData = async (user) => {
   const data = [];
 
@@ -180,6 +182,7 @@ export const getTodayUsersVisitorsData = async (user) => {
   return "No data";
 };
 
+//not used
 export const getAllVisitorsData = async (user) => {
   const data = [];
   const q = query(collection(db, "visitors-" + user.uid));

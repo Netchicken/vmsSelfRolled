@@ -28,99 +28,19 @@ const Register = () => {
   let navigate = useNavigate();
 
   const [showPassword, setShowPassword] = useState(false);
-  const [business, setBusiness] = useState("Vision College");
+  const [business, setBusiness] = useState("");
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("123qwe");
-  const [businessSlogan, setBusinessSlogan] = useState("Changing Lives for Learning");
-  const [businessCategory, setBusinessCategory] = useState("Education");
-  const [businessBranch, setBusinessBranch] = useState("Christchurch");
-  const [welcomeMessage, setWelcomeMessage] = useState("Welcome to the Visitor Management System");
-
-
-  // const handleChange = (prop) => (event) => {
-  //   event.preventDefault();
-
-  //   // if (prop === "business" || prop === "email" || prop === "password" || prop === "business" ||
-  //   //   prop === "busnessSlogan" || prop === "businessCategory" || prop === "businessBranch" ||
-  //   //   prop === "welcomeMessage") {
-  //   if (prop === "email") {
-  //     setEmail(event.target.value);
-  //     console.log("register email = ", event.target.value);
-  //   }
-  //   if (prop === "password") {
-  //     setPassword(event.target.value);
-  //     console.log("register password = ", event.target.value);
-  //   }
-  //   if (prop === "business") {
-  //     setBusiness(event.target.value);
-  //     console.log("register businessName = ", event.target.value);
-  //   }
-  //   if (prop === "busnessSlogan") {
-  //     setBusinessSlogan(event.target.value);
-  //     console.log("register busnessSlogan = ", event.target.value);
-  //   }
-  //   if (prop === "businessCategory") {
-  //     setBusinessCategory(event.target.value);
-  //     console.log("register businessCategory = ", event.target.value);
-  //   }
-  //   if (prop === "businessBranch") {
-  //     setBusinessBranch(event.target.value);
-  //     console.log("register businessBranch = ", event.target.value);
-  //   }
-
-  //   if (prop === "welcomeMessage") {
-  //     setWelcomeMessage(event.target.value);
-  //     console.log("register welcomeMessage = ", event.target.value);
-  //   }
-  //   //}
-
-  //   // if (prop === "business" && prop === "email" && prop === "password" && prop === "business" &&
-  //   //   prop === "busnessSlogan" && prop === "businessCategory" && prop === "businessBranch" &&
-  //   //   prop === "welcomeMessage") {
-
-  //   // }
-
-  // };
+  const [password, setPassword] = useState("");
+  const [businessSlogan, setBusinessSlogan] = useState("");
+  const [businessCategory, setBusinessCategory] = useState("");
+  const [businessBranch, setBusinessBranch] = useState("");
+  const [welcomeMessage, setWelcomeMessage] = useState("");
 
 
   const handleClickShowPassword = () => {
     setShowPassword({ showPassword: !showPassword });
   };
 
-  // const handleClickedCheckedBoxTP = (name) => (event) => {
-  //   this.setState({
-  //     [name]: event.target.checked,
-  //     [name + "Error"]: false,
-  //   });
-  // };
-
-  const checkRegisterInputs = () => {
-    // if (businessName === '') {
-    //     this.setState(state => ({ businessNameError: 'Your Business Name is required' }));
-    // } else {
-    //     if (this.state.email === '') {
-    //         this.setState(state => ({ emailError: 'Your email is required' }));
-    //     } else {
-    //         if (!ValidateEmail(this.state.email)) {
-    //             this.setState(state => ({ emailError: 'Email is invalid' }));
-    //         } else {
-    //             if (this.state.password === '') {
-    //                 this.setState(state => ({ passwordError: 'Enter a password' }));
-    //             } else {
-    //                 if (!ValidatePassword(this.state.password)) {
-    //                     this.setState(state => ({ passwordError: 'Your password must be at least 6 characters' }));
-    //                 } else {
-    //                     if (this.state.checkedBoxTP === false) {
-    //                         this.setState(state => ({ checkedBoxTPError: true }));
-    //                     } else {
-    //                         this.register();
-    //                     }
-    //                 }
-    //             }
-    //         }
-    //     }
-    // }
-  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -164,39 +84,13 @@ const Register = () => {
 
     await createUserWithEmailAndPassword(auth, email, password)
       .then((data) => {
-
         console.log("DB Auth data = ", data);
-
         updateSettings(data.user.uid);
-
         SaveToDb(data); //generate a new entry
 
       });
 
   }
-
-
-  //   setDoc(doc(db, "vcUsers"), "Admin"), {
-  //     businessName: business,
-  //     email: email,
-  //     ID: data.user.uid,
-  //     initialSetup: true,
-  //     user: "Admin",
-  //     createdDate: format(Date.now(), "yyyy-MM-dd HH:MM:SS"),
-  //     lastLoginDate: format(Date.now(), "yyyy-MM-dd HH:MM:SS"),
-  //   }
-  // })
-  // .then((data) => {
-  //   setDoc(doc(db, "settings-" + data.user.uid), "init"), {
-  //     businessCategory: businessCategory,
-  //     businessName: business,
-  //     businessSlogan: businessSlogan,
-  //     businessBranch: businessBranch,
-  //     welcomeMessage: welcomeMessage,
-  //     createdDate: format(Date.now(), " yyyy-MM-dd HH:MM:SS"),
-  //   }.then(() => {
-  //     navigate("/console");
-  //   });
 
 
   //uid  "fJnge6ROzpbktfM3oNVmFyVX7gN2"
@@ -252,6 +146,7 @@ const Register = () => {
               value={businessCategory}
               onChange={e => setBusinessCategory(e.target.value)}
               fullWidth={true}
+              required
             />
           </Stack>
           <Stack spacing={2} direction="row" sx={{ marginBottom: 2 }}>
@@ -264,6 +159,7 @@ const Register = () => {
               value={businessSlogan}
               onChange={e => setBusinessSlogan(e.target.value)}
               fullWidth={true}
+              required
             />
 
             <TextField
@@ -286,6 +182,7 @@ const Register = () => {
             value={welcomeMessage}
             onChange={e => setWelcomeMessage(e.target.value)}
             fullWidth={true}
+            required
           />
 
           <Stack spacing={2} direction="row" sx={{ marginBottom: 2 }}>
@@ -335,4 +232,3 @@ const Register = () => {
 };
 
 export default Register;
-//onClick={handleSubmit}

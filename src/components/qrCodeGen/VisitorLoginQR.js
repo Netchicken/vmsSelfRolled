@@ -29,19 +29,22 @@ const VisitorLoginQR = () => {
     const [businessBranch, setBusinessBranch] = useState(BusinessCategories.businessBranch);
     const [visible, setVisible] = useState(true);
     const [logIn, setLogIn] = useState("Log in");
-    let { userid } = useParams();
+    const [userid, setuserid] = useState(UserID);
+    //let { userid } = useParams();
     //http://localhost:3000/vloginqr/userid=zKrDsscyDXN7lQbdujUjjcj3N5K2
 
     let navigate = useNavigate(); //https://stackoverflow.com/questions/71173957/how-to-use-history-push-in-react-router-dom-version-6-0-0
-
-    useEffect(() => {
-
-        FormatUserID();
-    }, [userid]);
+    // let userid;
+    // useEffect(() => {
+    //    // userid = UserID;
+    //    
+    //     // FormatUserID();
+    // }, []);
 
 
 
     const FormatUserID = () => {
+
         // let newuserid = userid.slice(1);
         // let newuserid = userid;
         // userid = newuserid.replace(/}/, '');
@@ -63,15 +66,16 @@ const VisitorLoginQR = () => {
     const login = async () => {
         setLoggingIn("true");
         setLogIn("Log out");
-        //   SaveToDb();
-        setVisible(!visible);
+        SaveToDb();
+
     };
 
 
 
     const SaveToDb = () => {
         const vcUsersRef = collection(db, "visitors");
-        const DayOfTheYear = getDayOfYear(Date.now());
+        console.log("userid visitorLogin", userid);
+        //  const DayOfTheYear = getDayOfYear(Date.now());
         setDoc(doc(vcUsersRef, userid + visitorPhone), {
             visitorName: visitorName,
             visitorPhone: visitorPhone,
@@ -83,17 +87,19 @@ const VisitorLoginQR = () => {
             dayOfYear: getDayOfYear(Date.now()),
         }).then(() => {
             setLoggingIn(false);
-            // setVisitorName("");
-            // setDepartment("");
-            // setVisitorPhone("");
-            // setDepartmentPerson("");
+            setVisitorName("");
+            setDepartment("");
+            setVisitorPhone("");
+            setDepartmentPerson("");
+            setVisible(!visible);
+
         });
     };
 
     const LogOut = () => {
         setVisible(!visible);
         setLogIn("Log in");
-        //   runUpdateTrans();
+        runUpdateTrans();
     }
 
     const goToHomePage = () => {
@@ -114,7 +120,7 @@ const VisitorLoginQR = () => {
             console.log("Transaction successfully committed!");
 
         } catch (e) {
-            console.log("Transaction failed: ", e);
+            console.log("Transaction failed: ", e + " " + docRef);
         }
 
     }
@@ -133,7 +139,8 @@ const VisitorLoginQR = () => {
                     <div >Welcome to <span style={{ color: '#3485ff' }}>{businessName} {businessBranch}</span></div>
                     <div>Please  <span style={{ color: '#3485ff', }}>{logIn}</span>  </div>
                 </div>
-                <div>Param = {userid}   Mobile version</div>
+                <div>userID: {userid}   Mobile version</div>
+                <div>Logged in with {visitorName}   Mobile version</div>
 
 
 
@@ -207,20 +214,15 @@ const VisitorLoginQR = () => {
                                 color='error'
                                 size='large'
                                 disabled={visible}
-                                onClick={LogOut}
-                            >
+                                onClick={LogOut}>
                                 Logout
                             </Button>
                         </Stack>
                     </Fragment>
                     <div>
-
-
                     </div>
                 </div>
             </div>
-
-            {/* <NotLoggedOut UserID={userid} /> */}
         </div>
     )
 }
