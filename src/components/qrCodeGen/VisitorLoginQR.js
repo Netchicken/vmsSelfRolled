@@ -83,7 +83,7 @@ const VisitorLoginQR = () => {
         //  setCookieData([{ "name": visitorName }, { "phone": visitorPhone }, { "department": department }, { "person": departmentPerson }, { "userid": userid }]);
 
         setCookie("VMSVisitor", [visitorName, visitorPhone, department, departmentPerson, userid]);
-        console.log("cookie", cookie + " " + cookie.VMSVisitor);
+        console.log("cookie", cookie.VMSVisitor);
 
         const vcUsersRef = collection(db, "visitors");
         console.log("userid visitorLogin", userid);
@@ -165,10 +165,11 @@ const VisitorLoginQR = () => {
                     <NameLogo height='50px' /> </div>
                 <div style={{ paddingLeft: "0.3em", fontSize: "1.5em", fontWeight: 'bold' }}>
                     <div >Welcome to <span style={{ color: '#3485ff' }}>{businessName} {businessBranch}</span></div>
+                    <div> {userid ? "Login OK" : "Please relogin as the ID is missing"} </div>
+
                     <div>Please  <span style={{ color: '#3485ff', }}>{logIn}</span>  </div>
                 </div>
-                <div>Cookie Data {cookie.VMSVisitor[0] + " " + cookie.VMSVisitor[3] + " " + cookie.VMSVisitor[4]}   Mobile version</div>
-                <div>Mobile version</div>
+
 
 
 
@@ -181,7 +182,7 @@ const VisitorLoginQR = () => {
                                 variant='outlined'
                                 type='text'
                                 label='Enter your name'
-                                value={cookie.VMSVisitor[0]}
+                                defaultValue={cookie.VMSVisitor[0]}
                                 onChange={e => setVisitorName(e.target.value)}
                                 fullWidth={true}
                                 required={true} />
@@ -193,7 +194,7 @@ const VisitorLoginQR = () => {
                                 variant='outlined'
                                 type='text'
                                 label='Enter your phone number'
-                                value={cookie.VMSVisitor[1]}
+                                defaultValue={cookie.VMSVisitor[1]}
                                 onChange={e => setVisitorPhone(e.target.value)}
                                 fullWidth={true}
                                 required={true}
@@ -205,7 +206,7 @@ const VisitorLoginQR = () => {
                                 variant='outlined'
                                 type='text'
                                 label='What department are you visiting'
-                                value={cookie.VMSVisitor[2]}
+                                defaultValue={cookie.VMSVisitor[2]}
                                 onChange={e => setDepartment(e.target.value)}
                                 fullWidth={true}
                                 required={true}
@@ -216,7 +217,7 @@ const VisitorLoginQR = () => {
                                 variant='outlined'
                                 type='text'
                                 label='Who are you visiting'
-                                value={cookie.VMSVisitor[3]}
+                                defaultValue={cookie.VMSVisitor[3]}
                                 onChange={e => setDepartmentPerson(e.target.value)}
                                 fullWidth={true}
                                 required={true}
@@ -250,6 +251,10 @@ const VisitorLoginQR = () => {
                     <div>
                     </div>
                 </div>
+
+                <div >Cookie Data {"name  " + cookie.VMSVisitor[0] + " phone " + cookie.VMSVisitor[1] + " dept " + cookie.VMSVisitor[2] + " person " + cookie.VMSVisitor[3]
+                    + " userid " + cookie.VMSVisitor[4]}  </div>
+                <div>Mobile version</div>
             </div>
         </div>
     )
