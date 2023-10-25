@@ -31,8 +31,9 @@ const VisitorLoginQR = () => {
     const [logIn, setLogIn] = useState("Log in");
     const [userid, setuserid] = useState(UserID);
 
-    const [cookieData, setCookieData] = useState([{ "name": visitorName }, { "phone": visitorPhone }, { "department": department }, { "person": departmentPerson }, { "id": userid }]);
-    const [cookie, setCookie] = useCookies([cookieData]) //https://stackoverflow.com/questions/39826992/how-can-i-set-a-cookie-in-react
+    // const [cookieData, setCookieData] = useState([{ "name": visitorName }, { "phone": visitorPhone }, { "department": department }, { "person": departmentPerson }, { "id": userid }]);
+    // const [cookieData, setCookieData] = useState([visitorName, visitorPhone, department, departmentPerson, userid]);
+    const [cookie, setCookie] = useCookies([visitorName, visitorPhone, department, departmentPerson, userid]) //https://stackoverflow.com/questions/39826992/how-can-i-set-a-cookie-in-react
 
 
 
@@ -79,10 +80,10 @@ const VisitorLoginQR = () => {
 
     const SaveToDb = () => {
 
-        setCookieData([{ "name": visitorName }, { "phone": visitorPhone }, { "department": department }, { "person": departmentPerson }, { "userid": userid }]);
+        //  setCookieData([{ "name": visitorName }, { "phone": visitorPhone }, { "department": department }, { "person": departmentPerson }, { "userid": userid }]);
 
-        setCookie('VMSVisitor', [{ "name": visitorName }, { "phone": visitorPhone }, { "department": department }, { "person": departmentPerson }, { "userid": userid }]);
-        console.log("cookie", cookie);
+        setCookie("VMSVisitor", [visitorName, visitorPhone, department, departmentPerson, userid]);
+        console.log("cookie", cookie + " " + cookie.VMSVisitor);
 
         const vcUsersRef = collection(db, "visitors");
         console.log("userid visitorLogin", userid);
@@ -129,10 +130,10 @@ const VisitorLoginQR = () => {
 
         //  let user = NLO.filter(item => item.visitorPhone === visitorPhone);
         //   let person = user[0];
-        LogOutVisitor({ userid: cookie.userid, phone: cookie.phone })
+        LogOutVisitor({ userid: cookie.VMSVisitor[4], phone: cookie.VMSVisitor[1] })
         console.log("Cookie", cookie);
 
-        let docRef = doc(db, "visitors", cookie.userid + cookie.phone);
+        let docRef = doc(db, "visitors", cookie.VMSVisitor[4] + cookie.VMSVisitor[1]);
         // let NLO = await getVisitorsNotLoggedOut(UserID);
 
         const timeLogout = format(Date.now(), "yyyy-MM-dd HH:MM:SS");
@@ -166,7 +167,7 @@ const VisitorLoginQR = () => {
                     <div >Welcome to <span style={{ color: '#3485ff' }}>{businessName} {businessBranch}</span></div>
                     <div>Please  <span style={{ color: '#3485ff', }}>{logIn}</span>  </div>
                 </div>
-                <div>Cookie Data {cookie.name + " " + cookie.departmentPerson + " " + cookie.userid}   Mobile version</div>
+                <div>Cookie Data {cookie.VMSVisitor[0] + " " + cookie.VMSVisitor[3] + " " + cookie.VMSVisitor[4]}   Mobile version</div>
                 <div>Mobile version</div>
 
 
@@ -180,7 +181,7 @@ const VisitorLoginQR = () => {
                                 variant='outlined'
                                 type='text'
                                 label='Enter your name'
-                                value={cookie.name}
+                                value={cookie.VMSVisitor[0]}
                                 onChange={e => setVisitorName(e.target.value)}
                                 fullWidth={true}
                                 required={true} />
@@ -192,7 +193,7 @@ const VisitorLoginQR = () => {
                                 variant='outlined'
                                 type='text'
                                 label='Enter your phone number'
-                                value={cookie.phone}
+                                value={cookie.VMSVisitor[1]}
                                 onChange={e => setVisitorPhone(e.target.value)}
                                 fullWidth={true}
                                 required={true}
@@ -204,7 +205,7 @@ const VisitorLoginQR = () => {
                                 variant='outlined'
                                 type='text'
                                 label='What department are you visiting'
-                                value={cookie.department}
+                                value={cookie.VMSVisitor[2]}
                                 onChange={e => setDepartment(e.target.value)}
                                 fullWidth={true}
                                 required={true}
@@ -215,7 +216,7 @@ const VisitorLoginQR = () => {
                                 variant='outlined'
                                 type='text'
                                 label='Who are you visiting'
-                                value={cookie.person}
+                                value={cookie.VMSVisitor[3]}
                                 onChange={e => setDepartmentPerson(e.target.value)}
                                 fullWidth={true}
                                 required={true}
