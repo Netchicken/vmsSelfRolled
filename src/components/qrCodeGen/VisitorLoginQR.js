@@ -2,10 +2,10 @@ import React, { useState, useEffect, Fragment } from "react";
 // import "../../styles/Common.css";
 import "../../styles/visitorLogin.css";
 import "../../styles/roundButtons.css";
-
+import { useCookies } from 'react-cookie';
 import { auth, db } from "../firebase/Config";
 import { doc, collection, setDoc, updateDoc, query, where, getDoc, runTransaction } from "firebase/firestore";
-
+import { LogOutVisitor } from "../firebase/DBOperations";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { UserID, UserData, BusinessCategories } from "../../App"; //imports data from app
 import NameLogo from "../LogoNavBar";
@@ -30,7 +30,12 @@ const VisitorLoginQR = () => {
     const [visible, setVisible] = useState(true);
     const [logIn, setLogIn] = useState("Log in");
     const [userid, setuserid] = useState(UserID);
-    //let { userid } = useParams();
+
+    const [cookieData, setCookieData] = useState([{ "name": visitorName }, { "phone": visitorPhone }, { "department": department }, { "person": departmentPerson }, { "id": userid }]);
+    const [cookie, setCookie] = useCookies([cookieData]) //https://stackoverflow.com/questions/39826992/how-can-i-set-a-cookie-in-react
+
+
+
     //http://localhost:3000/vloginqr/userid=zKrDsscyDXN7lQbdujUjjcj3N5K2
 
     let navigate = useNavigate(); //https://stackoverflow.com/questions/71173957/how-to-use-history-push-in-react-router-dom-version-6-0-0
@@ -73,9 +78,15 @@ const VisitorLoginQR = () => {
 
 
     const SaveToDb = () => {
+
+        setCookieData([{ "name": visitorName }, { "phone": visitorPhone }, { "department": department }, { "person": departmentPerson }, { "userid": userid }]);
+
+        setCookie('VMSVisitor', [{ "name": visitorName }, { "phone": visitorPhone }, { "department": department }, { "person": departmentPerson }, { "userid": userid }]);
+        console.log("cookie", cookie);
+
         const vcUsersRef = collection(db, "visitors");
         console.log("userid visitorLogin", userid);
-        //  const DayOfTheYear = getDayOfYear(Date.now());
+        const DayOfTheYear = getDayOfYear(Date.now());
         setDoc(doc(vcUsersRef, userid + visitorPhone), {
             visitorName: visitorName,
             visitorPhone: visitorPhone,
@@ -84,16 +95,22 @@ const VisitorLoginQR = () => {
             dateIn: format(Date.now(), "yyyy-MM-dd HH:MM:SS"),
             dateOut: "",
             userID: userid,
-            dayOfYear: getDayOfYear(Date.now()),
+            dayOfYear: DayOfTheYear,
         }).then(() => {
             setLoggingIn(false);
-            setVisitorName("");
-            setDepartment("");
-            setVisitorPhone("");
-            setDepartmentPerson("");
+            // setVisitorName("");
+            // setDepartment("");
+            // setVisitorPhone("");
+            // setDepartmentPerson("");
             setVisible(!visible);
 
         });
+        //set cookies
+        // let expires = new Date()
+        // const hoursInMillis = 8 * (60 * 60 * 1000);  //8 hours
+        // expires.setTime(expires.getTime() + hoursInMillis); //https://reactgo.com/react-set-cookie/
+
+
     };
 
     const LogOut = () => {
@@ -107,7 +124,17 @@ const VisitorLoginQR = () => {
     };
     // https://firebase.google.com/docs/firestore/manage-data/transactions
     const runUpdateTrans = async () => {
-        let docRef = doc(db, "visitors", userid + visitorPhone);
+
+        // let NLO = await getVisitorsNotLoggedOut(UserID);
+
+        //  let user = NLO.filter(item => item.visitorPhone === visitorPhone);
+        //   let person = user[0];
+        LogOutVisitor({ userid: cookie.userid, phone: cookie.phone })
+        console.log("Cookie", cookie);
+
+        let docRef = doc(db, "visitors", cookie.userid + cookie.phone);
+        // let NLO = await getVisitorsNotLoggedOut(UserID);
+
         const timeLogout = format(Date.now(), "yyyy-MM-dd HH:MM:SS");
         try {
             await runTransaction(db, async (transaction) => {
@@ -139,8 +166,8 @@ const VisitorLoginQR = () => {
                     <div >Welcome to <span style={{ color: '#3485ff' }}>{businessName} {businessBranch}</span></div>
                     <div>Please  <span style={{ color: '#3485ff', }}>{logIn}</span>  </div>
                 </div>
-                <div>userID: {userid}   Mobile version</div>
-                <div>Logged in with {visitorName}   Mobile version</div>
+                <div>Cookie Data {cookie.name + " " + cookie.departmentPerson + " " + cookie.userid}   Mobile version</div>
+                <div>Mobile version</div>
 
 
 
@@ -153,7 +180,7 @@ const VisitorLoginQR = () => {
                                 variant='outlined'
                                 type='text'
                                 label='Enter your name'
-                                value={visitorName}
+                                value={cookie.name}
                                 onChange={e => setVisitorName(e.target.value)}
                                 fullWidth={true}
                                 required={true} />
@@ -165,7 +192,7 @@ const VisitorLoginQR = () => {
                                 variant='outlined'
                                 type='text'
                                 label='Enter your phone number'
-                                value={visitorPhone}
+                                value={cookie.phone}
                                 onChange={e => setVisitorPhone(e.target.value)}
                                 fullWidth={true}
                                 required={true}
@@ -177,7 +204,7 @@ const VisitorLoginQR = () => {
                                 variant='outlined'
                                 type='text'
                                 label='What department are you visiting'
-                                value={department}
+                                value={cookie.department}
                                 onChange={e => setDepartment(e.target.value)}
                                 fullWidth={true}
                                 required={true}
@@ -188,7 +215,7 @@ const VisitorLoginQR = () => {
                                 variant='outlined'
                                 type='text'
                                 label='Who are you visiting'
-                                value={departmentPerson}
+                                value={cookie.person}
                                 onChange={e => setDepartmentPerson(e.target.value)}
                                 fullWidth={true}
                                 required={true}

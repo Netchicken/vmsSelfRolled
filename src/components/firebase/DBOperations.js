@@ -16,10 +16,12 @@ import {
   getDocs,
   setDoc,
   documentId,
+  runTransaction,
 } from "firebase/firestore";
 import { auth, db } from "../firebase/Config";
 import { format, getDayOfYear } from "date-fns";
 import { useState } from "react";
+
 
 //https://firebase.google.com/docs/firestore/manage-data/add-data
 //===========================admin login===========================
@@ -201,6 +203,7 @@ export const getAllVisitorsData = async (user) => {
 
 // where(format("signedInDate", "yyyy-MM-dd"), "==", dateToday),, where("userID", "==", user)
 
+//used in NotloggedOut.js
 export const getVisitorsNotLoggedOut = async (user) => {
   // console.log("getVisitorsNotLoggedOut", user);
   const data = [];
@@ -222,6 +225,30 @@ export const getVisitorsNotLoggedOut = async (user) => {
   }
   return "No data";
 };
+
+//update not logged out visitor with date now.
+export const LogOutVisitor = async ({ userid, phone }) => {
+
+  console.log("LogOutVisitor", userid, phone);
+  let docRef = doc(db, "visitors", userid + phone);
+  const timeLogout = format(Date.now(), "yyyy-MM-dd HH:MM:SS");
+  try {
+    await runTransaction(db, async (transaction) => {
+      const sfDoc = await transaction.get(docRef);
+      if (!sfDoc.exists()) {
+        throw "Document does not exist!";
+      }
+      transaction.update(docRef, { dateOut: timeLogout });
+    });
+    console.log("Transaction successfully committed!");
+
+  } catch (e) {
+    console.log("Transaction failed: ", e);
+  }
+
+}
+
+
 
 export const Logout = async (user) => {
 
