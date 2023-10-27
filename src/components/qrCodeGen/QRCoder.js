@@ -32,7 +32,7 @@ const QRCoder = () => {
 
 
     let locFull = window.location.href;  //location.pathname;
-    let locUsed = locFull.split("/")[0] + locFull.split("/")[1] + locFull.split("/")[2] + "/vloginqr/?userid=" + UserID;
+    let locUsed = locFull.split("/")[0] + locFull.split("/")[1] + locFull.split("/")[2] + "/vloginqr"; //?userid=" ; + UserID;
     const [value, setValue] = useState(locUsed);
 
     //http://localhost:3000/vloginqr/?userid=zKrDsscyDXN7lQbdujUjjcj3N5K2
@@ -50,13 +50,13 @@ const QRCoder = () => {
     console.log("UserID", UserID);
     return (
         <div className='setup-content'>
-            <AppContainer>
+            {/* <AppContainer>
                 <TopBar />
-            </AppContainer>
+            </AppContainer> */}
             <div className='login-form-area'>
 
                 <h2>{title}</h2>
-                <h3>{value}</h3>
+                {/* <h3>{value}</h3> */}
                 <h4> <a onClick={goToVisitorLoginPage}> Check Login Page Link ... </a></h4>
                 <center>
 
