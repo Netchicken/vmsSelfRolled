@@ -19,6 +19,7 @@ import Login from "./components/Login";
 import QRCode from "./components/qrCodeGen/QRCoder";
 import VisitorLoginQR from "./components/qrCodeGen/VisitorLoginQR";
 import { auth, db } from "./components/firebase/Config";
+import { userDataContext } from "./context/userDataContext";
 import {
   getData,
   getDataSingleUser,
@@ -122,21 +123,26 @@ function App() {
     <BrowserRouter>
       <div>
         <CssBaseline />
-        <Routes>
-          <Route path='/login' element={<Login />} />
+        <userDataContext.Provider value={UserID}>
+          <Routes>
+            <Route path='/login' element={<Login />} />
 
-          <Route path='/' element={<Home />} />
-          <Route path='/setup' element={<InitialSetup />} />
-          <Route path='/visitorLogin' element={<VisitorLogin />} />
-          <Route path='/authentication' element={<Auth />} />
-          <Route path='/qrcode' element={<QRCode />} />
-          <Route path='/vloginqr' element={<VisitorLoginQR />} />
-          <Route path='/console' element={<Console />} />
-        </Routes>
+            <Route path='/' element={<Home />} />
+            <Route path='/setup' element={<InitialSetup />} />
+            <Route path='/visitorLogin' element={<VisitorLogin />} />
+            <Route path='/authentication' element={<Auth />} />
+            <Route path='/qrcode' element={<QRCode />} />
+
+
+            <Route path='/vloginqr' element={<VisitorLoginQR />} />
+
+            <Route path='/console' element={<Console />} />
+          </Routes>
+        </userDataContext.Provider>,
       </div>
     </BrowserRouter>
   );
 }
 
-///:userid
+
 export default App;

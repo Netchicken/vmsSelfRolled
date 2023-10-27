@@ -11,7 +11,8 @@ import { UserID, UserData, BusinessCategories } from "../../App"; //imports data
 import NameLogo from "../LogoNavBar";
 import { format, getDayOfYear } from "date-fns";
 import { TextField, Stack, Button, Box } from "@mui/material";
-
+import { useContext } from 'react';
+import { userDataContext } from "../../context/userDataContext";
 
 
 const VisitorLoginQR = () => {
@@ -29,21 +30,36 @@ const VisitorLoginQR = () => {
     const [businessBranch, setBusinessBranch] = useState(BusinessCategories.businessBranch);
     const [visible, setVisible] = useState(true);
     const [logIn, setLogIn] = useState("Log in");
-    const [userid, setuserid] = useState(UserID);
+    const userID = useContext(userDataContext);//get the userID data from the context
 
-    // const [cookieData, setCookieData] = useState([{ "name": visitorName }, { "phone": visitorPhone }, { "department": department }, { "person": departmentPerson }, { "id": userid }]);
-    // const [cookieData, setCookieData] = useState([visitorName, visitorPhone, department, departmentPerson, userid]);
-    const [cookie, setCookie] = useCookies([visitorName, visitorPhone, department, departmentPerson, userid]) //https://stackoverflow.com/questions/39826992/how-can-i-set-a-cookie-in-react
+    const [userid, setuserid] = useState(userID ? userID : UserID); //check if there is a userID in the context, if not, use the one from the app.js
 
 
+    // const [cookie, setCookie] = useCookies("VMSVisitor", [visitorName, visitorPhone, department, departmentPerson, userid]) //https://stackoverflow.com/questions/39826992/how-can-i-set-a-cookie-in-react
+    const [cookie, setCookie] = useCookies("VMSVisitor", []); //https://stackoverflow.com/questions/39826992/how-can-i-set-a-cookie-in-react
+    let cookieName = "";
+    let cookiePhone = "";
+    let cookieDept = "";
+    let cookiePerson = "";
+    let cookieID = "";
+
+    if (cookie.VMSVisitor) {
+        console.log("cookie", cookie.VMSVisitor);
+        cookieName = cookie.VMSVisitor[0] ? cookie.VMSVisitor[0] : "";
+        cookiePhone = cookie.VMSVisitor[1] ? cookie.VMSVisitor[1] : "";
+        cookieDept = cookie.VMSVisitor[2] ? cookie.VMSVisitor[2] : "";
+        cookiePerson = cookie.VMSVisitor[3] ? cookie.VMSVisitor[3] : "";
+        cookieID = cookie.VMSVisitor[4];
+    }
 
     //http://localhost:3000/vloginqr/userid=zKrDsscyDXN7lQbdujUjjcj3N5K2
+
 
     let navigate = useNavigate(); //https://stackoverflow.com/questions/71173957/how-to-use-history-push-in-react-router-dom-version-6-0-0
     // let userid;
     // useEffect(() => {
     //    // userid = UserID;
-    //    
+
     //     // FormatUserID();
     // }, []);
 
@@ -130,10 +146,10 @@ const VisitorLoginQR = () => {
 
         //  let user = NLO.filter(item => item.visitorPhone === visitorPhone);
         //   let person = user[0];
-        LogOutVisitor({ userid: cookie.VMSVisitor[4], phone: cookie.VMSVisitor[1] })
+        LogOutVisitor({ userid: userid, phone: visitorPhone })
         console.log("Cookie", cookie);
 
-        let docRef = doc(db, "visitors", cookie.VMSVisitor[4] + cookie.VMSVisitor[1]);
+        let docRef = doc(db, "visitors", userid + visitorPhone);
         // let NLO = await getVisitorsNotLoggedOut(UserID);
 
         const timeLogout = format(Date.now(), "yyyy-MM-dd HH:MM:SS");
@@ -164,8 +180,8 @@ const VisitorLoginQR = () => {
                 <div style={{ alignItems: "center" }} className='login-name-logo' onClick={goToHomePage}>
                     <NameLogo height='50px' /> </div>
                 <div style={{ paddingLeft: "0.3em", fontSize: "1.5em", fontWeight: 'bold' }}>
-                    <div >Welcome to <span style={{ color: '#3485ff' }}>{businessName} {businessBranch}</span></div>
-                    <div> {userid ? "Login OK" : "Please relogin as the ID is missing"} </div>
+                    <div>Welcome to <span style={{ color: '#3485ff' }}>{businessName} {businessBranch}</span></div>
+                    <div> {userid ? "" : "Please relogin as the ID is missing"} </div>
 
                     <div>Please  <span style={{ color: '#3485ff', }}>{logIn}</span>  </div>
                 </div>
@@ -182,7 +198,7 @@ const VisitorLoginQR = () => {
                                 variant='outlined'
                                 type='text'
                                 label='Enter your name'
-                                defaultValue={cookie.VMSVisitor[0]}
+                                defaultValue={cookieName}
                                 onChange={e => setVisitorName(e.target.value)}
                                 fullWidth={true}
                                 required={true} />
@@ -194,7 +210,7 @@ const VisitorLoginQR = () => {
                                 variant='outlined'
                                 type='text'
                                 label='Enter your phone number'
-                                defaultValue={cookie.VMSVisitor[1]}
+                                defaultValue={cookiePhone}
                                 onChange={e => setVisitorPhone(e.target.value)}
                                 fullWidth={true}
                                 required={true}
@@ -206,7 +222,7 @@ const VisitorLoginQR = () => {
                                 variant='outlined'
                                 type='text'
                                 label='What department are you visiting'
-                                defaultValue={cookie.VMSVisitor[2]}
+                                defaultValue={cookieDept}
                                 onChange={e => setDepartment(e.target.value)}
                                 fullWidth={true}
                                 required={true}
@@ -217,7 +233,7 @@ const VisitorLoginQR = () => {
                                 variant='outlined'
                                 type='text'
                                 label='Who are you visiting'
-                                defaultValue={cookie.VMSVisitor[3]}
+                                defaultValue={cookiePerson}
                                 onChange={e => setDepartmentPerson(e.target.value)}
                                 fullWidth={true}
                                 required={true}
@@ -252,8 +268,8 @@ const VisitorLoginQR = () => {
                     </div>
                 </div>
 
-                <div >Cookie Data {"name  " + cookie.VMSVisitor[0] + " phone " + cookie.VMSVisitor[1] + " dept " + cookie.VMSVisitor[2] + " person " + cookie.VMSVisitor[3]
-                    + " userid " + cookie.VMSVisitor[4]}  </div>
+                {/* <div >Cookie Data {"name  " + cookie.VMSVisitor[0] + " phone " + cookie.VMSVisitor[1] + " dept " + cookie.VMSVisitor[2] + " person " + cookie.VMSVisitor[3]
+                    + " userid " + cookie.VMSVisitor[4]}  </div> */}
                 <div>Mobile version</div>
             </div>
         </div>

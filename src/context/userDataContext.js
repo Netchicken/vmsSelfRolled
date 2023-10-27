@@ -1,21 +1,18 @@
 import { createContext } from 'react';
+//https://www.geeksforgeeks.org/explain-new-context-api-in-react/
 
-const userDataContext = createContext({
-    authenticated: false,
-    appData: '',
-    changeAuthenticated: () => { }
-});
+export const userDataContext = createContext();
 
-export default userDataContext;
+//export const Provider = userDataContext.Provider;
+//export const Consumer = userDataContext.Consumer;
 
-// import React from 'react';
-
-// const userDataContext = React.createContext({
-//     authenticated: false,
+// authenticated: true,
 //     appData: '',
-//     changeAuthenticated: () => { }
-// });
+//         changeAuthenticated: () => { }
 
-// export default userDataContext;
+
+//https://react.dev/learn/passing-data-deeply-with-context
+
+
 
 //UPDATE THIS FROM HERE https://react.dev/learn/passing-data-deeply-with-context    
