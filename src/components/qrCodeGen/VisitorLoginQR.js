@@ -86,9 +86,16 @@ const VisitorLoginQR = () => {
     }
 
     const login = async () => {
-        setLoggingIn("true");
-        setLogIn("Log out");
-        SaveToDb();
+
+        if (visitorName !== "" && visitorPhone !== "" && department !== "" && departmentPerson !== "") {
+            setLoggingIn("true");
+            setLogIn("Log out");
+            SaveToDb();
+        }
+        else {
+            alert("Please fill all the fields");
+            return;
+        }
 
     };
 
