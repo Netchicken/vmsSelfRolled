@@ -9,7 +9,7 @@ import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { UserID, UserData, BusinessCategories } from "../../App"; //imports data from app
 import NameLogo from "../../components/LogoNavBar";
 import { format, getDayOfYear } from "date-fns";
-import { TextField, Stack, Button, } from "@mui/material";
+import { FormControl, TextField, Stack, Button, } from "@mui/material";
 import NotLoggedOut from "./NotLoggedOut";
 
 
@@ -34,7 +34,13 @@ const VisitorLogin = () => {
 
     const login = async () => {
         setLoggingIn("true");
-        SaveToDb();
+        if (visitorName !== "" && visitorPhone !== "" && department !== "" && departmentPerson !== "") {
+            SaveToDb();
+        }
+        else {
+            alert("Please fill all the fields");
+            return;
+        }
     };
 
     const SaveToDb = () => {
@@ -76,67 +82,67 @@ const VisitorLogin = () => {
 
 
                 </div>
-                <div className="form-group">
+                <form onSubmit={login}>
+                    <div className="form-group">
 
-                    <TextField
-                        className='input'
-                        id='lvisitorname'
-                        variant='outlined'
-                        type='text'
-                        label='Enter your name'
-                        value={visitorName}
-                        onChange={e => setVisitorName(e.target.value)}
-                        fullWidth={true}
-                        required={true}
+                        <TextField
+                            className='input'
+                            id='lvisitorname'
+                            variant='outlined'
+                            type='text'
+                            label='Enter your name'
+                            value={visitorName}
+                            onChange={e => setVisitorName(e.target.value)}
+                            fullWidth={true}
+                            required
 
-                    /> <TextField
-                        className='input'
-                        id='lphonel'
-                        variant='outlined'
-                        type='text'
-                        label='Enter your phone number'
-                        value={visitorPhone}
-                        onChange={e => setVisitorPhone(e.target.value)}
-                        fullWidth={true}
-                        required={true}
+                        /> <TextField
+                            className='input'
+                            id='lphonel'
+                            variant='outlined'
+                            type='text'
+                            label='Enter your phone number'
+                            value={visitorPhone}
+                            onChange={e => setVisitorPhone(e.target.value)}
+                            fullWidth={true}
+                            required
 
-                    />
-                    <TextField
-                        className='input'
-                        id='lDepartment'
-                        variant='outlined'
-                        type='text'
-                        label='What department are you visiting'
-                        value={department}
-                        onChange={e => setDepartment(e.target.value)}
-                        fullWidth={true}
-                        required={true}
-                    />
-                    <TextField
-                        className='input'
-                        id='lperson'
-                        variant='outlined'
-                        type='text'
-                        label='Who are you visiting'
-                        value={departmentPerson}
-                        onChange={e => setDepartmentPerson(e.target.value)}
-                        fullWidth={true}
-                        required={true}
-                    />
+                        />
+                        <TextField
+                            className='input'
+                            id='lDepartment'
+                            variant='outlined'
+                            type='text'
+                            label='What department are you visiting'
+                            value={department}
+                            onChange={e => setDepartment(e.target.value)}
+                            fullWidth={true}
+                            required
+                        />
+                        <TextField
+                            className='input'
+                            id='lperson'
+                            variant='outlined'
+                            type='text'
+                            label='Who are you visiting'
+                            value={departmentPerson}
+                            onChange={e => setDepartmentPerson(e.target.value)}
+                            fullWidth={true}
+                            required
+                        />
+                        <Button
+                            className='auth-button'
+                            variant='contained'
+                            color='primary'
+                            size='large'
+                            // // disabled={setLoggingIn}
+                            onClick={login}
+                        >
+                            {loggingIn ? "Logging In..." : "Login"}
+                        </Button>
 
-                    <Button
-                        className='auth-button'
-                        variant='contained'
-                        color='primary'
-                        size='large'
-                        // // disabled={setLoggingIn}
-                        onClick={login}
-                    >
-                        {loggingIn ? "Logging In..." : "Login"}
-                    </Button>
-                    <div>
                     </div>
-                </div>
+                </form>
             </div>
             <NotLoggedOut UserID={UserID} />
         </div>

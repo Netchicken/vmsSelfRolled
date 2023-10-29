@@ -47,7 +47,7 @@ const NotLoggedOut = ({ UserID }) => {
         <div style={{ paddingLeft: "0.3em", fontSize: "1.5em", fontWeight: 'bold' }}>
         <div>Please  <span style={{ color: '#3485ff', }}>Log Out</span></div>
         </div>           
-            <ul>{notLoggedOut.map(item => <li key={item.visitorName} onClick={() => { runUpdateTrans(item = { item }) }}><a href='#' className="round green">{item.visitorName} <span className="round">Thank You!</span></a></li>)}</ul>
+            <ul>{notLoggedOut.map(item => <li key={item.dateIn} onClick={() => { runUpdateTrans(item = { item }) }}><a href='#' className="round green">{item.visitorName} <span className="round">Thank You!</span></a></li>)}</ul>
         </div>
     )
 }
