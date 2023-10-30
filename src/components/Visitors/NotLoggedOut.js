@@ -4,36 +4,45 @@ import { TextField, Stack, Button, } from "@mui/material";
 import { doc, collection, setDoc, updateDoc, query, where, getDoc, runTransaction } from "firebase/firestore";
 import { format, getDayOfYear } from "date-fns";
 import { auth, db } from "../firebase/Config";
+import { UserID } from "../../App"; //imports data from app
 
-const NotLoggedOut = ({ UserID }) => {
+const NotLoggedOut = ({  }) => {
     const [notLoggedOut, setnotLoggedOut] = useState([]);
     const [visitorLoggedOut, setvisitorLoggedOut] = useState(false);
-    
-    let NLOList = [];
+    const [userid, setuserid] = useState(UserID);
+
+    let NLOList = 0;
     useEffect(() => {
         initLoad();
-    });
+    },[]);
 
     const initLoad = async () => {
-   let NLO = await getVisitorsNotLoggedOut(UserID);
+        let NLO = await getVisitorsNotLoggedOut(userid);
         setnotLoggedOut(NLO);      
         setvisitorLoggedOut(false);
+        console.log("UserID", userid);
     };
+
+
     // https://firebase.google.com/docs/firestore/manage-data/transactions
-    const runUpdateTrans = async ({UserID, item }) => {
+    const runUpdateTrans = async ({ item }) => {
         
-        let docRef = doc(db, "visitors", UserID + item.visitorPhone);
+        console.log("runUpdateTrans", userid, item);
+
+        let docRef = doc(db, "visitors", userid + item.visitorPhone);
         const timeLogout = format(Date.now(), "yyyy-MM-dd HH:MM:SS");
         try {
-            await runTransaction(db, async (transaction) => {
-                const sfDoc = await transaction.get(docRef);
-                if (!sfDoc.exists()) {
-                    throw "Document does not exist!";
-                }
-                transaction.update(docRef, { dateOut: timeLogout });
-            });
+            await updateDoc(docRef, { dateOut: timeLogout });
+            // await runTransaction(db, async (transaction) => {
+            //     const sfDoc = await transaction.get(docRef);
+            //     if (!sfDoc.exists()) {
+            //         throw "Document does not exist!";
+            //     }
+            //     transaction.update(docRef, { dateOut: timeLogout });
+            // });
             console.log("Transaction successfully committed!");
             setvisitorLoggedOut(true)
+            initLoad();
         } catch (e) {
             console.log("Transaction failed: ", e);
         }
@@ -47,12 +56,12 @@ const NotLoggedOut = ({ UserID }) => {
         <div style={{ paddingLeft: "0.3em", fontSize: "1.5em", fontWeight: 'bold' }}>
         <div>Please  <span style={{ color: '#3485ff', }}>Log Out</span></div>
         </div>           
-            <ul>{notLoggedOut.map(item => <li key={item.dateIn} onClick={() => { runUpdateTrans(item = { item }) }}><a href='#' className="round green">{item.visitorName} <span className="round">Thank You!</span></a></li>)}</ul>
+            <ul>{notLoggedOut.map((item,i) => <li key={i} onClick={() => { runUpdateTrans(item = { item }) }}><a href='#' className="round green">{item.visitorName} <span className="round">Thank You!</span></a></li>)}</ul>
         </div>
     )
 }
 export default NotLoggedOut
-
+// 
 
 
     // const Logout = async ({ item }) => {

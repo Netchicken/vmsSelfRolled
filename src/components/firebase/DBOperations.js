@@ -211,7 +211,8 @@ export const getVisitorsNotLoggedOut = async (user) => {
 
   const q = query(collection(db, "visitors"),
     where("dateOut", "==", ""),
-    where("dayOfYear", "==", today)
+    where("dayOfYear", "==", today),
+    where("userID", "==", user)
   );
 
 

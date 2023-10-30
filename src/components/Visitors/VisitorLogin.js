@@ -34,7 +34,7 @@ const VisitorLogin = () => {
 
     const login = async () => {
         setLoggingIn("true");
-        if (visitorName !== "" && visitorPhone !== "" && department !== "" && departmentPerson !== "") {
+        if (visitorName !== "" && visitorPhone !== "" && department !== "" && departmentPerson !== "" && UserID !== "") {
             SaveToDb();
         }
         else {
@@ -42,7 +42,7 @@ const VisitorLogin = () => {
             return;
         }
     };
-
+    // Add a new document with a generated id. doc
     const SaveToDb = () => {
         const vcUsersRef = collection(db, "visitors");
         const DayOfTheYear = getDayOfYear(Date.now());
@@ -63,6 +63,8 @@ const VisitorLogin = () => {
             setVisitorPhone("");
             setDepartmentPerson("");
         });
+
+        console.log("SaveToDb vcUsersRef", vcUsersRef.id);
     };
 
     const goToHomePage = () => {
@@ -94,6 +96,7 @@ const VisitorLogin = () => {
                             value={visitorName}
                             onChange={e => setVisitorName(e.target.value)}
                             fullWidth={true}
+
                             required
 
                         /> <TextField
@@ -135,7 +138,6 @@ const VisitorLogin = () => {
                             variant='contained'
                             color='primary'
                             size='large'
-                            // // disabled={setLoggingIn}
                             onClick={login}
                         >
                             {loggingIn ? "Logging In..." : "Login"}
