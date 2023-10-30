@@ -109,7 +109,7 @@ function App() {
                 });
             } else {
 
-              console.log("No such document!");
+              //  console.log("No such document!");
             }
           });
       } else {

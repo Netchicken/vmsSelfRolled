@@ -26,6 +26,7 @@ const VisitorLogin = () => {
     const [loggingIn, setLoggingIn] = useState(false);
     const [businessName, setBusinessName] = useState(BusinessCategories.businessName);
     const [businessBranch, setBusinessBranch] = useState(BusinessCategories.businessBranch);
+    const [userid, setuserid] = useState();
 
     // const [notLoggedOut, setnotLoggedOut] = useState([]);
 
@@ -62,9 +63,10 @@ const VisitorLogin = () => {
             setDepartment("");
             setVisitorPhone("");
             setDepartmentPerson("");
+            setuserid(UserID);
         });
 
-        console.log("SaveToDb vcUsersRef", vcUsersRef.id);
+        console.log("SaveToDb vcUsersRef", vcUsersRef);
     };
 
     const goToHomePage = () => {
@@ -146,7 +148,7 @@ const VisitorLogin = () => {
                     </div>
                 </form>
             </div>
-            <NotLoggedOut UserID={UserID} />
+            <NotLoggedOut UserID={userid} />
         </div>
     )
 }
