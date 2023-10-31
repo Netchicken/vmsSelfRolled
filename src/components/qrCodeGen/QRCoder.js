@@ -31,7 +31,8 @@ const QRCoder = () => {
     let locUsed = locFull + "/vloginqr";
     console.log("location", locUsed);
     //let locUsed = locFull + "/vloginqr"; //?userid=" ;
-    const [value, setValue] = useState("https://vmsnz.netlify.app/vloginqr");
+    // const [value, setValue] = useState("https://vmsnz.netlify.app/vloginqr");
+    const [value, setValue] = useState(locUsed);
 
     //https://stackoverflow.com/questions/39823681/read-the-current-full-url-with-react
 
@@ -58,7 +59,7 @@ const QRCoder = () => {
 
                     {value && (
                         <QRCode
-                            title={title}
+                            title={title + " " + value}
                             value={value}
                             bgColor={back}
                             fgColor={fore}
