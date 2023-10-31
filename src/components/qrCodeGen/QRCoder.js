@@ -26,9 +26,9 @@ const QRCoder = () => {
     const [size, setSize] = useState(256);
     const location = useLocation();
 
-
+    let https = "https://";
     let locFull = window.location.href;  //location.pathname;
-    let locUsed = locFull.split("/")[0] + locFull.split("/")[1] + locFull.split("/")[2] + "/vloginqr"; //?userid=" ; + UserID;
+    let locUsed = https + locFull.split("/")[0] + locFull.split("/")[1] + locFull.split("/")[2] + "/vloginqr"; //?userid=" ; + UserID;
     //let locUsed = locFull + "/vloginqr"; //?userid=" ;
     const [value, setValue] = useState(locUsed);
 
