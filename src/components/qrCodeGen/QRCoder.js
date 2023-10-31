@@ -28,8 +28,8 @@ const QRCoder = () => {
 
 
     let locFull = window.location.href;  //location.pathname;
-    // let locUsed = locFull.split("/")[0] + locFull.split("/")[1] + locFull.split("/")[2] + "/vloginqr"; //?userid=" ; + UserID;
-    let locUsed = locFull + "/vloginqr"; //?userid=" ;
+    let locUsed = locFull.split("/")[0] + locFull.split("/")[1] + locFull.split("/")[2] + "/vloginqr"; //?userid=" ; + UserID;
+    //let locUsed = locFull + "/vloginqr"; //?userid=" ;
     const [value, setValue] = useState(locUsed);
 
     //http://localhost:3000/vloginqr/?userid=zKrDsscyDXN7lQbdujUjjcj3N5K2
