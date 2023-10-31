@@ -46,6 +46,7 @@ const VisitorLoginQR = () => {
 
     useEffect(() => {
         loadCookie();
+        console.log("cookie loading", cookie.VMSVisitor);
     }, []);
 
     const loadCookie = () => {
@@ -63,7 +64,7 @@ const VisitorLoginQR = () => {
             setDepartment(cookieDept);
             setDepartmentPerson(cookiePerson);
             setuserid(cookieID);
-            console.log("visitorName", visitorName);
+            console.log("visitorName ", visitorName + "  cookie " + cookie.VMSVisitor[0]);
         }
     };
 
@@ -230,7 +231,7 @@ const VisitorLoginQR = () => {
                                 variant='outlined'
                                 type='text'
                                 label='Enter your name'
-                                defaultValue={visitorName}
+                                defaultValue={cookieName}
                                 onChange={e => setVisitorName(e.target.value)}
                                 fullWidth={true}
                                 required={true} />
