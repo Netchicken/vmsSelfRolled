@@ -45,8 +45,8 @@ const VisitorLoginQR = () => {
     let cookieID;
 
     useEffect(() => {
-        //  loadCookie();
-    });
+        loadCookie();
+    }, []);
 
     const loadCookie = () => {
 
