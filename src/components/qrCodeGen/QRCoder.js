@@ -29,6 +29,7 @@ const QRCoder = () => {
 
     let locFull = window.origin;
     let locUsed = locFull + "/vloginqr";
+    console.log("location", locUsed);
     //let locUsed = locFull + "/vloginqr"; //?userid=" ;
     const [value, setValue] = useState("https://vmsnz.netlify.app/vloginqr");
 
