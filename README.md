@@ -1,7 +1,7 @@
 # Visitor Management System 
-###Online version  https://vmsnz.netlify.app/ 
+### Online version  https://vmsnz.netlify.app/ 
 
-##Steps to use the Visitor Management System
+## Steps to use the Visitor Management System
 
 1. Register your business with "Register For Admin". This creates your business profile and gives you a unique ID" Example: aaa@aaa.com and PW 123qwe
 
