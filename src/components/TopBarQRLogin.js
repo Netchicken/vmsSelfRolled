@@ -2,8 +2,8 @@ import React from "react";
 import NameLogo from "./LogoNavBar";
 import "../styles/Home.css";
 import styled from 'styled-components';
-import { useNavigate, useLocation } from "react-router-dom";
-import { UserData, BusinessCategories } from "../App"; //imports data from app
+import { useNavigate } from "react-router-dom";
+
 
 const Nav = styled.nav`
   display: inline; 
@@ -49,29 +49,18 @@ const TopBar = (props) => {
     //console.log("QRCoder", navigate);
   };
 
-  const goToLoginPage = () => {
-    const authType = true;
-    navigate("/authentication", { state: authType });
-    //  console.log("Login", navigate);
-  };
+
   const goToVisitorLoginPage = () => {
     const authType = false;
     navigate("/visitorLogin", { state: authType });
     //  console.log("Register", navigate);
   };
-  const goToRegisterPage = () => {
-    const authType = false;
-    navigate("/authentication", { state: authType });
-    //  console.log("Register", navigate);
-  };
-  const goToConsolePage = () => {
-    navigate("/console");
-  };
+
   const goToHomePage = () => {
     navigate("/");
   };
 
-  const [isMobileNavOpen, setIsMobileNavOpen] = React.useState(false);
+
   return (
     <Nav>
 
@@ -80,14 +69,7 @@ const TopBar = (props) => {
       </div>
 
       <NavItem>  <a onClick={goToVisitorLoginPage}> Login with Page </a></NavItem>
-      {/* <NavItem>  <a onClick={goToRegisterPage}> Register for Admin </a></NavItem>
-        <NavItem>  <a onClick={goToLoginPage}> Admin Login </a></NavItem>
-        <NavItem>  <a onClick={goToConsolePage}> Go to Console </a></NavItem> */}
       <NavItem>  <a onClick={goToQRLoginPage}> Login with QR code </a></NavItem>
-
-
-
-
     </Nav>
   );
 };

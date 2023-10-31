@@ -34,14 +34,9 @@ const QRCoder = () => {
 
     //http://localhost:3000/vloginqr/?userid=zKrDsscyDXN7lQbdujUjjcj3N5K2
     console.log("location", locFull);
-    //${zKrDsscyDXN7lQbdujUjjcj3N5K2}
 
     let navigate = useNavigate();
-    const goToVisitorLoginPage = () => {
-
-
-        // navigate('/detail-post', { state: { UserId } });
-        // navigate('/vloginqr', { state: { userID: UserID, } });
+    const goToVisitorQRLoginPage = () => {
         navigate('/vloginqr');
     }
     console.log("UserID", UserID);
@@ -52,7 +47,7 @@ const QRCoder = () => {
 
                 <h2>{title}</h2>
                 {/* <h3>{value}</h3> */}
-                <h4> <a onClick={goToVisitorLoginPage}> Check Login Page Link ... </a></h4>
+                <h4> <a onClick={goToVisitorQRLoginPage}> Check Login Page Link ... </a></h4>
                 <center>
 
                     {value && (
