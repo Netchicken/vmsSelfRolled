@@ -26,13 +26,18 @@ const QRCoder = () => {
     const [size, setSize] = useState(256);
     const location = useLocation();
 
-    let https = "https://";
-    let locFull = window.location.href;  //location.pathname;
-    let locUsed = https + locFull.split("/")[0] + locFull.split("/")[1] + locFull.split("/")[2] + "/vloginqr"; //?userid=" ; + UserID;
+
+    let locFull = window.origin;
+    let locUsed = locFull + "/vloginqr";
     //let locUsed = locFull + "/vloginqr"; //?userid=" ;
     const [value, setValue] = useState("https://vmsnz.netlify.app/vloginqr");
 
-    //http://localhost:3000/vloginqr/?userid=zKrDsscyDXN7lQbdujUjjcj3N5K2
+    //https://stackoverflow.com/questions/39823681/read-the-current-full-url-with-react
+
+    // window.location.href // Returns full path, with domain name
+    // window.location.origin // returns window domain url Ex : "https://stackoverflow.com"
+    //  window.location.pathname // returns relative path, without domain name
+
     console.log("location", locFull);
 
     let navigate = useNavigate();
