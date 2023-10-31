@@ -36,14 +36,7 @@ const NotLoggedOut = ({  }) => {
         const timeLogout = format(Date.now(), "yyyy-MM-dd HH:MM:SS");
         try {
             await updateDoc(docRef, { dateOut: timeLogout });
-            // await runTransaction(db, async (transaction) => {
-            //     const sfDoc = await transaction.get(docRef);
-            //     if (!sfDoc.exists()) {
-            //         throw "Document does not exist!";
-            //     }
-            //     transaction.update(docRef, { dateOut: timeLogout });
-            // });
-            console.log("Transaction successfully committed!");
+              console.log("update successfully committed!");
             setvisitorLoggedOut(true)
             initLoad();
         } catch (e) {

@@ -230,7 +230,7 @@ export const getVisitorsNotLoggedOut = async (user) => {
 //update not logged out visitor with date now.
 export const LogOutVisitor = async ({ userid, phone }) => {
 
-  console.log("LogOutVisitor", userid, phone);
+  console.log("LogOutVisitor", userid + "  " + phone);
   let docRef = doc(db, "visitors", userid + phone);
   const timeLogout = format(Date.now(), "yyyy-MM-dd HH:MM:SS");
   try {

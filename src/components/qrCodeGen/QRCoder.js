@@ -4,9 +4,8 @@ import "../../styles/InitialSetup.css";
 import { auth, db } from "../firebase/Config";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { UserID, UserData, BusinessCategories } from "../../App"; //imports data from app
-import NameLogo from "../../components/LogoNavBar";
-import TopBar from "../../components/TopBar";
-import styled from 'styled-components';
+import TopBarQRLogin from "../TopBarQRLogin";
+
 
 
 //https://www.geeksforgeeks.org/how-to-generate-qr-code-using-react-qr-code-in-reactjs/
@@ -17,10 +16,7 @@ import styled from 'styled-components';
 // size: It is the size of the Qr - code.
 // level: It defines the level of Qr - code.
 
-const AppContainer = styled.div`
-  max-width: 1200px;
-  margin: 0 auto;
-`;
+
 
 const QRCoder = () => {
     const [title, setTitle] = useState(BusinessCategories.businessName + " " + BusinessCategories.businessBranch) //https://www.geeksforgeeks.org/how-to-generate-qr-code-using-react-qr-code-in-reactjs/
@@ -51,9 +47,7 @@ const QRCoder = () => {
     console.log("UserID", UserID);
     return (
         <div className='setup-content'>
-            {/* <AppContainer>
-                <TopBar />
-            </AppContainer> */}
+            <TopBarQRLogin />
             <div className='login-form-area'>
 
                 <h2>{title}</h2>

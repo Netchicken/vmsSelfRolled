@@ -11,6 +11,9 @@ import NameLogo from "../../components/LogoNavBar";
 import { format, getDayOfYear } from "date-fns";
 import { FormControl, TextField, Stack, Button, } from "@mui/material";
 import NotLoggedOut from "./NotLoggedOut";
+import swal from 'sweetalert';
+import TopBarQRLogin from "../TopBarQRLogin";
+
 
 
 const VisitorLogin = () => {
@@ -39,7 +42,8 @@ const VisitorLogin = () => {
             SaveToDb();
         }
         else {
-            alert("Please fill all the fields");
+            //  alert("Please fill all the fields");
+            swal("Cannot log you in", "Please fill all the fields first");
             return;
         }
     };
@@ -72,14 +76,21 @@ const VisitorLogin = () => {
     const goToHomePage = () => {
         navigate("/");
     };
-
+    //     const AppContainer = styled.div`
+    //   max-width: 1200px;
+    //   margin: 0 auto;
+    // `;
 
     return (
         <div>
+            <TopBarQRLogin />
             <div className='vcontainer'>
+                {/* <AppContainer> */}
+
+                {/* </AppContainer> */}
                 {/* <div className='login-form-area'> */}
-                <div style={{ alignItems: "center" }} className='login-name-logo' onClick={goToHomePage}>
-                    <NameLogo height='50px' /> </div>
+                {/* <div style={{ alignItems: "center" }} className='login-name-logo' onClick={goToHomePage}>
+                    <NameLogo height='50px' /> </div> */}
                 <div style={{ paddingLeft: "0.3em", fontSize: "1.5em", fontWeight: 'bold' }}>
                     <div >Welcome to <span style={{ color: '#3485ff' }}>{businessName} {businessBranch}</span></div>
                     <div>Please  <span style={{ color: '#3485ff', }}>Log In</span></div>
