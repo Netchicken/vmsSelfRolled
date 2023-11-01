@@ -10,53 +10,51 @@ const SummaryArea = ({ countOnsiteNow, countOnsiteToday, countOnsiteEver, userDa
 
     return (
         <div>
-            <div className='console-visitor-summary'>
-                <div className='console-visitor-now'>
+            <ul className='console-visitor-summary'>
+                <li className='console-visitor-now'>
                     <div>
-                        Visitors Right Now
+                        Visitors Now
                     </div>
                     <h1
                         style={{
-                            fontSize: '60px',
+                            fontSize: '40px',
                             color: '#ffffff',
                             textAlign: 'center'
                         }}>
                         {countOnsiteNow}
                     </h1>
-                </div>
+                </li>
 
-                <div className='console-visitor-period'>
+                <li className='console-visitor-period'>
                     <div>
                         Visitors Today
                     </div>
                     <h1
                         style={{
-                            fontSize: '60px',
+                            fontSize: '40px',
                             // color: '#ffffff', 
                             textAlign: 'center'
                         }}>
                         {countOnsiteToday}
                     </h1>
 
-                </div>
+                </li>
 
-                <div className='console-activeDevices'>
+                <li className='console-activeDevices'>
                     <div>
                         Visitors Ever
                     </div>
                     <h1
                         style={{
-                            fontSize: '60px',
+                            fontSize: '40px',
                             color: '#8934FF',
                             textAlign: 'center'
                         }}>
                         {countOnsiteEver}
-
-                        {/* {props.userData.licences === 0 ? props.activeDevices : props.userData.licences} */}
                     </h1>
-                </div>
+                </li>
 
-            </div>
+            </ul>
 
         </div>
     )

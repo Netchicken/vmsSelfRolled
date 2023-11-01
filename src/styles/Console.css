@@ -1,25 +1,25 @@
 .console-container {
     width: 100%;
-    height: 100%;
-    display: inline-block;
+    /* height: 100%; */
+    /* display: inline-block; */
     background-color: white;
     color: #253061;
     /* border: 0.5px solid #E0E5F6; */
-    display: flex;
+    /* display: flex; */
     flex-direction: row;
     left: 0;
     right: 0;
-    position: absolute;
+    position: relative;
     margin: auto;
     padding: 1px;
-    flex: 0 1 auto;
+    /* flex: 0 1 auto; */
 }
 
 .console-sidebar {
-    width: 20%;
+    width: 10%;
     background-color: white;
     height: 100%;
-    font-size: 14px;
+    font-size: 12px;
     border-right: solid 1px #E0E5F6;
     position: fixed;
     /* Fixed Sidebar (stay in place on scroll) */
@@ -56,15 +56,8 @@
 }
 
 
-.console-content {
-    background-color: white;
-    /* height: 99.99%; */
-    font-size: 14px;
-    text-align: center;
-    margin: auto;
-}
 
-.console-content-header {
+/* .console-content-header {
     font: 20px/1.5 Helvetica, sans-serif;
     padding-left: 60px;
     color: #568eb4;
@@ -76,21 +69,101 @@
     position: relative;
     display: flex;
     flex-direction: row;
+} */
+
+.console-content {
+    background-color: white;
+    /* display: flex; */
+    flex-flow: row wrap;
+    justify-content: space-around;
+    padding: 0;
+    list-style: none;
+    font-size: 14px;
+    text-align: center;
+    margin-top: auto;
+    margin-right: auto;
+    margin-bottom: auto;
+    margin-left: 10%;
+
 }
 
 .console-content-children {
-    width: 100%;
+    /* width: 100%;
     height: 100%;
-    /* display: inline-block; */
+    display: inline-block;
     background-color: white;
-    color: #253061;
+    color: #253061; */
+
+
     /* display: flex;
     flex-direction: row;
     left: 0;
     right: 0;
     margin: auto; */
-    padding: 10px;
+    /* padding: 10px; */
     /* justify-content: space-around; */
+}
+
+.console-visitor-summary {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+    padding: 0;
+    margin: 0;
+    align-items: center;
+    list-style: none;
+}
+
+.console-visitor-now {
+    width: 30%;
+    /* height: 150px; */
+    border-radius: 10px;
+    margin: 10px;
+    /* flex: auto; */
+    color: #E0E5F6;
+    align-items: left;
+    padding: 20px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    background: #34bfff;
+
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #758cb6, #1345cf);
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+}
+
+/* TODAY */
+.console-visitor-period {
+    width: 30%;
+    /* height: 150px; */
+    border-radius: 10px;
+    /* flex: auto; */
+    color: #253061;
+    align-items: left;
+    padding: 20px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    background: #FFC233;
+
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #fff468, #FFC233);
+}
+
+/* visitors EVER */
+.console-activeDevices {
+    width: 30%;
+    /* height: 150px; */
+    border-radius: 10px;
+    margin: 10px;
+    color: #c167ff;
+    flex: auto;
+    align-items: left;
+    /* justify-content: center; */
+    padding: 20px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    background: #E0E5F6;
+
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #ffffff, #E0E5F6);
 }
 
 .console-genAuthCodeChip {
@@ -139,79 +212,6 @@
     height: 100%;
 }
 
-.console-visitor-summary {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-    /* border: solid 1px #E0E5F6;
-    border-radius: 10px; */
-    font-size: 16px;
-
-    text-align: center;
-    width: 100%;
-
-    background-color: white;
-    display: flex;
-    flex-direction: row;
-
-}
-
-.console-visitor-now {
-    width: 400px;
-    height: 200px;
-    border-radius: 10px;
-    margin: 10px;
-    display: flex;
-    flex-direction: column;
-    color: #E0E5F6;
-
-    padding: 20px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    background: #34bfff;
-
-    /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to right, #758cb6, #1345cf);
-    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
-}
-
-.console-visitor-period {
-    width: 400px;
-    height: 200px;
-    border-radius: 10px;
-    margin: 10px;
-    color: #253061;
-    display: flex;
-    flex-direction: column;
-    align-items: left;
-    /* justify-content: center; */
-    padding: 20px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    background: #FFC233;
-
-    /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to right, #fff468, #FFC233);
-}
-
-/* visitors now */
-.console-activeDevices {
-    width: 400px;
-    height: 200px;
-    border-radius: 10px;
-    margin: 10px;
-    color: #c167ff;
-    display: flex;
-    flex-direction: column;
-    align-items: left;
-    /* justify-content: center; */
-    padding: 20px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    background: #E0E5F6;
-
-    /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to right, #ffffff, #E0E5F6);
-}
 
 .console-graph-area {
     border: solid 1px #E0E5F6;
