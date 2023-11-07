@@ -111,10 +111,12 @@ const VisitorLoginQR = () => {
     };
 
     const SaveToDb = () => {
-        setCookie("VMSVisitor", [visitorName, visitorPhone, department, departmentPerson, userid]);
-        // console.log("cookie saving", cookie.VMSVisitor);
-        Save();
+        if (visitorName !== "" && visitorPhone !== "" && department !== "" && departmentPerson !== "") {
+            setCookie("VMSVisitor", [visitorName, visitorPhone, department, departmentPerson, userid]);
 
+            // console.log("cookie saving", cookie.VMSVisitor);
+            Save();
+        }
         //set cookies
         // let expires = new Date()
         // const hoursInMillis = 8 * (60 * 60 * 1000);  //8 hours
