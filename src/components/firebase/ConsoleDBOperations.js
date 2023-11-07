@@ -53,3 +53,20 @@ export const CountVisitorsOnSiteEver = async ({ UserID }) => {
     //   console.log("countVisitorsOnSiteNow", snapshot.data().count);
     return snapshot.data().count;
 }
+
+// get visitors and userID
+export const getAllVisitorsData = async (user) => {
+    const data = [];
+    console.log("getAllVisitorsData in App  ", user);
+    const q = query(collection(db, "visitors"))
+        .where("userID", "==", user);
+    const querySnapshot = await getDocs(q);
+    if (q) {
+        querySnapshot.forEach((doc) => {
+            console.log("getAllVisitorsData in App  ");
+            data.push(doc.data());
+        });
+        return Promise.all(data);
+    }
+    return "No data";
+};

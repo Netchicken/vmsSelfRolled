@@ -5,7 +5,7 @@ import { TextField, Icon, InputAdornment, Typography, Button, Link, } from '@mui
 
 
 
-const SideBarLinks = (props) => {
+const SideBarLinks = (allVisitorsData) => {
 
 
   const activeColor = {
@@ -33,7 +33,7 @@ const SideBarLinks = (props) => {
           width='10px' />
         Dashboard
       </Button>
-
+      {/*
       <Button
         className='console-sidebar-links'
         style={props.activeLink === 'visitors' ? activeColor : inActiveColor}
@@ -46,7 +46,7 @@ const SideBarLinks = (props) => {
           height='100%'
           width='10px' />
         Visitors
-      </Button>
+      </Button> */}
 
     </div>
   )

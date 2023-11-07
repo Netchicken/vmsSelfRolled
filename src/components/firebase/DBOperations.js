@@ -166,7 +166,7 @@ export const getDefaultSettingsRef = async (user) => {
 };
 
 
-//not used
+//console
 export const getTodayUsersVisitorsData = async (user) => {
   const data = [];
 
@@ -184,10 +184,12 @@ export const getTodayUsersVisitorsData = async (user) => {
   return "No data";
 };
 
-//not used
+// get visitors and userID
 export const getAllVisitorsData = async (user) => {
   const data = [];
-  const q = query(collection(db, "visitors-" + user.uid));
+  console.log("getAllVisitorsData in App  ", user);
+  const q = query(collection(db, "visitors"))
+    .where("userID", "==", user);
   const querySnapshot = await getDocs(q);
   if (q) {
     querySnapshot.forEach((doc) => {
