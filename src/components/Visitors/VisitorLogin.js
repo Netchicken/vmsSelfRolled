@@ -11,7 +11,8 @@ import NameLogo from "../../components/LogoNavBar";
 import { format, getDayOfYear } from "date-fns";
 import { FormControl, TextField, Stack, Button, } from "@mui/material";
 import NotLoggedOut from "./NotLoggedOut";
-import swal from 'sweetalert';
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content'
 import TopBarQRLogin from "../TopBarQRLogin";
 
 
@@ -30,7 +31,7 @@ const VisitorLogin = () => {
     const [businessName, setBusinessName] = useState(BusinessCategories.businessName);
     const [businessBranch, setBusinessBranch] = useState(BusinessCategories.businessBranch);
     const [userid, setuserid] = useState();
-
+    const MySwal = withReactContent(Swal)
     // const [notLoggedOut, setnotLoggedOut] = useState([]);
 
 
@@ -43,8 +44,21 @@ const VisitorLogin = () => {
         }
         else {
             //  alert("Please fill all the fields");
-            swal("Cannot log you in", "Please fill all the fields first");
-            return;
+
+            MySwal.fire({
+                icon: "warning",
+                titleText: 'Cannot log you in',
+                html: <div>
+                    <h4>Please fill all the fields first</h4>
+                    <p> Name {visitorName} </p>
+                    <p> Phone:{visitorPhone}</p>
+                    <p> Dept:{department}</p>
+                    <p> Person:{departmentPerson}</p>
+                </div>
+
+            });
+
+
         }
     };
     // Add a new document with a generated id. doc
