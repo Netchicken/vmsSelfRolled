@@ -21,11 +21,11 @@ const SideBarLinks = (allVisitorsData) => {
 
       <Button
         className='console-sidebar-links'
-        style={props.activeLink === 'dashboard' ? activeColor : inActiveColor}
+        // style={props.activeLink === 'dashboard' ? activeColor : inActiveColor}
         fullWidth
         size="large"
         variant="text"
-        onClick={() => props.click('dashboard', 'Dashboard')}
+      // onClick={() => props.click('dashboard', 'Dashboard')}
       >
 
         <Margin

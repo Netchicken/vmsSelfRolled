@@ -47,7 +47,7 @@ const DashboardPage = () => {
         querySnapshot.forEach((doc) => {
           myVisitors.push(doc.data());
         });
-        setAllVisitorsData(myVisitors);
+        // setAllVisitorsData(myVisitors);
         return myVisitors;
       }
     );
