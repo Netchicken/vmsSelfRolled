@@ -53,7 +53,7 @@ const QRCoder = () => {
             <div className='login-form-area'>
 
                 <h2>{title}</h2>
-                {/* <h3>{value}</h3> */}
+                <p>{value}</p>
                 <h4> <a onClick={goToVisitorQRLoginPage}> Check Login Page Link ... </a></h4>
                 <center>
 
