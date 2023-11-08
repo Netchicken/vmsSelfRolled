@@ -29,7 +29,7 @@ const QRCoder = () => {
 
     let locFull = window.origin;
     let locUsed = locFull + "/src/components/qrCodeGen/VisitorLoginQR";
-    console.log("location", locUsed);
+    console.log("location Used", locUsed);
     //vms\src\components\qrCodeGen\VisitorLoginQR.js
     // const [value, setValue] = useState("https://vmsnz.netlify.app/vloginqr");
     const [value, setValue] = useState(locUsed);
@@ -40,7 +40,7 @@ const QRCoder = () => {
     // window.location.origin // returns window domain url Ex : "https://stackoverflow.com"
     //  window.location.pathname // returns relative path, without domain name
 
-    console.log("location", locFull);
+    // console.log("location", locFull);
 
     let navigate = useNavigate();
     const goToVisitorQRLoginPage = () => {
