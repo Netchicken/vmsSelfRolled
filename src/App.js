@@ -114,6 +114,7 @@ function App() {
   const router = createBrowserRouter(createRoutesFromElements(
 
     <React.Fragment>
+      <Route path='/console' element={<Console />} />
       <Route path='/login' element={<Login />} />
       <Route path='/' element={<Home />} />
       <Route path='/setup' element={<InitialSetup />} />
@@ -122,7 +123,7 @@ function App() {
       <Route path='/qrcode' element={<QRCode />} />
       <Route path='/qrcodelogin' element={<QRCodelogin />} />
       <Route path='/vloginqr' element={<VisitorLoginQR />} />
-      <Route path='/console' element={<Console />} />
+
     </React.Fragment>
   ), { basename: '/' });
 
