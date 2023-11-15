@@ -20,22 +20,10 @@ import QRCodelogin from "./components/qrCodeGen/VisitorLoginQR";
 import VisitorLoginQR from "./components/qrCodeGen/VisitorLoginQR";
 import { auth, db } from "./components/firebase/Config";
 import { userDataContext } from "./context/userDataContext";
-import {
-  getData,
-  getDataSingleUser,
-  getBusinessData,
-  getPurposeOfVisitOptionsRef,
-  getDefaultSettingsRef,
-  updateSettings,
-} from "./components/firebase/DBOperations";
+import { getDataSingleUser, getBusinessData, getDefaultSettingsRef } from "./components/firebase/DBOperations";
 
 import {
-  CssBaseline,
-  createTheme,
-  MuiThemeProvider,
-  Typography,
-  Button,
-  Link,
+  CssBaseline
 } from "@mui/material";
 
 
@@ -46,6 +34,7 @@ export let BusinessCategories = "";
 export let DefaultSettings = "";
 
 function App() {
+  let QRUserid = null;
 
   useEffect(() => {
     initLoad();
@@ -57,6 +46,7 @@ function App() {
       if (user) {
 
         UserID = user.uid;
+        QRUserid = user.uid;
         // const userDataRef = db.collection("vsUsers").doc(user.uid);
         const userDataRef = getDataSingleUser(user.uid);
         //  console.log("userDataRef", userDataRef);
@@ -122,6 +112,7 @@ function App() {
 
 
   const router = createBrowserRouter(createRoutesFromElements(
+
     <React.Fragment>
       <Route path='/login' element={<Login />} />
       <Route path='/' element={<Home />} />
