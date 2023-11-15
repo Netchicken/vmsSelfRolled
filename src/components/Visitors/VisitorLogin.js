@@ -1,15 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 // import "../../styles/Common.css";
 import "../../styles/visitorLogin.css";
 import "../../styles/roundButtons.css";
-import { doc, collection, setDoc, updateDoc } from "firebase/firestore";
+import { doc, collection, setDoc } from "firebase/firestore";
 import { auth, db } from "../firebase/Config";
 
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { UserID, UserData, BusinessCategories } from "../../App"; //imports data from app
-import NameLogo from "../../components/LogoNavBar";
+//import NameLogo from "../../components/LogoNavBar";
 import { format, getDayOfYear } from "date-fns";
-import { FormControl, TextField, Stack, Button, } from "@mui/material";
+import { TextField, Button, } from "@mui/material";
 import NotLoggedOut from "./NotLoggedOut";
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content'

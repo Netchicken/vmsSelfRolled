@@ -28,7 +28,7 @@ function Console() {
   let navigate = useNavigate();
 
   useEffect(() => {
-    console.log("console", UserData);
+    console.log("console UserData", UserData);
     init();
   }, []);
 

@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { getVisitorsNotLoggedOut, } from "../firebase/DBOperations";
-import { TextField, Stack, Button, } from "@mui/material";
-import { doc, collection, setDoc, updateDoc, query, where, getDoc, runTransaction } from "firebase/firestore";
-import { format, getDayOfYear, set } from "date-fns";
+import { doc, updateDoc,  } from "firebase/firestore";
+import { format } from "date-fns";
 import { auth, db } from "../firebase/Config";
 import { UserID } from "../../App"; //imports data from app
 
@@ -12,9 +11,10 @@ const NotLoggedOut = ({  }) => {
     const [userid, setuserid] = useState(UserID);
 
     let NLOList = 0;
+    
     useEffect(() => {
         initLoad();
-    });
+    },[]);
 
     const initLoad = async () => {
        
