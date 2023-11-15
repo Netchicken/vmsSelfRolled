@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 
 import "../../styles/Console.css";
 import SideBarLinks from "../../components/console/SideBarLinks";
@@ -6,10 +6,6 @@ import DashboardPage from "../console/dashboardPage/DashboardPage";
 import TopBar from "../../components/TopBar";
 
 const Console = () => {
-
-  useEffect(() => {
-    console.log("console load");
-  }, []);
 
 
   return (
@@ -29,12 +25,7 @@ const Console = () => {
           </div>
         </div>
         <div className='console-content'>
-          {/* <div className='console-content-header'>{header} {businessName}  {businessBranch}</div>
-        <div className='console-content-children'> */}
-          {/* <div className='console-content-children'> */}
           <DashboardPage />
-          {/* </div> */}
-          {/* <VisitorsPage visitorsData={visitorsData} userData={UserData} /> */}
         </div>
       </div >
     </div >
