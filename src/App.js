@@ -7,8 +7,7 @@ import {
   Switch,
   Route,
   Routes,
-  createBrowserRouter,
-  RouterProvider,
+  createBrowserRouter, createRoutesFromElements, RouterProvider
 } from "react-router-dom";
 import Home from "./components/Home";
 import Auth from "./components/auth/Auth";
@@ -120,27 +119,31 @@ function App() {
     });
   };
 
+
+
+  const router = createBrowserRouter(createRoutesFromElements(
+    <React.Fragment>
+      <Route path='/login' element={<Login />} />
+      <Route path='/' element={<Home />} />
+      <Route path='/setup' element={<InitialSetup />} />
+      <Route path='/visitorLogin' element={<VisitorLogin />} />
+      <Route path='/authentication' element={<Auth />} />
+      <Route path='/qrcode' element={<QRCode />} />
+      <Route path='/qrcodelogin' element={<QRCodelogin />} />
+      <Route path='/vloginqr' element={<VisitorLoginQR />} />
+      <Route path='/console' element={<Console />} />
+    </React.Fragment>
+  ), { basename: '/' });
+
   return (
-    <BrowserRouter>
-      <div>
-        <CssBaseline />
-        <userDataContext.Provider value={UserID}>
-          <Routes>
-            <Route path='/login' element={<Login />} />
-
-            <Route path='/' element={<Home />} />
-            <Route path='/setup' element={<InitialSetup />} />
-            <Route path='/visitorLogin' element={<VisitorLogin />} />
-            <Route path='/authentication' element={<Auth />} />
-            <Route path='/qrcode' element={<QRCode />} />
-            <Route path='/qrcodelogin' element={<QRCodelogin />} />
-            <Route path='/vloginqr' element={<VisitorLoginQR />} />
-
-            <Route path='/console' element={<Console />} />
-          </Routes>
-        </userDataContext.Provider>,
-      </div>
-    </BrowserRouter>
+    // <BrowserRouter>
+    <div>
+      <CssBaseline />
+      <userDataContext.Provider value={UserID}>
+        <RouterProvider router={router} />
+      </userDataContext.Provider>,
+    </div>
+    // </BrowserRouter>
   );
 }
 

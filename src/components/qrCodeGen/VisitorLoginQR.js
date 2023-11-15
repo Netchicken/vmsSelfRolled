@@ -50,8 +50,8 @@ const VisitorLoginQR = () => {
     let ID;
 
     useEffect(() => {
-        console.log("cookie loading[1]", cookie.VMSVisitor[1]);
-        console.log("cookie loading[0]", cookie.VMSVisitor[0]);
+        //  console.log("cookie loading[1]", cookie.VMSVisitor[1]);
+        //  console.log("cookie loading[0]", cookie.VMSVisitor[0]);
     }, []);
 
 
@@ -73,10 +73,10 @@ const VisitorLoginQR = () => {
     }
 
     const login = async () => {
-        // Name = (Name === "" ? cookie.VMSVisitor[0] : Name);
-        // Phone = (Phone === "" ? cookie.VMSVisitor[1] : Phone);
-        // Dept = (Dept === "" ? cookie.VMSVisitor[2] : Dept);
-        // Person = (Person === "" ? cookie.VMSVisitor[3] : Person);
+        Name = (Name === "" ? cookie.VMSVisitor[0] : Name);
+        Phone = (Phone === "" ? cookie.VMSVisitor[1] : Phone);
+        Dept = (Dept === "" ? cookie.VMSVisitor[2] : Dept);
+        Person = (Person === "" ? cookie.VMSVisitor[3] : Person);
         setVisitorCookie();
         setVisitorPhoneCookie();
         setDepartmentCookie();
@@ -243,7 +243,7 @@ const VisitorLoginQR = () => {
                                 variant='outlined'
                                 type='text'
                                 label='Enter your name'
-                                defaultValue={cookie.VMSVisitor[0]}
+                                defaultValue={Name}
                                 onChange={e => setVisitorCookie(e.target.value)}
                                 fullWidth={true}
                                 required={true} />
@@ -255,7 +255,7 @@ const VisitorLoginQR = () => {
                                 variant='outlined'
                                 type='text'
                                 label='Enter your phone number'
-                                defaultValue={cookie.VMSVisitor[1]}
+                                defaultValue={Phone}
                                 onChange={e => setVisitorPhoneCookie(e.target.value)}
                                 fullWidth={true}
                                 required={true}
@@ -267,7 +267,7 @@ const VisitorLoginQR = () => {
                                 variant='outlined'
                                 type='text'
                                 label='What department are you visiting'
-                                defaultValue={cookie.VMSVisitor[2]}
+                                defaultValue={Dept}
                                 onChange={e => setDepartmentCookie(e.target.value)}
                                 fullWidth={true}
                                 required={true}
@@ -278,7 +278,7 @@ const VisitorLoginQR = () => {
                                 variant='outlined'
                                 type='text'
                                 label='Who are you visiting'
-                                defaultValue={cookie.VMSVisitor[3]}
+                                defaultValue={Person}
                                 onChange={e => setDepartmentPersonCookie(e.target.value)}
                                 fullWidth={true}
                                 required={true}
